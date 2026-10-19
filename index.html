@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARY Plus - Shaka Player DRM Stream Inspector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Shaka Player CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.compiled.js"></script>
+  <style>
+    :root {
+      --primary: #c3161c;
+      --primary-hover: #e01d24;
+      --primary-glow: rgba(195, 22, 28, 0.35);
+      --bg: #0b0c10;
+      --surface: #14161f;
+      --surface-elevated: #1d202d;
+      --border: #2a2e40;
+      --text-main: #f0f2f8;
+      --text-muted: #8e95aa;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --code-bg: #08090d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: rgba(20, 22, 31, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .header-pills {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .pill-green .pill-dot { background: var(--accent-green); }
+    .pill-blue .pill-dot { background: var(--accent-blue); }
+
+    /* Layout */
+    .container {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 28px;
+      flex: 1;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-elevated);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Video Player */
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 12px 12px 0 0;
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .player-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 12, 16, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 10;
+      transition: opacity 0.3s;
+    }
+
+    .player-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Content controls */
+    .controls-panel {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-field {
+      flex: 1;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-glow);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 20px var(--primary-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border);
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* Content Metadata */
+    .meta-box {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+    }
+
+    .meta-poster {
+      width: 140px;
+      height: 195px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+    }
+
+    .meta-info h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .meta-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+
+    .meta-tag.drm {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .meta-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .meta-cast {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .meta-cast span {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Right Column: Step-by-Step DRM Pipeline */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+    }
+
+    .step-item {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .step-item.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 16px rgba(195, 22, 28, 0.15);
+    }
+
+    .step-item.success {
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+
+    .step-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .step-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 10px;
+    }
+
+    .step-status {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    .step-status.ok {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+    }
+
+    .step-status.loading {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-blue);
+    }
+
+    .step-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .code-snippet {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      color: #cbd5e1;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 120px;
+    }
+
+    /* Live Event Logs */
+    .log-panel {
+      margin-top: 16px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .log-header {
+      padding: 10px 14px;
+      background: var(--surface-elevated);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .log-body {
+      padding: 12px;
+      height: 160px;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .log-entry {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .log-entry.info { color: #94a3b8; }
+    .log-entry.success { color: var(--accent-green); }
+    .log-entry.warn { color: var(--accent-amber); }
+    .log-entry.error { color: #ef4444; }
+
+    @media (max-width: 1080px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .meta-box {
+        grid-template-columns: 100px 1fr;
+      }
+      .meta-poster {
+        width: 100px;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span class="brand-badge">ARY PLUS</span>
+      <div>
+        <span class="brand-title">Shaka Player DRM Inspector</span>
+        <span class="brand-subtitle">v1 SingleVideo Pipeline</span>
+      </div>
+    </div>
+    <div class="header-pills">
+      <div class="pill pill-green">
+        <span class="pill-dot"></span>
+        <span>Google Widevine Modular (CENC)</span>
+      </div>
+      <div class="pill pill-blue">
+        <span class="pill-dot"></span>
+        <span>Tencent Cloud VOD Multi-DRM</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Left Column: Video Player & Stream Metadata -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Live Video Viewport</span>
+          <span id="playerStateBadge" class="pill pill-blue"><span class="pill-dot"></span><span id="playerStateText">Idle</span></span>
+        </div>
+
+        <div class="video-container">
+          <video id="videoElement" controls autoplay playsinline></video>
+          <div id="playerOverlay" class="player-overlay">
+            <div class="spinner"></div>
+            <p id="overlayStatus" style="font-size: 14px; font-weight: 500;">Initializing Shaka Player DRM Pipeline...</p>
+          </div>
+        </div>
+
+        <div class="controls-panel">
+          <div class="input-group">
+            <input type="text" id="seriesIdInput" class="input-field" value="69bad0ba34f97c2d4ae5da34" placeholder="Enter Series / Video ID (e.g. 69bad0ba34f97c2d4ae5da34)">
+            <button id="loadBtn" class="btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Inspect & Run
+            </button>
+          </div>
+
+          <div id="metaBox" class="meta-box" style="display: none;">
+            <img id="metaPoster" class="meta-poster" src="" alt="Poster">
+            <div class="meta-info">
+              <h2 id="metaTitle">Loading...</h2>
+              <div class="meta-badges">
+                <span id="metaDrmBadge" class="meta-tag drm">Widevine DRM</span>
+                <span id="metaTypeBadge" class="meta-tag">singleVideo</span>
+                <span id="metaStatusBadge" class="meta-tag">Published</span>
+              </div>
+              <p id="metaDesc" class="meta-desc"></p>
+              <div class="meta-cast">Cast: <span id="metaCast">-</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Pipeline Logs -->
+      <div class="log-panel">
+        <div class="log-header">
+          <span>PIPELINE EXECUTION LOGS</span>
+          <span id="logCount" style="color: var(--text-muted); font-size: 10px;">0 events</span>
+        </div>
+        <div id="logBody" class="log-body"></div>
+      </div>
+    </div>
+
+    <!-- Right Column: Step-by-Step DRM Inspection Pipeline -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">DRM Architecture Steps</span>
+        <button id="clearLogsBtn" class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;">Reset View</button>
+      </div>
+
+      <div class="steps-container">
+        <!-- Step 1 -->
+        <div id="step1" class="step-item">
+          <div class="step-head">
+            <span class="step-number"><span class="step-badge">1</span> Content Metadata API</span>
+            <span id="step1Status" class="step-status">Pending</span>
+          </div>
+          <div class="step-title">Fetch Video Stream & DRM Flag</div>
+          <div id="step1Output" class="code-snippet">Endpoint: GET https://be.aryplus.tv/api/series/:id
+Header: x-api-key: ak_37515186786306625012043079404171</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="step2" class="step-item">
+          <div class="step-head">
+            <span class="step-number"><span class="step-badge">2</span> DRM Token Exchange</span>
+            <span id="step2Status" class="step-status">Pending</span>
+          </div>
+          <div class="step-title">Generate Tencent VOD Multi-DRM Token</div>
+          <div id="step2Output" class="code-snippet">Endpoint: GET https://be.aryplus.tv/api/v3/drm/token/:streamUrl</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="step3" class="step-item">
+          <div class="step-head">
+            <span class="step-number"><span class="step-badge">3</span> Shaka DRM Configuration</span>
+            <span id="step3Status" class="step-status">Pending</span>
+          </div>
+          <div class="step-title">Configure Widevine & FairPlay License Servers</div>
+          <div id="step3Output" class="code-snippet">com.widevine.alpha:
+https://be.aryplus.tv/api/v3/drm/getWVLicense?drmToken={token}</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div id="step4" class="step-item">
+          <div class="step-head">
+            <span class="step-number"><span class="step-badge">4</span> Request & Response Filters</span>
+            <span id="step4Status" class="step-status">Pending</span>
+          </div>
+          <div class="step-title">Register EME License Filters in Shaka</div>
+          <div id="step4Output" class="code-snippet">NetworkingEngine.registerResponseFilter:
+Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
+        </div>
+
+        <!-- Step 5 -->
+        <div id="step5" class="step-item">
+          <div class="step-head">
+            <span class="step-number"><span class="step-badge">5</span> EME Key Exchange & Playback</span>
+            <span id="step5Status" class="step-status">Pending</span>
+          </div>
+          <div class="step-title">Manifest Load & Content Decryption</div>
+          <div id="step5Output" class="code-snippet">Awaiting player.load() and CDM session grant...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Configuration constants extracted from ARY Plus bundle
+    const API_CONFIG = {
+      API_BASE: 'https://be.aryplus.tv',
+      API_KEY: 'ak_37515186786306625012043079404171',
+      DRM_TOKEN_ENDPOINT: 'https://be.aryplus.tv/api/v3/drm/token',
+      WV_LICENSE_SERVER: 'https://be.aryplus.tv/api/v3/drm/getWVLicense',
+      FP_LICENSE_SERVER: 'https://be.aryplus.tv/api/v3/drm/getFPLicense',
+      FP_CERT_URL: 'https://cert.drm.vod-qcloud.com/cert/v1/fa1e8adc0e6ee6586a60700e4024cd19/fairplay.cer',
+      IMAGE_BASE: 'https://images.aryplus.tv/'
+    };
+
+    let shakaPlayer = null;
+
+    // Logging helper
+    function log(message, type = 'info') {
+      const logBody = document.getElementById('logBody');
+      const time = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      div.className = `log-entry ${type}`;
+      div.textContent = `[${time}] ${message}`;
+      logBody.appendChild(div);
+      logBody.scrollTop = logBody.scrollHeight;
+      document.getElementById('logCount').textContent = `${logBody.children.length} events`;
+    }
+
+    // Step UI update
+    function setStep(stepNum, status, outputText = null) {
+      const stepEl = document.getElementById(`step${stepNum}`);
+      const statusEl = document.getElementById(`step${stepNum}Status`);
+      const outputEl = document.getElementById(`step${stepNum}Output`);
+
+      stepEl.classList.remove('active', 'success');
+      statusEl.classList.remove('ok', 'loading');
+
+      if (status === 'loading') {
+        stepEl.classList.add('active');
+        statusEl.classList.add('loading');
+        statusEl.textContent = 'Executing...';
+      } else if (status === 'success') {
+        stepEl.classList.add('success');
+        statusEl.classList.add('ok');
+        statusEl.textContent = 'Completed';
+      } else if (status === 'error') {
+        statusEl.textContent = 'Failed';
+        statusEl.style.color = '#ef4444';
+      }
+
+      if (outputText) {
+        outputEl.textContent = outputText;
+      }
+    }
+
+    // Initialize Shaka Player
+    async function initShaka() {
+      shaka.polyfill.installAll();
+
+      if (!shaka.Player.isBrowserSupported()) {
+        log('Browser does not support Shaka Player EME APIs', 'error');
+        alert('Your browser does not support Encrypted Media Extensions (EME) needed for DRM playback.');
+        return;
+      }
+
+      const video = document.getElementById('videoElement');
+      shakaPlayer = new shaka.Player(video);
+
+      // Listen for player errors
+      shakaPlayer.addEventListener('error', (event) => {
+        log(`Shaka Player Error [${event.detail.code}]: ${event.detail.message || 'DRM or Media error'}`, 'error');
+        console.error('Shaka Player Error:', event.detail);
+      });
+
+      // Network Engine Filters for License Calls (Directly matching ARY Plus)
+      shakaPlayer.getNetworkingEngine().registerRequestFilter(async (type, request) => {
+        if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
+          log('🔑 License request dispatched to license server', 'info');
+          // If auth token exists in localStorage / Firebase, attach it:
+          const cachedToken = sessionStorage.getItem('idTokenOverride');
+          if (cachedToken) {
+            request.headers['Authorization'] = `Bearer ${cachedToken}`;
+          }
+        }
+      });
+
+      shakaPlayer.getNetworkingEngine().registerResponseFilter((type, response) => {
+        if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
+          log('📥 License response received from server', 'success');
+          try {
+            const text = new TextDecoder().decode(response.data);
+            if (text.trim().startsWith('{')) {
+              const parsed = JSON.parse(text);
+              const keyData = parsed.ckc || parsed.msg || parsed.data || parsed.license;
+              if (keyData) {
+                log('🔄 Decoded JSON license payload into raw binary for CDM', 'info');
+                response.data = shaka.util.Uint8ArrayUtils.fromBase64(keyData.replace(/\s/g, ''));
+              }
+            }
+          } catch (e) {
+            log(`License response filter note: ${e.message}`, 'warn');
+          }
+        }
+      });
+
+      log('Shaka Player initialized and EME polyfills installed.', 'info');
+    }
+
+    // Execute the complete pipeline
+    async function runDrmPipeline(contentId) {
+      const overlay = document.getElementById('playerOverlay');
+      const overlayText = document.getElementById('overlayStatus');
+      const playerBadge = document.getElementById('playerStateText');
+
+      overlay.classList.remove('hidden');
+      overlayText.textContent = 'Querying Content Metadata...';
+      playerBadge.textContent = 'Connecting';
+
+      try {
+        // STEP 1: Content Metadata
+        setStep(1, 'loading');
+        log(`[Step 1] Fetching metadata for ID: ${contentId}`, 'info');
+
+        const seriesRes = await fetch(`${API_CONFIG.API_BASE}/api/series/${contentId}`, {
+          headers: {
+            'x-api-key': API_CONFIG.API_KEY
+          }
+        });
+
+        if (!seriesRes.ok) {
+          throw new Error(`Failed to fetch series data: HTTP ${seriesRes.status}`);
+        }
+
+        const seriesData = await seriesRes.json();
+        log(`[Step 1] Retrieved content: "${seriesData.title}" (DRM Enabled: ${seriesData.drmEnabled})`, 'success');
+
+        // Update UI Metadata Box
+        document.getElementById('metaBox').style.display = 'grid';
+        document.getElementById('metaTitle').textContent = seriesData.title || 'Untitled';
+        document.getElementById('metaDesc').textContent = seriesData.description || 'No description available';
+        document.getElementById('metaCast').textContent = (seriesData.cast && seriesData.cast.join(', ')) || 'N/A';
+        document.getElementById('metaTypeBadge').textContent = seriesData.seriesType || 'singleVideo';
+        if (seriesData.imagePoster) {
+          document.getElementById('metaPoster').src = `${API_CONFIG.IMAGE_BASE}${seriesData.imagePoster}`;
+        }
+
+        const streamUrl = seriesData.seiresCDNWebLink || seriesData.seiresCDN;
+        setStep(1, 'success', `Title: ${seriesData.title}\nStream URL: ${streamUrl}\nDRM Enabled: ${seriesData.drmEnabled}`);
+
+        // STEP 2: DRM Token
+        setStep(2, 'loading');
+        overlayText.textContent = 'Generating DRM Token...';
+        log(`[Step 2] Requesting DRM Token for stream...`, 'info');
+
+        let drmToken = null;
+        if (seriesData.drmEnabled) {
+          const tokenRes = await fetch(`${API_CONFIG.DRM_TOKEN_ENDPOINT}/${streamUrl}`, {
+            headers: {
+              'x-api-key': API_CONFIG.API_KEY
+            }
+          });
+
+          if (!tokenRes.ok) {
+            throw new Error(`DRM Token API failed: HTTP ${tokenRes.status}`);
+          }
+
+          const tokenData = await tokenRes.json();
+          drmToken = tokenData.token;
+          log(`[Step 2] DRM Token successfully generated!`, 'success');
+
+          // Parse token payload for display
+          let tokenInfo = drmToken;
+          try {
+            const parts = drmToken.split('~');
+            if (parts.length > 1) {
+              const claims = JSON.parse(atob(parts[1]));
+              tokenInfo = `AppId: ${claims.appId}\nFileId: ${claims.fileId}\nExpire: ${new Date(claims.expireTimeStamp * 1000).toLocaleString()}\nToken: ${drmToken.slice(0, 40)}...`;
+            }
+          } catch(e) {}
+
+          setStep(2, 'success', tokenInfo);
+        } else {
+          setStep(2, 'success', 'Content is clear (No DRM token required)');
+        }
+
+        // STEP 3: Configure DRM in Shaka Player
+        setStep(3, 'loading');
+        overlayText.textContent = 'Configuring DRM Engine...';
+        log(`[Step 3] Configuring Shaka DRM servers...`, 'info');
+
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const wvLicenseUrl = `${API_CONFIG.WV_LICENSE_SERVER}?drmToken=${encodeURIComponent(drmToken)}`;
+        const fpLicenseUrl = `${API_CONFIG.FP_LICENSE_SERVER}?drmToken=${encodeURIComponent(drmToken)}`;
+
+        const drmServers = {
+          'com.widevine.alpha': wvLicenseUrl,
+          'com.apple.fps': fpLicenseUrl,
+          'com.apple.fps.1_0': fpLicenseUrl
+        };
+
+        const shakaDrmConfig = {
+          servers: drmServers,
+          streaming: {
+            useNativeHlsOnSafari: false,
+            bufferingGoal: 20,
+            rebufferingGoal: 5,
+            bufferBehind: 10
+          }
+        };
+
+        // If Apple FairPlay on Safari, fetch server certificate
+        if (isSafari && seriesData.drmEnabled) {
+          log('[Step 3] Fetching Apple FairPlay Application Certificate...', 'info');
+          try {
+            const certRes = await fetch(API_CONFIG.FP_CERT_URL);
+            const certData = new Uint8Array(await certRes.arrayBuffer());
+            shakaDrmConfig.advanced = {
+              'com.apple.fps': { serverCertificate: certData },
+              'com.apple.fps.1_0': { serverCertificate: certData }
+            };
+            log('[Step 3] FairPlay Certificate applied', 'success');
+          } catch (certErr) {
+            log(`FairPlay Certificate warning: ${certErr.message}`, 'warn');
+          }
+        }
+
+        shakaPlayer.configure({ drm: shakaDrmConfig });
+        setStep(3, 'success', `Widevine License Server:\n${wvLicenseUrl}\n\nFairPlay License Server:\n${fpLicenseUrl}`);
+
+        // STEP 4: Request & Response Filters
+        setStep(4, 'success', 'Request/Response filters active on Shaka NetworkingEngine (JSON -> Base64 CKC transformation ready)');
+
+        // STEP 5: Load Stream
+        setStep(5, 'loading');
+        overlayText.textContent = 'Loading Encrypted HLS Manifest...';
+        log(`[Step 5] Calling player.load("${streamUrl}")...`, 'info');
+
+        await shakaPlayer.load(streamUrl);
+        log(`[Step 5] Stream loaded successfully! Media ready for playback.`, 'success');
+        setStep(5, 'success', `Manifest parsed, PSSH extracted, CDM session active!\nVideo dimensions: ${videoElement.videoWidth || 'Adaptive'} x ${videoElement.videoHeight || 'Adaptive'}`);
+
+        // Hide overlay & play
+        overlay.classList.add('hidden');
+        playerBadge.textContent = 'Playing';
+        document.getElementById('playerStateBadge').className = 'pill pill-green';
+
+        videoElement.play().catch(e => {
+          log(`Autoplay note: ${e.message} (Click play on the video controls)`, 'warn');
+        });
+
+      } catch (err) {
+        log(`Pipeline Failure: ${err.message}`, 'error');
+        overlayText.textContent = `Error: ${err.message}`;
+        playerBadge.textContent = 'Error';
+        document.getElementById('playerStateBadge').className = 'pill';
+        console.error('DRM Pipeline Error:', err);
+      }
+    }
+
+    // Event Listeners
+    document.getElementById('loadBtn').addEventListener('click', () => {
+      const id = document.getElementById('seriesIdInput').value.trim();
+      if (id) runDrmPipeline(id);
+    });
+
+    document.getElementById('clearLogsBtn').addEventListener('click', () => {
+      document.getElementById('logBody').innerHTML = '';
+      document.getElementById('logCount').textContent = '0 events';
+      for (let i = 1; i <= 5; i++) {
+        setStep(i, 'pending');
+      }
+    });
+
+    // Boot on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+      await initShaka();
+      runDrmPipeline('69bad0ba34f97c2d4ae5da34');
+    });
+  </script>
+</body>
+</html>
