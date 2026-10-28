@@ -44,6 +44,6 @@ The user requested a multi-view redesign of the ARY Plus streaming portal (`aryp
 - [x] 5.3: Include Custom ID Inspector for querying and testing any ARY Plus content ID.
 
 ### Task 6: Testing, Build & Live Vercel Deployment (v1.0)
-- [ ] 6.1: Test all view transitions, sorting, and playback locally.
-- [ ] 6.2: Commit and push changes to `origin` and `vercel-repo` (`main` and `master`).
-- [ ] 6.3: Verify on live Vercel endpoint `https://aryplus-drm.vercel.app/` using CDP and capture verification screenshots.
+- [x] 6.1: Test all view transitions, sorting, and playback locally.
+- [x] 6.2: Commit and push changes to `origin` and `vercel-repo` (`main` and `master`).
+- [x] 6.3: Verify on live Vercel endpoint `https://aryplus-drm.vercel.app/` using CDP and capture verification screenshots.
