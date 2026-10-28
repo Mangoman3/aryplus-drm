@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARY Plus - Shaka Player DRM Stream Inspector</title>
+  <title>ARY Plus - Shaka Player & Content Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -253,10 +253,67 @@
       display: block;
     }
 
-    /* Content Cards Grid (DRM Section) */
+    /* Series Hero Banner in Home Tab */
+    .series-hero-banner {
+      background: linear-gradient(180deg, rgba(29, 32, 45, 0.6) 0%, rgba(20, 22, 31, 0.95) 100%), url('https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp') center/cover no-repeat;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .series-hero-poster {
+      width: 85px;
+      height: 120px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      flex-shrink: 0;
+    }
+
+    .series-hero-info {
+      flex: 1;
+    }
+
+    .series-hero-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .series-hero-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .series-hero-credits {
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .series-hero-credits span {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* DRM Content Cards Grid */
     .drm-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 12px;
     }
 
@@ -264,9 +321,9 @@
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 12px;
+      padding: 14px;
       display: flex;
-      gap: 12px;
+      gap: 14px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -283,8 +340,8 @@
     }
 
     .content-card-thumb {
-      width: 72px;
-      height: 100px;
+      width: 80px;
+      height: 112px;
       border-radius: 6px;
       object-fit: cover;
       background: var(--code-bg);
@@ -300,7 +357,7 @@
     }
 
     .content-card-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 4px;
@@ -332,7 +389,7 @@
       align-items: center;
       gap: 6px;
       align-self: flex-start;
-      margin-top: 6px;
+      margin-top: 8px;
       transition: background 0.2s;
     }
 
@@ -340,12 +397,12 @@
       background: var(--primary-hover);
     }
 
-    /* Episodes Grid (Dar-E-Nijaat Section) */
+    /* Episodes Grid */
     .episodes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       gap: 10px;
-      max-height: 340px;
+      max-height: 320px;
       overflow-y: auto;
       padding-right: 4px;
     }
@@ -707,14 +764,14 @@
     <div class="brand">
       <span class="brand-badge">ARY PLUS</span>
       <div>
-        <span class="brand-title">Shaka Player Inspector</span>
-        <span class="brand-subtitle">DRM & Episodes Catalog</span>
+        <span class="brand-title">Video & DRM Portal</span>
+        <span class="brand-subtitle">Shaka Player Engine</span>
       </div>
     </div>
     <div class="header-pills">
       <div class="pill pill-green">
         <span class="pill-dot"></span>
-        <span>Google Widevine Modular (CENC)</span>
+        <span>Google Widevine Modular</span>
       </div>
       <div class="pill pill-blue">
         <span class="pill-dot"></span>
@@ -736,19 +793,19 @@
           <video id="videoElement" controls autoplay playsinline></video>
           <div id="playerOverlay" class="player-overlay">
             <div class="spinner"></div>
-            <p id="overlayStatus" style="font-size: 13px; font-weight: 500;">Initializing Shaka Player Pipeline...</p>
+            <p id="overlayStatus" style="font-size: 13px; font-weight: 500;">Initializing Media Stream...</p>
           </div>
         </div>
 
-        <!-- Section Tabs Navigation -->
+        <!-- Section Tabs Navigation: Home (Dar-E-Nijaat) is first and default -->
         <div class="section-tabs">
-          <button class="tab-btn active" onclick="switchSection('drm-section', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            DRM Videos
+          <button class="tab-btn active" onclick="switchSection('home-section', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Home (Dar-E-Nijaat)
           </button>
-          <button class="tab-btn" onclick="switchSection('series-section', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-            Dar-E-Nijaat (25 Episodes)
+          <button class="tab-btn" onclick="switchSection('drm-section', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            DRM Protected Content
           </button>
           <button class="tab-btn" onclick="switchSection('custom-section', this)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -756,11 +813,49 @@
           </button>
         </div>
 
-        <!-- Tab 1: DRM Videos Section -->
-        <div id="drm-section" class="tab-panel active tab-content">
+        <!-- Tab 1: HOME SECTION (Dar-E-Nijaat Series & All 25 Episodes) -->
+        <div id="home-section" class="tab-panel active tab-content">
+          <!-- Featured Series Hero Banner -->
+          <div class="series-hero-banner">
+            <img class="series-hero-poster" src="https://images.aryplus.tv/poster/280X400_1784120968010.webp" alt="Dar-E-Nijaat">
+            <div class="series-hero-info">
+              <div class="series-hero-title">
+                Dar-E-Nijaat
+                <span class="meta-tag" style="background: rgba(195, 22, 28, 0.2); color: #fff; border: 1px solid var(--primary);">Featured Drama</span>
+                <span class="meta-tag">25 Episodes</span>
+              </div>
+              <div class="series-hero-desc">
+                Some stories begin with love. Some are tested by loss. And some are remembered for the courage it takes to forgive. Written By: Umera Ahmed. Directed By: Saqib Khan.
+              </div>
+              <div class="series-hero-credits">
+                Cast: <span>Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sania Saeed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Episodes Selector Header -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div style="font-size: 13px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <span>Episodes Catalog</span>
+              <span id="episodesCountBadge" class="meta-tag" style="background: rgba(255, 255, 255, 0.08);">25 Episodes</span>
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted);">Click an episode to play</div>
+          </div>
+
+          <!-- Episodes Grid -->
+          <div id="episodesGrid" class="episodes-grid">
+            <div style="color: var(--text-muted); font-size: 12px; padding: 20px;">Loading episodes catalog...</div>
+          </div>
+        </div>
+
+        <!-- Tab 2: DRM PROTECTED CONTENT SECTION -->
+        <div id="drm-section" class="tab-panel tab-content">
+          <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px;">
+            DRM Protected Movies & Singles
+          </div>
           <div class="drm-cards-grid">
             <!-- Love Guru DRM Card -->
-            <div class="content-item-card active" onclick="loadDrmContent('69bad0ba34f97c2d4ae5da34')">
+            <div class="content-item-card" onclick="loadDrmContent('69bad0ba34f97c2d4ae5da34')">
               <img class="content-card-thumb" src="https://images.aryplus.tv/poster/Poster_1773850806160.webp" alt="Love Guru">
               <div class="content-card-details">
                 <div>
@@ -769,7 +864,7 @@
                     <span class="meta-tag drm">Widevine CENC</span>
                     <span class="meta-tag">Movie</span>
                   </div>
-                  <div class="content-card-meta">Humayun Saeed, Mahira Khan • Tencent Cloud VOD Multi-DRM</div>
+                  <div class="content-card-meta">Humayun Saeed, Mahira Khan • Common Encryption (CENC) with SAMPLE-AES</div>
                 </div>
                 <button class="content-card-btn" onclick="event.stopPropagation(); loadDrmContent('69bad0ba34f97c2d4ae5da34')">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -780,21 +875,11 @@
           </div>
         </div>
 
-        <!-- Tab 2: Dar-E-Nijaat Episodes Section -->
-        <div id="series-section" class="tab-panel tab-content">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 12px; font-weight: 700; color: #fff;">
-              Dar-E-Nijaat Episodes <span id="episodesCountBadge" class="meta-tag" style="margin-left: 6px;">25 Episodes</span>
-            </div>
-            <div style="font-size: 11px; color: var(--text-muted);">Click any episode to play</div>
-          </div>
-          <div id="episodesGrid" class="episodes-grid">
-            <div style="color: var(--text-muted); font-size: 12px; padding: 20px;">Loading episodes catalog...</div>
-          </div>
-        </div>
-
-        <!-- Tab 3: Custom ID Inspector Section -->
+        <!-- Tab 3: CUSTOM ID INSPECTOR SECTION -->
         <div id="custom-section" class="tab-panel tab-content">
+          <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 8px;">
+            Inspect Any ARY Plus Content ID
+          </div>
           <div class="input-group">
             <input type="text" id="seriesIdInput" class="input-field" value="69bad0ba34f97c2d4ae5da34" placeholder="Enter Series / Video ID (e.g. 69bad0ba34f97c2d4ae5da34)">
             <button id="loadBtn" class="btn">
@@ -832,10 +917,10 @@
       </div>
     </div>
 
-    <!-- Right Column: Step-by-Step DRM Inspection Pipeline -->
+    <!-- Right Column: Step-by-Step DRM & Player Pipeline -->
     <div class="card">
       <div class="card-header">
-        <span class="card-title">DRM Architecture Steps</span>
+        <span class="card-title">Player & DRM Pipeline</span>
         <button id="clearLogsBtn" class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;">Reset View</button>
       </div>
 
@@ -1010,12 +1095,11 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
       await runDrmPipeline(contentId);
     }
 
-    // Load Direct Episode from Dar-E-Nijaat
+    // Play Direct Episode from Dar-E-Nijaat
     async function playEpisode(epIndex) {
       const ep = episodesCatalog[epIndex];
       if (!ep) return;
 
-      // Update active card styling
       document.querySelectorAll('.ep-card').forEach((c, i) => {
         c.classList.toggle('active', i === epIndex);
       });
@@ -1032,11 +1116,10 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
         log(`[Step 1] Loading Dar-E-Nijaat - ${ep.title}`, 'info');
         setStep(1, 'success', `Title: Dar-E-Nijaat - ${ep.title}\nDuration: ${ep.durationFormatted}\nStream URL: ${ep.hlsStreamUrl}\nDRM Enabled: ${ep.drmEnabled}`);
 
-        // Update Meta Box
         document.getElementById('metaBox').style.display = 'grid';
         document.getElementById('metaTitle').textContent = `Dar-E-Nijaat - ${ep.title}`;
         document.getElementById('metaDesc').textContent = `Some stories begin with love. Some are tested by loss. And some are remembered for the courage it takes to forgive. Written By: Umera Ahmed. Directed By: Saqib Khan.`;
-        document.getElementById('metaCast').textContent = 'Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sehar Hashmi, Sania Saeed';
+        document.getElementById('metaCast').textContent = 'Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sania Saeed';
         document.getElementById('metaTypeBadge').textContent = 'Episode';
         document.getElementById('metaDrmBadge').textContent = ep.drmEnabled ? 'Widevine DRM' : 'Clear HLS';
         document.getElementById('metaDrmBadge').className = ep.drmEnabled ? 'meta-tag drm' : 'meta-tag';
@@ -1072,7 +1155,7 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
         log(`[Step 5] Calling player.load("${ep.hlsStreamUrl}")...`, 'info');
         await shakaPlayer.load(ep.hlsStreamUrl);
         log(`[Step 5] ${ep.title} stream loaded successfully!`, 'success');
-        setStep(5, 'success', `Playing: ${ep.title}\nManifest loaded and decoded successfully.`);
+        setStep(5, 'success', `Playing: Dar-E-Nijaat - ${ep.title}\nManifest loaded and decoded successfully.`);
 
         overlay.classList.add('hidden');
         playerBadge.textContent = 'Playing';
@@ -1100,7 +1183,7 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
         grid.innerHTML = '';
         episodesCatalog.forEach((ep, idx) => {
           const card = document.createElement('div');
-          card.className = 'ep-card';
+          card.className = `ep-card ${idx === 0 ? 'active' : ''}`;
           card.onclick = () => playEpisode(idx);
 
           card.innerHTML = `
@@ -1117,13 +1200,18 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
         });
 
         document.getElementById('episodesCountBadge').textContent = `${episodesCatalog.length} Episodes`;
-        log(`Loaded ${episodesCatalog.length} episodes into Dar-E-Nijaat catalog.`, 'info');
+        log(`Loaded ${episodesCatalog.length} episodes for Dar-E-Nijaat.`, 'info');
+
+        // Automatically start playing Episode 1 on Home Tab load
+        if (episodesCatalog.length > 0) {
+          await playEpisode(0);
+        }
       } catch (e) {
         grid.innerHTML = `<div style="color: #ef4444; font-size: 12px; padding: 12px;">Failed to load episodes.json: ${e.message}</div>`;
       }
     }
 
-    // Pipeline for custom ID or series lookup
+    // Pipeline for custom ID lookup
     async function runDrmPipeline(contentId) {
       const overlay = document.getElementById('playerOverlay');
       const overlayText = document.getElementById('overlayStatus');
@@ -1272,8 +1360,7 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
 
     window.addEventListener('DOMContentLoaded', async () => {
       await initShaka();
-      loadEpisodesCatalog();
-      runDrmPipeline('69bad0ba34f97c2d4ae5da34'); // Default featured DRM video
+      await loadEpisodesCatalog(); // Loads Dar-E-Nijaat and begins Episode 1 by default
     });
   </script>
 </body>
