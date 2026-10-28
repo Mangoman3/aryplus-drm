@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>ARY Plus - Streaming & DRM Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -525,8 +526,7 @@
       border: 1px solid var(--border);
       cursor: pointer;
       transition: all 0.25s;
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
 
     .detail-ep-card:hover {
@@ -555,20 +555,40 @@
       transform: scale(1.05);
     }
 
-    .detail-ep-play-circle {
+    .detail-ep-gradient {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
-      width: 32px;
-      height: 32px;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 45%, transparent 75%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px 14px;
+    }
+
+    .detail-ep-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .detail-ep-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-ep-play-circle {
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(4px);
+      background: rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
       transition: all 0.2s;
     }
 
@@ -577,24 +597,11 @@
       transform: scale(1.1);
     }
 
-    .detail-ep-info {
-      padding: 12px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--surface);
-    }
-
-    .detail-ep-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-    }
-
     .detail-ep-dur {
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #cbd5e1;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     /* =========================================================
@@ -1605,13 +1612,15 @@
         card.innerHTML = `
           <div class="detail-ep-thumb-wrap">
             <img class="detail-ep-thumb" src="${ep.thumbnailUrl}" alt="${ep.title}" loading="lazy">
-            <div class="detail-ep-play-circle">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="detail-ep-gradient">
+              <div class="detail-ep-title">${ep.title}</div>
+              <div class="detail-ep-meta-row">
+                <div class="detail-ep-play-circle">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="detail-ep-dur">${ep.durationFormatted}</span>
+              </div>
             </div>
-          </div>
-          <div class="detail-ep-info">
-            <span class="detail-ep-title">${ep.title}</span>
-            <span class="detail-ep-dur">${ep.durationFormatted}</span>
           </div>
         `;
         grid.appendChild(card);
@@ -1635,6 +1644,13 @@
 
     // Watch a specific episode in dedicated Player View
     async function watchEpisode(epNumber) {
+      if (!shakaPlayer) {
+        await initShaka();
+      }
+      if (episodesCatalog.length === 0) {
+        await loadEpisodesCatalog();
+      }
+
       const epIndex = episodesCatalog.findIndex(e => e.episodeNumber === epNumber);
       if (epIndex === -1) return;
       currentEpisodeIndex = epIndex;
@@ -1693,6 +1709,10 @@
 
     // Play DRM Feature (e.g. Love Guru)
     async function playDrmFeature(contentId) {
+      if (!shakaPlayer) {
+        await initShaka();
+      }
+
       navigateTo('player');
       window.location.hash = `#/watch/drm/${contentId}`;
 
