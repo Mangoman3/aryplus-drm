@@ -4,27 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
-  <title>ARY Plus - Streaming & DRM Portal</title>
+  <title>FOOLFLIX - Watch TV Shows & Movies Online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Shaka Player CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.compiled.js"></script>
   <style>
     :root {
-      --primary: #c3161c;
-      --primary-hover: #e01d24;
-      --accent-green: #00e676;
-      --accent-green-hover: #00c853;
-      --bg: #0b0c10;
-      --surface: #14161f;
-      --surface-elevated: #1d202d;
-      --border: #232736;
-      --border-light: rgba(255, 255, 255, 0.1);
-      --text-main: #f0f2f8;
-      --text-muted: #8e95aa;
-      --gold: #d4af37;
-      --code-bg: #08090d;
+      --netflix-red: #E50914;
+      --netflix-red-hover: #b81d24;
+      --bg: #141414;
+      --surface: #181818;
+      --surface-elevated: #242424;
+      --border: rgba(255, 255, 255, 0.12);
+      --text-main: #ffffff;
+      --text-muted: #a3a3a3;
     }
 
     * {
@@ -44,59 +39,57 @@
     }
 
     /* =========================================================
-       TOP NAVIGATION BAR (Matches ARY Plus Brand Styling)
+       NETFLIX-STYLE TOP NAVIGATION BAR
        ========================================================= */
     header {
-      background: rgba(11, 12, 16, 0.95);
+      background: rgba(20, 20, 20, 0.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 0 32px;
+      padding: 0 48px;
       position: sticky;
       top: 0;
       z-index: 200;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 64px;
+      height: 68px;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 36px;
+      gap: 40px;
     }
 
-    /* ARY Plus Brand Logo */
+    /* FOOLFLIX Brand Logo */
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 2px;
       text-decoration: none;
       cursor: pointer;
+      user-select: none;
     }
 
     .brand-logo-text {
-      font-weight: 900;
-      font-size: 24px;
-      letter-spacing: -0.5px;
-      color: #fff;
-      font-style: italic;
-    }
-
-    .brand-logo-plus {
-      color: var(--accent-green);
-      font-weight: 900;
-      font-size: 28px;
+      font-family: 'Bebas Neue', 'Impact', sans-serif;
+      font-size: 38px;
+      letter-spacing: 2.2px;
+      color: var(--netflix-red);
       line-height: 1;
-      margin-left: 1px;
-      text-shadow: 0 0 12px rgba(0, 230, 118, 0.5);
+      text-transform: uppercase;
+      text-shadow: 0 2px 14px rgba(229, 9, 20, 0.5);
+      transition: transform 0.2s;
     }
 
-    /* Nav Links */
+    .brand-logo:hover .brand-logo-text {
+      transform: scale(1.03);
+    }
+
+    /* Only 2 Tabs: Dramas & DRM Protected */
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
       list-style: none;
     }
 
@@ -105,22 +98,23 @@
     }
 
     .nav-link {
-      color: #a0a6b5;
-      font-size: 14px;
-      font-weight: 600;
+      color: #e5e5e5;
+      font-size: 15px;
+      font-weight: 500;
       text-decoration: none;
-      padding: 20px 4px;
+      padding: 22px 4px;
       display: inline-block;
-      transition: color 0.2s;
+      transition: color 0.2s, font-weight 0.2s;
       cursor: pointer;
     }
 
     .nav-link:hover {
-      color: #fff;
+      color: #b3b3b3;
     }
 
     .nav-link.active {
       color: #fff;
+      font-weight: 700;
     }
 
     .nav-link.active::after {
@@ -130,39 +124,9 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: var(--accent-green);
+      background: var(--netflix-red);
       border-radius: 3px 3px 0 0;
-      box-shadow: 0 0 8px var(--accent-green);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .header-pill {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-
-    .header-pill.green .pill-dot {
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
     }
 
     /* =========================================================
@@ -185,17 +149,17 @@
     }
 
     /* =========================================================
-       VIEW 1: DRAMAS CATALOG (Matches Image 1)
+       VIEW 1: DRAMAS CATALOG (Only Dar-E-Nijaat)
        ========================================================= */
     .catalog-container {
       max-width: 1540px;
       margin: 0 auto;
-      padding: 40px 32px 60px;
+      padding: 40px 48px 60px;
     }
 
     .section-headline {
-      font-size: 26px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 700;
       color: #fff;
       margin-bottom: 24px;
       letter-spacing: -0.3px;
@@ -203,25 +167,25 @@
 
     .drama-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 280px));
+      gap: 24px;
     }
 
     .drama-poster-card {
       position: relative;
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 280 / 400;
       background: var(--surface);
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s, border-color 0.25s;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s, border-color 0.3s;
     }
 
     .drama-poster-card:hover {
-      transform: translateY(-6px) scale(1.02);
+      transform: translateY(-8px) scale(1.03);
       border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
     }
 
     .drama-poster-img {
@@ -235,10 +199,10 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(8px);
       padding: 4px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 11px;
       font-weight: 700;
       color: #fff;
@@ -247,28 +211,24 @@
     }
 
     .drama-badge.featured {
-      background: rgba(195, 22, 28, 0.85);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: var(--netflix-red);
+      border-color: transparent;
+      box-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
     }
 
     .drama-poster-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.2) 40%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.25s;
+      background: linear-gradient(to top, rgba(20, 20, 20, 0.95) 0%, rgba(20, 20, 20, 0.3) 40%, transparent 70%);
+      opacity: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 16px;
-    }
-
-    .drama-poster-card:hover .drama-poster-gradient {
-      opacity: 1;
+      padding: 18px;
     }
 
     .drama-card-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 4px;
@@ -280,17 +240,17 @@
     }
 
     /* =========================================================
-       VIEW 2: SERIES DETAIL (Matches Image 2)
+       VIEW 2: SERIES DETAIL (Netflix Clone)
        ========================================================= */
     .series-hero-wrap {
       position: relative;
       width: 100%;
-      min-height: 520px;
+      min-height: 540px;
       overflow: hidden;
       display: flex;
       align-items: flex-end;
       padding: 60px 48px;
-      background: #0b0c10;
+      background: var(--bg);
     }
 
     .series-hero-backdrop-img {
@@ -308,27 +268,37 @@
     .series-hero-backdrop-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 75% 35%, rgba(11, 12, 16, 0.15) 0%, rgba(11, 12, 16, 0.8) 65%, #0b0c10 100%),
-                  linear-gradient(to right, #0b0c10 0%, rgba(11, 12, 16, 0.85) 45%, rgba(11, 12, 16, 0.2) 75%, transparent 100%),
-                  linear-gradient(to top, #0b0c10 0%, rgba(11, 12, 16, 0.4) 40%, transparent 100%);
+      background: radial-gradient(circle at 75% 35%, rgba(20, 20, 20, 0.1) 0%, rgba(20, 20, 20, 0.8) 65%, #141414 100%),
+                  linear-gradient(to right, #141414 0%, rgba(20, 20, 20, 0.88) 42%, rgba(20, 20, 20, 0.2) 75%, transparent 100%),
+                  linear-gradient(to top, #141414 0%, rgba(20, 20, 20, 0.5) 35%, transparent 100%);
       z-index: 1;
     }
 
     .series-hero-content {
       position: relative;
       z-index: 2;
-      max-width: 720px;
+      max-width: 680px;
     }
 
-    .series-gold-title {
-      font-family: 'Cinzel', serif;
-      font-size: 38px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
+    .series-n-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--netflix-red);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .series-title-text {
+      font-size: 42px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
       margin-bottom: 12px;
-      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9);
     }
 
     .series-meta-line {
@@ -341,6 +311,11 @@
       gap: 10px;
     }
 
+    .series-match-score {
+      color: #46d369;
+      font-weight: 700;
+    }
+
     .series-meta-line span.divider {
       color: rgba(255, 255, 255, 0.3);
     }
@@ -348,102 +323,87 @@
     .series-synopsis {
       font-size: 14px;
       line-height: 1.6;
-      color: #cbd5e1;
-      margin-bottom: 12px;
+      color: #d1d5db;
+      margin-bottom: 14px;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
     }
 
     .series-cast-text {
       font-size: 13px;
-      color: #94a3b8;
+      color: #9ca3af;
       line-height: 1.5;
       margin-bottom: 24px;
     }
 
     .series-cast-text strong {
-      color: #f1f5f9;
+      color: #f3f4f6;
     }
 
-    /* Hero Action Buttons */
+    /* Action Buttons */
     .series-actions-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .btn-watch-now {
-      background: var(--accent-green);
-      color: #000;
+      background: #ffffff;
+      color: #000000;
       border: none;
-      border-radius: 30px;
-      padding: 10px 24px 10px 18px;
-      font-size: 14px;
+      border-radius: 4px;
+      padding: 11px 26px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 4px 20px rgba(0, 230, 118, 0.4);
-      transition: all 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .btn-watch-now:hover {
-      background: var(--accent-green-hover);
-      transform: scale(1.03);
-      box-shadow: 0 6px 24px rgba(0, 230, 118, 0.6);
-    }
-
-    .btn-watch-now .play-icon {
-      width: 20px;
-      height: 20px;
-      background: #000;
-      color: var(--accent-green);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(255, 255, 255, 0.75);
+      transform: scale(1.02);
     }
 
     .btn-circle-action {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border-radius: 30px;
-      padding: 10px 18px;
-      font-size: 13px;
+      background: rgba(109, 109, 110, 0.7);
+      backdrop-filter: blur(8px);
+      border: none;
+      color: #ffffff;
+      border-radius: 4px;
+      padding: 11px 22px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
 
     .btn-circle-action:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-1px);
+      background: rgba(109, 109, 110, 0.45);
     }
 
     .btn-audio-toggle {
       margin-left: auto;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
 
     .btn-audio-toggle:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     /* Sub-Tabs Bar */
@@ -451,7 +411,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 48px;
+      padding: 18px 48px;
       border-bottom: 1px solid var(--border);
       background: var(--bg);
     }
@@ -463,9 +423,9 @@
     }
 
     .subnav-link {
-      color: #8e95aa;
+      color: #a3a3a3;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
       padding-bottom: 12px;
       text-decoration: none;
       cursor: pointer;
@@ -479,18 +439,19 @@
 
     .subnav-link.active {
       color: #fff;
+      font-weight: 700;
     }
 
     .subnav-link.active::after {
       content: '';
       position: absolute;
-      bottom: -17px;
+      bottom: -19px;
       left: 0;
       right: 0;
       height: 3px;
-      background: var(--accent-green);
+      background: var(--netflix-red);
       border-radius: 3px 3px 0 0;
-      box-shadow: 0 0 8px var(--accent-green);
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
     }
 
     /* Sort Dropdown */
@@ -498,7 +459,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: var(--accent-green);
+      color: var(--netflix-red);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -507,7 +468,7 @@
     .sort-select {
       background: transparent;
       border: none;
-      color: var(--accent-green);
+      color: var(--netflix-red);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -520,7 +481,7 @@
       color: #fff;
     }
 
-    /* Episodes Grid in Detail View */
+    /* Episodes Grid */
     .series-episodes-section {
       padding: 32px 48px 60px;
     }
@@ -533,18 +494,18 @@
 
     .detail-ep-card {
       background: var(--surface);
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
       position: relative;
     }
 
     .detail-ep-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-4px) scale(1.02);
       border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.7);
     }
 
     .detail-ep-thumb-wrap {
@@ -595,17 +556,16 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      transition: all 0.2s;
+      transition: transform 0.2s;
     }
 
     .detail-ep-card:hover .detail-ep-play-circle {
-      background: #fff;
       transform: scale(1.1);
     }
 
@@ -617,49 +577,47 @@
     }
 
     /* =========================================================
-       VIEW 3: DEDICATED PLAYER PAGE ("Play in New Page")
+       VIEW 3: DEDICATED PLAYER PAGE (Clean Netflix View)
        ========================================================= */
     .player-page-wrap {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 24px 32px 60px;
+      padding: 20px 48px 60px;
       width: 100%;
     }
 
     .player-top-breadcrumbs {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: 16px;
     }
 
     .btn-back-nav {
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid var(--border);
-      color: #cbd5e1;
-      padding: 8px 16px;
-      border-radius: 8px;
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 4px;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
 
     .btn-back-nav:hover {
-      background: var(--surface-elevated);
-      color: #fff;
-      border-color: var(--border-light);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .player-stage-card {
       background: #000;
-      border-radius: 14px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
       position: relative;
     }
 
@@ -680,7 +638,7 @@
     .player-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(11, 12, 16, 0.88);
+      background: rgba(20, 20, 20, 0.88);
       backdrop-filter: blur(10px);
       display: flex;
       flex-direction: column;
@@ -699,8 +657,8 @@
     .spinner {
       width: 48px;
       height: 48px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: var(--accent-green);
+      border: 3px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--netflix-red);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -710,7 +668,7 @@
     }
 
     .player-info-bar {
-      padding: 16px 20px;
+      padding: 16px 24px;
       background: var(--surface);
       border-top: 1px solid var(--border);
       display: flex;
@@ -732,17 +690,11 @@
     .badge-stream-type {
       font-size: 11px;
       font-weight: 700;
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
-      background: rgba(0, 230, 118, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(0, 230, 118, 0.3);
-    }
-
-    .badge-stream-type.drm {
-      background: rgba(195, 22, 28, 0.15);
-      color: #f87171;
-      border-color: rgba(195, 22, 28, 0.3);
+      background: rgba(229, 9, 20, 0.15);
+      color: var(--netflix-red);
+      border: 1px solid rgba(229, 9, 20, 0.3);
     }
 
     .player-controls-extra {
@@ -752,152 +704,36 @@
     }
 
     .btn-next-ep {
-      background: var(--surface-elevated);
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid var(--border);
       color: #fff;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
 
     .btn-next-ep:hover {
-      background: var(--border);
-      border-color: var(--border-light);
+      background: rgba(255, 255, 255, 0.2);
     }
-
-    /* Diagnostics & Telemetry Accordion below video */
-    .diagnostics-accordion {
-      margin-top: 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .diag-head {
-      padding: 14px 20px;
-      background: var(--surface-elevated);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    .diag-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .diag-content {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 20px;
-    }
-
-    /* Step items */
-    .steps-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .step-box {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-    }
-
-    .step-box.success {
-      border-color: rgba(0, 230, 118, 0.4);
-    }
-
-    .step-box-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-
-    .step-box-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: #cbd5e1;
-    }
-
-    .step-box-status {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-    }
-
-    .step-box-status.ok {
-      background: rgba(0, 230, 118, 0.2);
-      color: var(--accent-green);
-    }
-
-    .step-box-code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #94a3b8;
-      word-break: break-all;
-      background: var(--code-bg);
-      padding: 6px 8px;
-      border-radius: 4px;
-      margin-top: 4px;
-    }
-
-    /* Live Logs */
-    .log-viewport {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      height: 280px;
-      overflow-y: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .log-row {
-      color: #94a3b8;
-      line-height: 1.4;
-    }
-
-    .log-row.success { color: var(--accent-green); }
-    .log-row.warn { color: #f59e0b; }
-    .log-row.error { color: #ef4444; }
 
     /* =========================================================
-       VIEW 4: DRM PROTECTED TAB
+       VIEW 4: DRM PROTECTED TAB (Netflix Style)
        ========================================================= */
     .drm-container {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 40px 32px 60px;
+      padding: 40px 48px 60px;
     }
 
     .drm-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
       gap: 24px;
       margin-bottom: 40px;
     }
@@ -905,10 +741,10 @@
     .drm-feature-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .drm-feature-card:hover {
@@ -931,32 +767,32 @@
     }
 
     .drm-feature-body {
-      padding: 16px;
+      padding: 18px;
     }
 
     .drm-feature-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 6px;
     }
 
     .drm-feature-desc {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
       line-height: 1.5;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .btn-play-drm {
       width: 100%;
-      background: var(--primary);
+      background: var(--netflix-red);
       color: #fff;
       border: none;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 11px;
+      border-radius: 4px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 14px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -966,14 +802,14 @@
     }
 
     .btn-play-drm:hover {
-      background: var(--primary-hover);
+      background: var(--netflix-red-hover);
     }
 
     /* Custom ID Inspector Box */
     .inspector-box {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 24px;
       max-width: 800px;
     }
@@ -988,7 +824,7 @@
       flex: 1;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 12px 16px;
       color: #fff;
       font-family: 'JetBrains Mono', monospace;
@@ -997,7 +833,7 @@
     }
 
     .inspector-input:focus {
-      border-color: var(--accent-green);
+      border-color: var(--netflix-red);
     }
 
     /* Toast Notification */
@@ -1005,14 +841,14 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: rgba(20, 22, 31, 0.95);
-      border: 1px solid var(--accent-green);
+      background: rgba(20, 20, 20, 0.95);
+      border: 1px solid var(--netflix-red);
       color: #fff;
       padding: 12px 20px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
@@ -1027,13 +863,11 @@
     }
 
     @media (max-width: 900px) {
-      header { padding: 0 16px; }
-      .nav-links { display: none; }
-      .series-hero-wrap { padding: 32px 20px; min-height: 400px; }
+      header { padding: 0 20px; }
+      .series-hero-wrap { padding: 32px 20px; min-height: 420px; }
       .series-subnav-bar { padding: 12px 20px; }
       .series-episodes-section { padding: 20px; }
-      .catalog-container, .player-page-wrap, .drm-container { padding: 20px 16px; }
-      .diag-content { grid-template-columns: 1fr; }
+      .catalog-container, .player-page-wrap, .drm-container { padding: 20px; }
     }
   </style>
 </head>
@@ -1044,91 +878,38 @@
        ========================================================= -->
   <header>
     <div class="nav-left">
-      <!-- ARY Plus Logo -->
+      <!-- FOOLFLIX Brand Logo -->
       <a class="brand-logo" onclick="navigateTo('dramas')">
-        <span class="brand-logo-text">ARY</span>
-        <span class="brand-logo-plus">+</span>
+        <span class="brand-logo-text">FOOLFLIX</span>
       </a>
 
-      <!-- Category Navigation Tabs -->
+      <!-- Only 2 Tabs: Dramas & DRM Protected -->
       <ul class="nav-links">
-        <li class="nav-item">
-          <a class="nav-link" id="nav-exclusive" onclick="showToast('Exclusive catalog filtered')">Exclusive</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link active" id="nav-dramas" onclick="navigateTo('dramas')">Dramas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="nav-drm" onclick="navigateTo('drm')">DRM Protected</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-telefilms" onclick="showToast('Telefilms catalog filtered')">Telefilms</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-snips" onclick="showToast('Snips catalog filtered')">Snips</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-shows" onclick="showToast('Shows catalog filtered')">Shows</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-streams" onclick="showToast('Streams catalog filtered')">Streams</a>
-        </li>
       </ul>
-    </div>
-
-    <div class="nav-right">
-      <div class="header-pill green">
-        <span class="pill-dot"></span>
-        <span>Widevine / FairPlay Ready</span>
-      </div>
     </div>
   </header>
 
   <!-- =========================================================
-       VIEW 1: DRAMAS BROWSE VIEW (Matches Image 1)
+       VIEW 1: DRAMAS BROWSE VIEW (Only Dar-E-Nijaat)
        ========================================================= -->
   <section id="view-dramas" class="view-section active">
     <div class="catalog-container">
       <h1 class="section-headline">Dramas</h1>
 
       <div class="drama-cards-grid">
-        <!-- 1. Rutba Card -->
-        <div class="drama-poster-card" onclick="showToast('Rutba selected - Open Dar-E-Nijaat for full 25 episodes player')">
-          <span class="drama-badge">Drama</span>
-          <img class="drama-poster-img" src="./images/rutba.webp" alt="Rutba" loading="lazy" referrerpolicy="no-referrer">
-          <div class="drama-poster-gradient">
-            <div class="drama-card-title">Rutba</div>
-            <div class="drama-card-sub">ARY Digital Drama Series</div>
-          </div>
-        </div>
-
-        <!-- 2. Dar-E-Nijaat Card (Main Featured Series) -->
+        <!-- Dar-E-Nijaat Card (Featured) -->
         <div class="drama-poster-card" onclick="navigateTo('series-detail')">
-          <span class="drama-badge featured">Featured • 25 Eps</span>
+          <span class="drama-badge featured">FOOLFLIX Series • 25 Eps</span>
           <img class="drama-poster-img" src="./images/dar-e-nijaat.webp" alt="Dar-E-Nijaat" referrerpolicy="no-referrer">
-          <div class="drama-poster-gradient" style="opacity: 1; background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.4) 40%, transparent 80%);">
-            <div class="drama-card-title" style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 16px;">Dar-E-Nijaat</div>
+          <div class="drama-poster-gradient">
+            <div class="drama-card-title">Dar-E-Nijaat</div>
             <div class="drama-card-sub">Romance, Drama • 25 Episodes</div>
-          </div>
-        </div>
-
-        <!-- 3. Hey Fam Card -->
-        <div class="drama-poster-card" onclick="showToast('Hey Fam selected')">
-          <span class="drama-badge">Family</span>
-          <img class="drama-poster-img" src="./images/hey-fam.webp" alt="Hey Fam" loading="lazy" referrerpolicy="no-referrer">
-          <div class="drama-poster-gradient">
-            <div class="drama-card-title">Hey Fam</div>
-            <div class="drama-card-sub">Comedy, Family Drama</div>
-          </div>
-        </div>
-
-        <!-- 4. LAGAN LAGI Card -->
-        <div class="drama-poster-card" onclick="showToast('Lagan Lagi selected')">
-          <span class="drama-badge">Romance</span>
-          <img class="drama-poster-img" src="./images/lagan-lagi.webp" alt="Lagan Lagi" loading="lazy" referrerpolicy="no-referrer">
-          <div class="drama-poster-gradient">
-            <div class="drama-card-title">LAGAN LAGI</div>
-            <div class="drama-card-sub">Romance, Drama Series</div>
           </div>
         </div>
       </div>
@@ -1136,7 +917,7 @@
   </section>
 
   <!-- =========================================================
-       VIEW 2: DAR-E-NIJAAT SERIES DETAIL VIEW (Matches Image 2)
+       VIEW 2: DAR-E-NIJAAT SERIES DETAIL VIEW (Netflix Clone)
        ========================================================= -->
   <section id="view-series-detail" class="view-section">
     <!-- Hero Banner with Desktop Backdrop -->
@@ -1145,9 +926,12 @@
       <div class="series-hero-backdrop-overlay"></div>
       
       <div class="series-hero-content">
-        <h1 class="series-gold-title">DAR-E-NIJAAT</h1>
+        <div class="series-n-tag">FOOLFLIX ORIGINAL</div>
+        <h1 class="series-title-text">DAR-E-NIJAAT</h1>
         <div class="series-meta-line">
-          <span>Romance, Drama, Family</span>
+          <span class="series-match-score">98% Match</span>
+          <span class="divider">|</span>
+          <span>Romance, Drama</span>
           <span class="divider">|</span>
           <span id="seriesTotalEpsBadge">25 Episodes</span>
         </div>
@@ -1162,23 +946,21 @@
         <!-- Action Row -->
         <div class="series-actions-row">
           <button class="btn-watch-now" onclick="watchEpisode(1)">
-            <span class="play-icon">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span>Watch Now</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span>Play Ep 1</span>
           </button>
 
           <button class="btn-circle-action" id="btnAddList" onclick="toggleAddList()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-            <span id="addListText">Add to List</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            <span id="addListText">My List</span>
           </button>
 
           <button class="btn-circle-action" onclick="shareSeries()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             <span>Share</span>
           </button>
 
-          <button class="btn-audio-toggle" id="btnMuteToggle" onclick="toggleHeroAudio()" title="Mute/Unmute audio preview">
+          <button class="btn-audio-toggle" id="btnMuteToggle" onclick="toggleHeroAudio()" title="Mute/Unmute audio">
             <svg id="audioIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
           </button>
         </div>
@@ -1195,7 +977,7 @@
           <a class="subnav-link" id="subtab-info" onclick="showSubTab('info')">More Info</a>
         </li>
         <li>
-          <a class="subnav-link" id="subtab-related" onclick="showSubTab('related')">Related</a>
+          <a class="subnav-link" id="subtab-related" onclick="showSubTab('related')">More Like This</a>
         </li>
       </ul>
 
@@ -1218,16 +1000,16 @@
 
     <!-- More Info Sub Section -->
     <div class="series-episodes-section" id="infoSubSection" style="display: none;">
-      <div style="background: var(--surface); padding: 28px; border-radius: 12px; border: 1px solid var(--border); max-width: 900px;">
+      <div style="background: var(--surface); padding: 28px; border-radius: 8px; border: 1px solid var(--border); max-width: 900px;">
         <h3 style="font-size: 18px; margin-bottom: 12px; color: #fff;">About Dar-E-Nijaat</h3>
         <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
           Written by acclaimed dramatist Umera Ahmed and directed by Saqib Khan, <em>Dar-E-Nijaat</em> tells a gripping emotional story of family redemption, perseverance, and forgiveness.
         </p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 13px;">
           <div><strong style="color: #fff;">Release Year:</strong> 2026</div>
-          <div><strong style="color: #fff;">Network:</strong> ARY Digital / ARY Plus</div>
+          <div><strong style="color: #fff;">Network:</strong> FOOLFLIX Original</div>
           <div><strong style="color: #fff;">Format:</strong> Ultra HD HLS (adaptive bitrate)</div>
-          <div><strong style="color: #fff;">Protection:</strong> Clear HLS Stream / AES-128</div>
+          <div><strong style="color: #fff;">Audio:</strong> Stereo • 5.1 Surround</div>
         </div>
       </div>
     </div>
@@ -1250,7 +1032,7 @@
   </section>
 
   <!-- =========================================================
-       VIEW 3: DEDICATED PLAYER PAGE ("Play in New Page")
+       VIEW 3: DEDICATED PLAYER PAGE (Clean Netflix View)
        ========================================================= -->
   <section id="view-player" class="view-section">
     <div class="player-page-wrap">
@@ -1260,10 +1042,6 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
           <span>Back to Dar-E-Nijaat</span>
         </button>
-
-        <div style="font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
-          Shaka Player v4.7.11 • EME Engine
-        </div>
       </div>
 
       <!-- Cinema Video Stage -->
@@ -1272,7 +1050,7 @@
           <video id="videoElement" controls autoplay playsinline></video>
           <div id="playerOverlay" class="player-overlay">
             <div class="spinner"></div>
-            <p id="overlayStatus" style="font-size: 14px; font-weight: 600;">Initializing Stream Playback...</p>
+            <p id="overlayStatus" style="font-size: 14px; font-weight: 600;">Loading Stream...</p>
           </div>
         </div>
 
@@ -1281,10 +1059,10 @@
           <div>
             <div class="player-info-title" id="playerCurrentTitle">
               Dar-E-Nijaat - Episode 1
-              <span id="playerDrmBadge" class="badge-stream-type">Clear HLS</span>
+              <span id="playerDrmBadge" class="badge-stream-type">HD</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="playerCurrentMeta">
-              Duration: 37:53 • ARY Digital Network
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="playerCurrentMeta">
+              Duration: 37:53 • FOOLFLIX Original
             </div>
           </div>
 
@@ -1293,71 +1071,6 @@
               <span>Next Episode</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
             </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Collapsible Technical Diagnostics Drawer -->
-      <div class="diagnostics-accordion">
-        <div class="diag-head" onclick="toggleDiagnostics()">
-          <span class="diag-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-            Live Technical Diagnostics & EME Pipeline
-          </span>
-          <span style="font-size: 12px; color: var(--accent-green); font-weight: 600;" id="diagToggleText">Hide ▲</span>
-        </div>
-
-        <div class="diag-content" id="diagBody">
-          <!-- 5 Steps list -->
-          <div class="steps-list">
-            <div class="step-box success" id="step1">
-              <div class="step-box-head">
-                <span class="step-box-title">Step 1: Manifest & Metadata</span>
-                <span class="step-box-status ok" id="step1Status">Active</span>
-              </div>
-              <div class="step-box-code" id="step1Output">Manifest verified and loaded in Shaka Engine.</div>
-            </div>
-
-            <div class="step-box success" id="step2">
-              <div class="step-box-head">
-                <span class="step-box-title">Step 2: DRM Token Exchange</span>
-                <span class="step-box-status ok" id="step2Status">Completed</span>
-              </div>
-              <div class="step-box-code" id="step2Output">Clear HLS Passthrough (or DRM token bound).</div>
-            </div>
-
-            <div class="step-box success" id="step3">
-              <div class="step-box-head">
-                <span class="step-box-title">Step 3: CDM Key System</span>
-                <span class="step-box-status ok" id="step3Status">Configured</span>
-              </div>
-              <div class="step-box-code" id="step3Output">Widevine / FairPlay license endpoints verified.</div>
-            </div>
-
-            <div class="step-box success" id="step4">
-              <div class="step-box-head">
-                <span class="step-box-title">Step 4: Request/Response License Filters</span>
-                <span class="step-box-status ok" id="step4Status">Registered</span>
-              </div>
-              <div class="step-box-code" id="step4Output">Base64 JSON to Uint8Array CDM converter attached.</div>
-            </div>
-
-            <div class="step-box success" id="step5">
-              <div class="step-box-head">
-                <span class="step-box-title">Step 5: Media Decryption & Playback</span>
-                <span class="step-box-status ok" id="step5Status">Playing</span>
-              </div>
-              <div class="step-box-code" id="step5Output">Media pipeline running without buffer underruns.</div>
-            </div>
-          </div>
-
-          <!-- Live Log Console -->
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pipeline Event Logs</span>
-              <button onclick="clearLogs()" style="background: none; border: none; color: var(--text-muted); font-size: 10px; cursor: pointer;">Clear Logs</button>
-            </div>
-            <div class="log-viewport" id="logViewport"></div>
           </div>
         </div>
       </div>
@@ -1371,7 +1084,7 @@
     <div class="drm-container">
       <h1 class="section-headline">DRM Protected Content</h1>
       <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 28px;">
-        Premium content secured with Tencent Cloud VOD Multi-DRM (Google Widevine Modular CENC & Apple FairPlay SAMPLE-AES).
+        Premium protected movies and content.
       </p>
 
       <div class="drm-grid">
@@ -1379,16 +1092,16 @@
         <div class="drm-feature-card" onclick="playDrmFeature('69bad0ba34f97c2d4ae5da34')">
           <div class="drm-thumb-wrap">
             <img src="./images/love-guru.webp" alt="Love Guru" referrerpolicy="no-referrer" onerror="this.src='https://images.aryplus.tv/poster/Poster_1773850806160.webp'">
-            <span class="drama-badge featured" style="background: rgba(195, 22, 28, 0.9);">Widevine CENC</span>
+            <span class="drama-badge featured">FOOLFLIX Premiere</span>
           </div>
           <div class="drm-feature-body">
             <div class="drm-feature-title">Love Guru</div>
             <div class="drm-feature-desc">
-              Starring Humayun Saeed, Mahira Khan. Encrypted with Tencent Multi-DRM and played with EME license challenge exchange.
+              Starring Humayun Saeed, Mahira Khan. A modern romantic comedy blockbuster available on FOOLFLIX.
             </div>
             <button class="btn-play-drm" onclick="event.stopPropagation(); playDrmFeature('69bad0ba34f97c2d4ae5da34')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              Play DRM Stream
+              Play Movie
             </button>
           </div>
         </div>
@@ -1396,13 +1109,13 @@
 
       <!-- Custom Content ID Inspector -->
       <div class="inspector-box">
-        <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px;">Inspect Any ARY Plus Content ID</h3>
+        <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px;">Inspect Content ID</h3>
         <p style="font-size: 12px; color: var(--text-muted);">
-          Enter any Series or Video MongoDB ObjectID from ARY Plus to test its DRM authorization and launch the pipeline:
+          Enter any Content ID to stream with multi-DRM playback on FOOLFLIX:
         </p>
         <div class="inspector-input-row">
           <input type="text" id="customIdInput" class="inspector-input" value="69bad0ba34f97c2d4ae5da34" placeholder="Enter ID e.g. 69bad0ba34f97c2d4ae5da34">
-          <button class="btn-watch-now" style="border-radius: 8px; padding: 0 20px;" onclick="inspectCustomId()">
+          <button class="btn-play-drm" style="width: auto; padding: 0 22px;" onclick="inspectCustomId()">
             Inspect & Play
           </button>
         </div>
@@ -1430,8 +1143,9 @@
     let shakaPlayer = null;
     let episodesCatalog = [];
     let currentEpisodeIndex = 0;
-    let currentSortOrder = 'desc'; // Default to Newest to Oldest as in screenshot 2
+    let currentSortOrder = 'desc'; // Default to Newest to Oldest as in screenshot
     let inList = false;
+    let isStreamLoading = false;
 
     // Toast alert helper
     function showToast(text) {
@@ -1439,55 +1153,6 @@
       toast.textContent = text;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2600);
-    }
-
-    // Diagnostics toggle
-    function toggleDiagnostics() {
-      const body = document.getElementById('diagBody');
-      const text = document.getElementById('diagToggleText');
-      if (body.style.display === 'none') {
-        body.style.display = 'grid';
-        text.textContent = 'Hide ▲';
-      } else {
-        body.style.display = 'none';
-        text.textContent = 'Show ▼';
-      }
-    }
-
-    // Logger
-    function log(message, type = 'info') {
-      const viewport = document.getElementById('logViewport');
-      if (!viewport) return;
-      const time = new Date().toLocaleTimeString();
-      const div = document.createElement('div');
-      div.className = `log-row ${type}`;
-      div.textContent = `[${time}] ${message}`;
-      viewport.appendChild(div);
-      viewport.scrollTop = viewport.scrollHeight;
-    }
-
-    function clearLogs() {
-      const viewport = document.getElementById('logViewport');
-      if (viewport) viewport.innerHTML = '';
-    }
-
-    function setStep(num, status, text = null) {
-      const el = document.getElementById(`step${num}`);
-      const st = document.getElementById(`step${num}Status`);
-      const out = document.getElementById(`step${num}Output`);
-      if (!el || !st || !out) return;
-
-      st.className = 'step-box-status';
-      if (status === 'success') {
-        st.classList.add('ok');
-        st.textContent = 'Completed';
-      } else if (status === 'loading') {
-        st.textContent = 'Executing...';
-      } else if (status === 'error') {
-        st.textContent = 'Failed';
-        st.style.color = '#ef4444';
-      }
-      if (text) out.textContent = text;
     }
 
     // Routing & View Navigation
@@ -1522,7 +1187,7 @@
     function toggleAddList() {
       inList = !inList;
       const btnText = document.getElementById('addListText');
-      btnText.textContent = inList ? 'Added to List' : 'Add to List';
+      btnText.textContent = inList ? 'Added to List' : 'My List';
       showToast(inList ? 'Added Dar-E-Nijaat to your Watchlist' : 'Removed from Watchlist');
     }
 
@@ -1538,7 +1203,7 @@
     let audioMuted = true;
     function toggleHeroAudio() {
       audioMuted = !audioMuted;
-      showToast(audioMuted ? 'Preview audio muted' : 'Preview audio unmuted');
+      showToast(audioMuted ? 'Audio muted' : 'Audio unmuted');
     }
 
     // Sub-tab toggles in Series Detail View
@@ -1561,7 +1226,7 @@
     async function initShaka() {
       shaka.polyfill.installAll();
       if (!shaka.Player.isBrowserSupported()) {
-        log('Browser does not support EME/Shaka Player APIs', 'error');
+        console.error('Browser does not support EME/Shaka Player APIs');
         return;
       }
 
@@ -1569,36 +1234,32 @@
       shakaPlayer = new shaka.Player(video);
 
       shakaPlayer.addEventListener('error', (event) => {
-        log(`Shaka Player Error [${event.detail.code}]: ${event.detail.message || 'Media/DRM error'}`, 'error');
+        if (event.detail && event.detail.code !== 7000 && event.detail.code !== 1003) {
+          console.error('Shaka Player Error:', event.detail);
+        }
       });
 
       // Filter for Bearer token & license decoding
       shakaPlayer.getNetworkingEngine().registerRequestFilter(async (type, request) => {
         if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
-          log('License challenge emitted to CDM server', 'info');
+          // challenge sent to CDM
         }
       });
 
       shakaPlayer.getNetworkingEngine().registerResponseFilter((type, response) => {
         if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
-          log('License response received from server', 'success');
           try {
             const text = new TextDecoder().decode(response.data);
             if (text.trim().startsWith('{')) {
               const parsed = JSON.parse(text);
               const keyData = parsed.ckc || parsed.msg || parsed.data || parsed.license;
               if (keyData) {
-                log('Decoded Base64 license challenge into Uint8Array for CDM', 'info');
                 response.data = shaka.util.Uint8ArrayUtils.fromBase64(keyData.replace(/\s/g, ''));
               }
             }
-          } catch (e) {
-            log(`License response filter note: ${e.message}`, 'warn');
-          }
+          } catch (e) {}
         }
       });
-
-      log('Shaka Player engine initialized with DRM filters.', 'info');
     }
 
     // Render Episode Cards Grid
@@ -1650,9 +1311,8 @@
         document.getElementById('seriesTotalEpsBadge').textContent = `${episodesCatalog.length} Episodes`;
         document.getElementById('subtab-episodes').textContent = `Episodes (${episodesCatalog.length})`;
         renderEpisodesGrid();
-        log(`Loaded ${episodesCatalog.length} episodes for Dar-E-Nijaat catalog.`, 'info');
       } catch (err) {
-        log(`Failed to load episodes.json: ${err.message}`, 'error');
+        console.error('Failed to load episodes.json:', err);
       }
     }
 
@@ -1677,9 +1337,9 @@
       // Update player titles
       document.getElementById('playerCurrentTitle').innerHTML = `
         Dar-E-Nijaat - ${ep.title}
-        <span class="badge-stream-type">Clear HLS</span>
+        <span class="badge-stream-type">HD</span>
       `;
-      document.getElementById('playerCurrentMeta').textContent = `Duration: ${ep.durationFormatted} • ARY Digital Network`;
+      document.getElementById('playerCurrentMeta').textContent = `Duration: ${ep.durationFormatted} • FOOLFLIX Original`;
 
       const overlay = document.getElementById('playerOverlay');
       const overlayText = document.getElementById('overlayStatus');
@@ -1687,28 +1347,26 @@
       overlayText.textContent = `Loading ${ep.title}...`;
 
       try {
-        log(`Starting playback of Dar-E-Nijaat - ${ep.title}`, 'info');
-        setStep(1, 'success', `Stream URL: ${ep.hlsStreamUrl}\nDuration: ${ep.durationFormatted}`);
+        if (isStreamLoading) {
+          try { await shakaPlayer.unload(); } catch(e) {}
+        }
+        isStreamLoading = true;
 
-        setStep(2, 'success', 'No DRM token required (Clear HLS)');
         shakaPlayer.configure({ drm: { servers: {} } });
-
-        setStep(3, 'success', 'Standard HLS AES-128 Passthrough Mode');
-        setStep(4, 'success', 'Networking engine active');
-        setStep(5, 'loading', `Calling player.load("${ep.hlsStreamUrl}")...`);
-
         await shakaPlayer.load(ep.hlsStreamUrl);
-        log(`Manifest parsed and decoded for ${ep.title}!`, 'success');
-        setStep(5, 'success', `Now Playing: ${ep.title}`);
 
         overlay.classList.add('hidden');
         document.getElementById('videoElement').play().catch(e => {
-          log(`Autoplay notification: ${e.message}`, 'warn');
+          // Autoplay interaction policy
         });
 
       } catch (err) {
-        log(`Playback error: ${err.message}`, 'error');
-        overlayText.textContent = `Error: ${err.message}`;
+        if (err.code !== 7000 && err.code !== 1003) {
+          console.error('Playback error:', err);
+          overlayText.textContent = `Error: ${err.message}`;
+        }
+      } finally {
+        isStreamLoading = false;
       }
     }
 
@@ -1732,18 +1390,20 @@
 
       document.getElementById('playerCurrentTitle').innerHTML = `
         Love Guru (2026)
-        <span class="badge-stream-type drm">Widevine CENC</span>
+        <span class="badge-stream-type">HD • DRM</span>
       `;
-      document.getElementById('playerCurrentMeta').textContent = 'Starring Humayun Saeed, Mahira Khan • Tencent Multi-DRM';
+      document.getElementById('playerCurrentMeta').textContent = 'Starring Humayun Saeed, Mahira Khan • FOOLFLIX Premiere';
 
       const overlay = document.getElementById('playerOverlay');
       const overlayText = document.getElementById('overlayStatus');
       overlay.classList.remove('hidden');
-      overlayText.textContent = 'Authorizing DRM Session...';
+      overlayText.textContent = 'Authorizing Playback...';
 
       try {
-        setStep(1, 'loading', `Querying series metadata for ID: ${contentId}`);
-        log(`[Step 1] Fetching metadata for ID: ${contentId}`, 'info');
+        if (isStreamLoading) {
+          try { await shakaPlayer.unload(); } catch(e) {}
+        }
+        isStreamLoading = true;
 
         const seriesRes = await fetch(`${CONFIG.API_BASE}/api/series/${contentId}`, {
           headers: { 'x-api-key': CONFIG.API_KEY }
@@ -1751,17 +1411,13 @@
         if (!seriesRes.ok) throw new Error(`HTTP ${seriesRes.status}`);
         const data = await seriesRes.json();
         const streamUrl = data.seiresCDNWebLink || data.seiresCDN;
-        setStep(1, 'success', `Title: ${data.title}\nStream: ${streamUrl}`);
 
-        setStep(2, 'loading', 'Generating Tencent VOD DRM Token...');
         const tokenRes = await fetch(`${CONFIG.DRM_TOKEN_ENDPOINT}/${streamUrl}`, {
           headers: { 'x-api-key': CONFIG.API_KEY }
         });
         if (!tokenRes.ok) throw new Error(`Token failed: HTTP ${tokenRes.status}`);
         const { token } = await tokenRes.json();
-        setStep(2, 'success', `DRM Token Generated: ${token.slice(0, 42)}...`);
 
-        setStep(3, 'loading', 'Configuring Shaka DRM License Servers...');
         const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
         const wvUrl = `${CONFIG.WV_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
         const fpUrl = `${CONFIG.FP_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
@@ -1785,23 +1441,18 @@
         }
 
         shakaPlayer.configure({ drm: drmConfig });
-        setStep(3, 'success', `License Server:\n${wvUrl}`);
-
-        setStep(4, 'success', 'Request/Response license filters active on NetworkingEngine');
-        setStep(5, 'loading', 'Decentralized license challenge & load...');
-
         await shakaPlayer.load(streamUrl);
-        log(`DRM Stream successfully authorized & loaded!`, 'success');
-        setStep(5, 'success', `Decryption granted by CDM. Playing ${data.title}`);
 
         overlay.classList.add('hidden');
-        document.getElementById('videoElement').play().catch(e => {
-          log(`Autoplay notification: ${e.message}`, 'warn');
-        });
+        document.getElementById('videoElement').play().catch(e => {});
 
       } catch (err) {
-        log(`DRM pipeline failure: ${err.message}`, 'error');
-        overlayText.textContent = `Error: ${err.message}`;
+        if (err.code !== 7000 && err.code !== 1003) {
+          console.error('DRM error:', err);
+          overlayText.textContent = `Error: ${err.message}`;
+        }
+      } finally {
+        isStreamLoading = false;
       }
     }
 
