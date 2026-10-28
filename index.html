@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARY Plus - Shaka Player & Content Portal</title>
+  <title>ARY Plus - Streaming & DRM Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Shaka Player CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.compiled.js"></script>
   <style>
     :root {
       --primary: #c3161c;
       --primary-hover: #e01d24;
-      --primary-glow: rgba(195, 22, 28, 0.35);
+      --accent-green: #00e676;
+      --accent-green-hover: #00c853;
       --bg: #0b0c10;
       --surface: #14161f;
       --surface-elevated: #1d202d;
-      --border: #2a2e40;
+      --border: #232736;
+      --border-light: rgba(255, 255, 255, 0.1);
       --text-main: #f0f2f8;
       --text-muted: #8e95aa;
-      --accent-green: #10b981;
-      --accent-blue: #3b82f6;
-      --accent-purple: #8b5cf6;
-      --accent-amber: #f59e0b;
+      --gold: #d4af37;
       --code-bg: #08090d;
     }
 
@@ -40,66 +39,123 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
-    /* Header */
+    /* =========================================================
+       TOP NAVIGATION BAR (Matches ARY Plus Brand Styling)
+       ========================================================= */
     header {
-      background: rgba(20, 22, 31, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(11, 12, 16, 0.95);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 14px 28px;
+      padding: 0 32px;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 64px;
     }
 
-    .brand {
+    .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 36px;
     }
 
-    .brand-badge {
-      background: var(--primary);
-      color: #fff;
-      font-weight: 800;
-      font-size: 13px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 16px var(--primary-glow);
-    }
-
-    .brand-title {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-
-    .brand-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-left: 4px;
-    }
-
-    .header-pills {
+    /* ARY Plus Brand Logo */
+    .brand-logo {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+      cursor: pointer;
     }
 
-    .pill {
+    .brand-logo-text {
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      color: #fff;
+      font-style: italic;
+    }
+
+    .brand-logo-plus {
+      color: var(--accent-green);
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1;
+      margin-left: 1px;
+      text-shadow: 0 0 12px rgba(0, 230, 118, 0.5);
+    }
+
+    /* Nav Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: #a0a6b5;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 20px 4px;
+      display: inline-block;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .nav-link.active {
+      color: #fff;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent-green);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-pill {
       font-size: 11px;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid var(--border);
       background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .header-pill.green .pill-dot {
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
     }
 
     .pill-dot {
@@ -108,52 +164,378 @@
       border-radius: 50%;
     }
 
-    .pill-green .pill-dot { background: var(--accent-green); }
-    .pill-blue .pill-dot { background: var(--accent-blue); }
-
-    /* Layout */
-    .container {
-      max-width: 1540px;
-      margin: 0 auto;
-      padding: 20px 28px;
+    /* =========================================================
+       VIEW CONTAINER & ROUTING
+       ========================================================= */
+    .view-section {
+      display: none;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1.55fr 1fr;
-      gap: 24px;
       flex: 1;
     }
 
-    /* Card */
-    .card {
+    .view-section.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       VIEW 1: DRAMAS CATALOG (Matches Image 1)
+       ========================================================= */
+    .catalog-container {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 40px 32px 60px;
+    }
+
+    .section-headline {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    .drama-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .drama-poster-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 280 / 400;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s, border-color 0.25s;
     }
 
-    .card-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
+    .drama-poster-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+    }
+
+    .drama-poster-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .drama-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+    }
+
+    .drama-badge.featured {
+      background: rgba(195, 22, 28, 0.85);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .drama-poster-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.2) 40%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+    }
+
+    .drama-poster-card:hover .drama-poster-gradient {
+      opacity: 1;
+    }
+
+    .drama-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .drama-card-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       VIEW 2: SERIES DETAIL (Matches Image 2)
+       ========================================================= */
+    .series-hero-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 520px;
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 60px 48px;
+    }
+
+    .series-hero-backdrop-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 75% 30%, rgba(11, 12, 16, 0.2) 0%, rgba(11, 12, 16, 0.85) 65%, #0b0c10 100%),
+                  linear-gradient(to top, #0b0c10 0%, rgba(11, 12, 16, 0.6) 40%, rgba(11, 12, 16, 0.3) 100%);
+      z-index: 1;
+    }
+
+    .series-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .series-gold-title {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9);
+    }
+
+    .series-meta-line {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: var(--surface-elevated);
+      gap: 10px;
     }
 
-    .card-title {
+    .series-meta-line span.divider {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .series-synopsis {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .series-cast-text {
       font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .series-cast-text strong {
+      color: #f1f5f9;
+    }
+
+    /* Hero Action Buttons */
+    .series-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-watch-now {
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 24px 10px 18px;
+      font-size: 14px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 230, 118, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-watch-now:hover {
+      background: var(--accent-green-hover);
+      transform: scale(1.03);
+      box-shadow: 0 6px 24px rgba(0, 230, 118, 0.6);
+    }
+
+    .btn-watch-now .play-icon {
+      width: 20px;
+      height: 20px;
+      background: #000;
+      color: var(--accent-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-circle-action {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 30px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.2s;
     }
 
-    /* Video Player */
-    .video-container {
+    .btn-circle-action:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-audio-toggle {
+      margin-left: auto;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-audio-toggle:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Sub-Tabs Bar */
+    .series-subnav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .subnav-tabs {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .subnav-link {
+      color: #8e95aa;
+      font-size: 15px;
+      font-weight: 700;
+      padding-bottom: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .subnav-link:hover {
+      color: #fff;
+    }
+
+    .subnav-link.active {
+      color: #fff;
+    }
+
+    .subnav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -17px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent-green);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* Sort Dropdown */
+    .sort-dropdown-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-green);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .sort-select {
+      background: transparent;
+      border: none;
+      color: var(--accent-green);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .sort-select option {
+      background: var(--surface);
+      color: #fff;
+    }
+
+    /* Episodes Grid in Detail View */
+    .series-episodes-section {
+      padding: 32px 48px 60px;
+    }
+
+    .detail-episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .detail-ep-card {
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-ep-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .detail-ep-thumb-wrap {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -161,7 +543,115 @@
       overflow: hidden;
     }
 
-    video {
+    .detail-ep-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .detail-ep-card:hover .detail-ep-thumb {
+      transform: scale(1.05);
+    }
+
+    .detail-ep-play-circle {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s;
+    }
+
+    .detail-ep-card:hover .detail-ep-play-circle {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .detail-ep-info {
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+    }
+
+    .detail-ep-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .detail-ep-dur {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       VIEW 3: DEDICATED PLAYER PAGE ("Play in New Page")
+       ========================================================= */
+    .player-page-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 32px 60px;
+      width: 100%;
+    }
+
+    .player-top-breadcrumbs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn-back-nav {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-back-nav:hover {
+      background: var(--surface-elevated);
+      color: #fff;
+      border-color: var(--border-light);
+    }
+
+    .player-stage-card {
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .player-video-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    video#videoElement {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -170,12 +660,9 @@
 
     .player-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(11, 12, 16, 0.85);
-      backdrop-filter: blur(8px);
+      inset: 0;
+      background: rgba(11, 12, 16, 0.88);
+      backdrop-filter: blur(10px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -191,10 +678,10 @@
     }
 
     .spinner {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: var(--primary);
+      border-top-color: var(--accent-green);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -203,786 +690,714 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Section Tabs Navigation */
-    .section-tabs {
-      display: flex;
-      background: var(--surface-elevated);
-      border-bottom: 1px solid var(--border);
-      padding: 4px;
-      gap: 4px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .tab-btn:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .tab-btn.active {
-      color: #fff;
+    .player-info-bar {
+      padding: 16px 20px;
       background: var(--surface);
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .tab-content {
-      padding: 16px;
-    }
-
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    /* Series Hero Banner in Home Tab */
-    .series-hero-banner {
-      background: linear-gradient(180deg, rgba(29, 32, 45, 0.6) 0%, rgba(20, 22, 31, 0.95) 100%), url('https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp') center/cover no-repeat;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 14px;
+      border-top: 1px solid var(--border);
       display: flex;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
-    }
-
-    .series-hero-poster {
-      width: 85px;
-      height: 120px;
-      border-radius: 6px;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      flex-shrink: 0;
-    }
-
-    .series-hero-info {
-      flex: 1;
-    }
-
-    .series-hero-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .series-hero-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .series-hero-credits {
-      font-size: 11px;
-      color: #cbd5e1;
-    }
-
-    .series-hero-credits span {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    /* DRM Content Cards Grid */
-    .drm-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      flex-wrap: wrap;
       gap: 12px;
     }
 
-    .content-item-card {
+    .player-info-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-stream-type {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(0, 230, 118, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+    }
+
+    .badge-stream-type.drm {
+      background: rgba(195, 22, 28, 0.15);
+      color: #f87171;
+      border-color: rgba(195, 22, 28, 0.3);
+    }
+
+    .player-controls-extra {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-next-ep {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      display: flex;
-      gap: 14px;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: all 0.2s;
     }
 
-    .content-item-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(195, 22, 28, 0.2);
+    .btn-next-ep:hover {
+      background: var(--border);
+      border-color: var(--border-light);
     }
 
-    .content-item-card.active {
-      border-color: var(--primary);
-      background: rgba(195, 22, 28, 0.08);
-    }
-
-    .content-card-thumb {
-      width: 80px;
-      height: 112px;
-      border-radius: 6px;
-      object-fit: cover;
-      background: var(--code-bg);
-      flex-shrink: 0;
-    }
-
-    .content-card-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
+    /* Diagnostics & Telemetry Accordion below video */
+    .diagnostics-accordion {
+      margin-top: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
     }
 
-    .content-card-title {
-      font-size: 14px;
+    .diag-head {
+      padding: 14px 20px;
+      background: var(--surface-elevated);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .diag-title {
+      font-size: 13px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .content-card-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .content-card-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      align-self: flex-start;
-      margin-top: 8px;
-      transition: background 0.2s;
+      gap: 8px;
     }
 
-    .content-card-btn:hover {
-      background: var(--primary-hover);
-    }
-
-    /* Episodes Grid */
-    .episodes-grid {
+    .diag-content {
+      padding: 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-      max-height: 320px;
-      overflow-y: auto;
-      padding-right: 4px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
     }
 
-    .ep-card {
+    /* Step items */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-box {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.2s;
+      padding: 10px 14px;
+    }
+
+    .step-box.success {
+      border-color: rgba(0, 230, 118, 0.4);
+    }
+
+    .step-box-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .step-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    .step-box-status {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .step-box-status.ok {
+      background: rgba(0, 230, 118, 0.2);
+      color: var(--accent-green);
+    }
+
+    .step-box-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #94a3b8;
+      word-break: break-all;
+      background: var(--code-bg);
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* Live Logs */
+    .log-viewport {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      height: 280px;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       display: flex;
       flex-direction: column;
+      gap: 6px;
     }
 
-    .ep-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
+    .log-row {
+      color: #94a3b8;
+      line-height: 1.4;
     }
 
-    .ep-card.active {
-      border-color: var(--primary);
-      box-shadow: 0 0 12px var(--primary-glow);
+    .log-row.success { color: var(--accent-green); }
+    .log-row.warn { color: #f59e0b; }
+    .log-row.error { color: #ef4444; }
+
+    /* =========================================================
+       VIEW 4: DRM PROTECTED TAB
+       ========================================================= */
+    .drm-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 32px 60px;
     }
 
-    .ep-thumb-wrapper {
-      position: relative;
+    .drm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .drm-feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .drm-feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .drm-thumb-wrap {
       width: 100%;
       aspect-ratio: 16 / 9;
       background: #000;
+      position: relative;
     }
 
-    .ep-thumb {
+    .drm-thumb-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .ep-badge-num {
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      color: #fff;
-      font-size: 10px;
+    .drm-feature-body {
+      padding: 16px;
+    }
+
+    .drm-feature-title {
+      font-size: 16px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
+      color: #fff;
+      margin-bottom: 6px;
     }
 
-    .ep-badge-dur {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      color: #cbd5e1;
-      font-size: 9px;
-      font-weight: 600;
-      padding: 2px 5px;
-      border-radius: 3px;
+    .drm-feature-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
     }
 
-    .ep-info {
-      padding: 8px;
-    }
-
-    .ep-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-main);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Controls & Input Panel */
-    .input-group {
+    .btn-play-drm {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
       display: flex;
-      gap: 10px;
-      margin-bottom: 12px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
     }
 
-    .input-field {
+    .btn-play-drm:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Custom ID Inspector Box */
+    .inspector-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 800px;
+    }
+
+    .inspector-input-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .inspector-input {
       flex: 1;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 10px 14px;
+      padding: 12px 16px;
       color: #fff;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 13px;
       outline: none;
-      transition: border-color 0.2s;
     }
 
-    .input-field:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px var(--primary-glow);
+    .inspector-input:focus {
+      border-color: var(--accent-green);
     }
 
-    .btn {
-      background: var(--primary);
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(20, 22, 31, 0.95);
+      border: 1px solid var(--accent-green);
       color: #fff;
-      border: none;
+      padding: 12px 20px;
       border-radius: 8px;
-      padding: 10px 18px;
+      font-size: 13px;
       font-weight: 600;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.3s;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
-      box-shadow: 0 4px 16px var(--primary-glow);
-      transform: translateY(-1px);
+    .toast-msg.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
     }
 
-    .btn-secondary {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-    }
-
-    .btn-secondary:hover {
-      background: var(--border);
-      box-shadow: none;
-      transform: none;
-    }
-
-    /* Content Metadata Box */
-    .meta-box {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 14px;
-    }
-
-    .meta-poster {
-      width: 110px;
-      height: 155px;
-      border-radius: 6px;
-      object-fit: cover;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-    }
-
-    .meta-info h2 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .meta-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .meta-tag {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-muted);
-    }
-
-    .meta-tag.drm {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .meta-desc {
-      font-size: 12px;
-      line-height: 1.4;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .meta-cast {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    .meta-cast span {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    /* Right Column: Step-by-Step DRM Pipeline */
-    .steps-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .step-item {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      transition: border-color 0.2s;
-    }
-
-    .step-item.active {
-      border-color: var(--primary);
-      box-shadow: 0 0 16px rgba(195, 22, 28, 0.15);
-    }
-
-    .step-item.success {
-      border-color: rgba(16, 185, 129, 0.5);
-    }
-
-    .step-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-
-    .step-number {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .step-badge {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      line-height: 18px;
-      text-align: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      font-size: 10px;
-    }
-
-    .step-status {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-    }
-
-    .step-status.ok {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-    }
-
-    .step-status.loading {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--accent-blue);
-    }
-
-    .step-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .code-snippet {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 8px;
-      color: #cbd5e1;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-all;
-      max-height: 100px;
-    }
-
-    /* Live Event Logs */
-    .log-panel {
-      margin-top: 14px;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .log-header {
-      padding: 8px 12px;
-      background: var(--surface-elevated);
-      border-bottom: 1px solid var(--border);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .log-body {
-      padding: 10px;
-      height: 140px;
-      overflow-y: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .log-entry {
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .log-entry.info { color: #94a3b8; }
-    .log-entry.success { color: var(--accent-green); }
-    .log-entry.warn { color: var(--accent-amber); }
-    .log-entry.error { color: #ef4444; }
-
-    @media (max-width: 1080px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-      .meta-box {
-        grid-template-columns: 90px 1fr;
-      }
-      .meta-poster {
-        width: 90px;
-        height: 125px;
-      }
+    @media (max-width: 900px) {
+      header { padding: 0 16px; }
+      .nav-links { display: none; }
+      .series-hero-wrap { padding: 32px 20px; min-height: 400px; }
+      .series-subnav-bar { padding: 12px 20px; }
+      .series-episodes-section { padding: 20px; }
+      .catalog-container, .player-page-wrap, .drm-container { padding: 20px 16px; }
+      .diag-content { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- =========================================================
+       TOP NAVIGATION BAR
+       ========================================================= -->
   <header>
-    <div class="brand">
-      <span class="brand-badge">ARY PLUS</span>
-      <div>
-        <span class="brand-title">Video & DRM Portal</span>
-        <span class="brand-subtitle">Shaka Player Engine</span>
-      </div>
+    <div class="nav-left">
+      <!-- ARY Plus Logo -->
+      <a class="brand-logo" onclick="navigateTo('dramas')">
+        <span class="brand-logo-text">ARY</span>
+        <span class="brand-logo-plus">+</span>
+      </a>
+
+      <!-- Category Navigation Tabs -->
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a class="nav-link" id="nav-exclusive" onclick="showToast('Exclusive catalog filtered')">Exclusive</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" id="nav-dramas" onclick="navigateTo('dramas')">Dramas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-drm" onclick="navigateTo('drm')">DRM Protected</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-telefilms" onclick="showToast('Telefilms catalog filtered')">Telefilms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-snips" onclick="showToast('Snips catalog filtered')">Snips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-shows" onclick="showToast('Shows catalog filtered')">Shows</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-streams" onclick="showToast('Streams catalog filtered')">Streams</a>
+        </li>
+      </ul>
     </div>
-    <div class="header-pills">
-      <div class="pill pill-green">
+
+    <div class="nav-right">
+      <div class="header-pill green">
         <span class="pill-dot"></span>
-        <span>Google Widevine Modular</span>
-      </div>
-      <div class="pill pill-blue">
-        <span class="pill-dot"></span>
-        <span>Apple FairPlay / Clear HLS</span>
+        <span>Widevine / FairPlay Ready</span>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <!-- Left Column: Video Player, Sections & Metadata -->
-    <div style="display: flex; flex-direction: column; gap: 16px;">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">Live Video Viewport</span>
-          <span id="playerStateBadge" class="pill pill-blue"><span class="pill-dot"></span><span id="playerStateText">Idle</span></span>
+  <!-- =========================================================
+       VIEW 1: DRAMAS BROWSE VIEW (Matches Image 1)
+       ========================================================= -->
+  <section id="view-dramas" class="view-section active">
+    <div class="catalog-container">
+      <h1 class="section-headline">Dramas</h1>
+
+      <div class="drama-cards-grid">
+        <!-- 1. Rutba Card -->
+        <div class="drama-poster-card" onclick="showToast('Rutba selected - Open Dar-E-Nijaat for full 25 episodes player')">
+          <span class="drama-badge">Drama</span>
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1790783312410.webp" alt="Rutba" loading="lazy">
+          <div class="drama-poster-gradient">
+            <div class="drama-card-title">Rutba</div>
+            <div class="drama-card-sub">ARY Digital Drama Series</div>
+          </div>
         </div>
 
-        <div class="video-container">
+        <!-- 2. Dar-E-Nijaat Card (Main Featured Series) -->
+        <div class="drama-poster-card" onclick="navigateTo('series-detail')">
+          <span class="drama-badge featured">Featured • 25 Eps</span>
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280X400_1784120968010.webp" alt="Dar-E-Nijaat">
+          <div class="drama-poster-gradient" style="opacity: 1; background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.4) 40%, transparent 80%);">
+            <div class="drama-card-title" style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 16px;">Dar-E-Nijaat</div>
+            <div class="drama-card-sub">Romance, Drama • 25 Episodes</div>
+          </div>
+        </div>
+
+        <!-- 3. Hey Fam Card -->
+        <div class="drama-poster-card" onclick="showToast('Hey Fam selected')">
+          <span class="drama-badge">Family</span>
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280x400-1_1788282433040.webp" alt="Hey Fam" loading="lazy">
+          <div class="drama-poster-gradient">
+            <div class="drama-card-title">Hey Fam</div>
+            <div class="drama-card-sub">Comedy, Family Drama</div>
+          </div>
+        </div>
+
+        <!-- 4. LAGAN LAGI Card -->
+        <div class="drama-poster-card" onclick="showToast('Lagan Lagi selected')">
+          <span class="drama-badge">Romance</span>
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1791124391063.webp" alt="Lagan Lagi" loading="lazy">
+          <div class="drama-poster-gradient">
+            <div class="drama-card-title">LAGAN LAGI</div>
+            <div class="drama-card-sub">Romance, Drama Series</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 2: DAR-E-NIJAAT SERIES DETAIL VIEW (Matches Image 2)
+       ========================================================= -->
+  <section id="view-series-detail" class="view-section">
+    <!-- Hero Banner with Desktop Backdrop -->
+    <div class="series-hero-wrap" style="background-image: url('https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp');">
+      <div class="series-hero-backdrop-overlay"></div>
+      
+      <div class="series-hero-content">
+        <h1 class="series-gold-title">DAR-E-NIJAAT</h1>
+        <div class="series-meta-line">
+          <span>Romance, Drama, Family</span>
+          <span class="divider">|</span>
+          <span id="seriesTotalEpsBadge">25 Episodes</span>
+        </div>
+        <p class="series-synopsis">
+          Some stories begin with love. Some are tested by loss. And some are remembered for the courage it takes to forgive.<br>
+          Written By: Umera Ahmed Directed By: Saqib Khan
+        </p>
+        <p class="series-cast-text">
+          <strong>Starring:</strong> Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sehar Hashmi, Romaisa Khan, Sania Saeed, Saba Hamid, Nadia Afgan, Mahmood Aslam...
+        </p>
+
+        <!-- Action Row -->
+        <div class="series-actions-row">
+          <button class="btn-watch-now" onclick="watchEpisode(1)">
+            <span class="play-icon">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span>Watch Now</span>
+          </button>
+
+          <button class="btn-circle-action" id="btnAddList" onclick="toggleAddList()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            <span id="addListText">Add to List</span>
+          </button>
+
+          <button class="btn-circle-action" onclick="shareSeries()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <span>Share</span>
+          </button>
+
+          <button class="btn-audio-toggle" id="btnMuteToggle" onclick="toggleHeroAudio()" title="Mute/Unmute audio preview">
+            <svg id="audioIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Series Sub-Navigation & Sort Controls -->
+    <div class="series-subnav-bar">
+      <ul class="subnav-tabs">
+        <li>
+          <a class="subnav-link active" id="subtab-episodes" onclick="showSubTab('episodes')">Episodes (25)</a>
+        </li>
+        <li>
+          <a class="subnav-link" id="subtab-info" onclick="showSubTab('info')">More Info</a>
+        </li>
+        <li>
+          <a class="subnav-link" id="subtab-related" onclick="showSubTab('related')">Related</a>
+        </li>
+      </ul>
+
+      <!-- Sort Dropdown (Newest to Oldest / Oldest to Newest) -->
+      <div class="sort-dropdown-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/></svg>
+        <select class="sort-select" id="episodeSortSelect" onchange="changeEpisodeSort(this.value)">
+          <option value="desc">Newest to Oldest</option>
+          <option value="asc">Oldest to Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Episodes Grid Section -->
+    <div class="series-episodes-section" id="episodesSubSection">
+      <div class="detail-episodes-grid" id="detailEpisodesGrid">
+        <!-- Rendered dynamically via episodes.json -->
+      </div>
+    </div>
+
+    <!-- More Info Sub Section -->
+    <div class="series-episodes-section" id="infoSubSection" style="display: none;">
+      <div style="background: var(--surface); padding: 28px; border-radius: 12px; border: 1px solid var(--border); max-width: 900px;">
+        <h3 style="font-size: 18px; margin-bottom: 12px; color: #fff;">About Dar-E-Nijaat</h3>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Written by acclaimed dramatist Umera Ahmed and directed by Saqib Khan, <em>Dar-E-Nijaat</em> tells a gripping emotional story of family redemption, perseverance, and forgiveness.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 13px;">
+          <div><strong style="color: #fff;">Release Year:</strong> 2026</div>
+          <div><strong style="color: #fff;">Network:</strong> ARY Digital / ARY Plus</div>
+          <div><strong style="color: #fff;">Format:</strong> Ultra HD HLS (adaptive bitrate)</div>
+          <div><strong style="color: #fff;">Protection:</strong> Clear HLS Stream / AES-128</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Sub Section -->
+    <div class="series-episodes-section" id="relatedSubSection" style="display: none;">
+      <h3 style="font-size: 18px; margin-bottom: 16px; color: #fff;">More Like This</h3>
+      <div class="drama-cards-grid">
+        <div class="drama-poster-card" onclick="showToast('Rutba')">
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1790783312410.webp" alt="Rutba">
+        </div>
+        <div class="drama-poster-card" onclick="showToast('Hey Fam')">
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280x400-1_1788282433040.webp" alt="Hey Fam">
+        </div>
+        <div class="drama-poster-card" onclick="showToast('Lagan Lagi')">
+          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1791124391063.webp" alt="Lagan Lagi">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 3: DEDICATED PLAYER PAGE ("Play in New Page")
+       ========================================================= -->
+  <section id="view-player" class="view-section">
+    <div class="player-page-wrap">
+      <!-- Breadcrumbs / Back Navigation -->
+      <div class="player-top-breadcrumbs">
+        <button class="btn-back-nav" onclick="navigateTo('series-detail')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Back to Dar-E-Nijaat</span>
+        </button>
+
+        <div style="font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+          Shaka Player v4.7.11 • EME Engine
+        </div>
+      </div>
+
+      <!-- Cinema Video Stage -->
+      <div class="player-stage-card">
+        <div class="player-video-viewport">
           <video id="videoElement" controls autoplay playsinline></video>
           <div id="playerOverlay" class="player-overlay">
             <div class="spinner"></div>
-            <p id="overlayStatus" style="font-size: 13px; font-weight: 500;">Initializing Media Stream...</p>
+            <p id="overlayStatus" style="font-size: 14px; font-weight: 600;">Initializing Stream Playback...</p>
           </div>
         </div>
 
-        <!-- Section Tabs Navigation: Home (Dar-E-Nijaat) is first and default -->
-        <div class="section-tabs">
-          <button class="tab-btn active" onclick="switchSection('home-section', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            Home (Dar-E-Nijaat)
-          </button>
-          <button class="tab-btn" onclick="switchSection('drm-section', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            DRM Protected Content
-          </button>
-          <button class="tab-btn" onclick="switchSection('custom-section', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            Custom ID Inspector
-          </button>
-        </div>
-
-        <!-- Tab 1: HOME SECTION (Dar-E-Nijaat Series & All 25 Episodes) -->
-        <div id="home-section" class="tab-panel active tab-content">
-          <!-- Featured Series Hero Banner -->
-          <div class="series-hero-banner">
-            <img class="series-hero-poster" src="https://images.aryplus.tv/poster/280X400_1784120968010.webp" alt="Dar-E-Nijaat">
-            <div class="series-hero-info">
-              <div class="series-hero-title">
-                Dar-E-Nijaat
-                <span class="meta-tag" style="background: rgba(195, 22, 28, 0.2); color: #fff; border: 1px solid var(--primary);">Featured Drama</span>
-                <span class="meta-tag">25 Episodes</span>
-              </div>
-              <div class="series-hero-desc">
-                Some stories begin with love. Some are tested by loss. And some are remembered for the courage it takes to forgive. Written By: Umera Ahmed. Directed By: Saqib Khan.
-              </div>
-              <div class="series-hero-credits">
-                Cast: <span>Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sania Saeed</span>
-              </div>
+        <!-- Info Bar under Player -->
+        <div class="player-info-bar">
+          <div>
+            <div class="player-info-title" id="playerCurrentTitle">
+              Dar-E-Nijaat - Episode 1
+              <span id="playerDrmBadge" class="badge-stream-type">Clear HLS</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="playerCurrentMeta">
+              Duration: 37:53 • ARY Digital Network
             </div>
           </div>
 
-          <!-- Episodes Selector Header -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 13px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-              <span>Episodes Catalog</span>
-              <span id="episodesCountBadge" class="meta-tag" style="background: rgba(255, 255, 255, 0.08);">25 Episodes</span>
-            </div>
-            <div style="font-size: 11px; color: var(--text-muted);">Click an episode to play</div>
-          </div>
-
-          <!-- Episodes Grid -->
-          <div id="episodesGrid" class="episodes-grid">
-            <div style="color: var(--text-muted); font-size: 12px; padding: 20px;">Loading episodes catalog...</div>
-          </div>
-        </div>
-
-        <!-- Tab 2: DRM PROTECTED CONTENT SECTION -->
-        <div id="drm-section" class="tab-panel tab-content">
-          <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px;">
-            DRM Protected Movies & Singles
-          </div>
-          <div class="drm-cards-grid">
-            <!-- Love Guru DRM Card -->
-            <div class="content-item-card" onclick="loadDrmContent('69bad0ba34f97c2d4ae5da34')">
-              <img class="content-card-thumb" src="https://images.aryplus.tv/poster/Poster_1773850806160.webp" alt="Love Guru">
-              <div class="content-card-details">
-                <div>
-                  <div class="content-card-title">Love Guru</div>
-                  <div class="meta-badges" style="margin-bottom: 4px;">
-                    <span class="meta-tag drm">Widevine CENC</span>
-                    <span class="meta-tag">Movie</span>
-                  </div>
-                  <div class="content-card-meta">Humayun Saeed, Mahira Khan • Common Encryption (CENC) with SAMPLE-AES</div>
-                </div>
-                <button class="content-card-btn" onclick="event.stopPropagation(); loadDrmContent('69bad0ba34f97c2d4ae5da34')">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  Play DRM Stream
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tab 3: CUSTOM ID INSPECTOR SECTION -->
-        <div id="custom-section" class="tab-panel tab-content">
-          <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 8px;">
-            Inspect Any ARY Plus Content ID
-          </div>
-          <div class="input-group">
-            <input type="text" id="seriesIdInput" class="input-field" value="69bad0ba34f97c2d4ae5da34" placeholder="Enter Series / Video ID (e.g. 69bad0ba34f97c2d4ae5da34)">
-            <button id="loadBtn" class="btn">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              Inspect & Run
+          <div class="player-controls-extra">
+            <button class="btn-next-ep" id="btnNextEp" onclick="playNextEpisode()">
+              <span>Next Episode</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
             </button>
           </div>
         </div>
+      </div>
 
-        <!-- Content Metadata Box -->
-        <div style="padding: 0 16px 16px;">
-          <div id="metaBox" class="meta-box" style="display: none;">
-            <img id="metaPoster" class="meta-poster" src="" alt="Poster">
-            <div class="meta-info">
-              <h2 id="metaTitle">Loading...</h2>
-              <div class="meta-badges">
-                <span id="metaDrmBadge" class="meta-tag drm">Widevine DRM</span>
-                <span id="metaTypeBadge" class="meta-tag">singleVideo</span>
-                <span id="metaStatusBadge" class="meta-tag">Published</span>
+      <!-- Collapsible Technical Diagnostics Drawer -->
+      <div class="diagnostics-accordion">
+        <div class="diag-head" onclick="toggleDiagnostics()">
+          <span class="diag-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Live Technical Diagnostics & EME Pipeline
+          </span>
+          <span style="font-size: 12px; color: var(--accent-green); font-weight: 600;" id="diagToggleText">Hide ▲</span>
+        </div>
+
+        <div class="diag-content" id="diagBody">
+          <!-- 5 Steps list -->
+          <div class="steps-list">
+            <div class="step-box success" id="step1">
+              <div class="step-box-head">
+                <span class="step-box-title">Step 1: Manifest & Metadata</span>
+                <span class="step-box-status ok" id="step1Status">Active</span>
               </div>
-              <p id="metaDesc" class="meta-desc"></p>
-              <div class="meta-cast">Cast: <span id="metaCast">-</span></div>
+              <div class="step-box-code" id="step1Output">Manifest verified and loaded in Shaka Engine.</div>
+            </div>
+
+            <div class="step-box success" id="step2">
+              <div class="step-box-head">
+                <span class="step-box-title">Step 2: DRM Token Exchange</span>
+                <span class="step-box-status ok" id="step2Status">Completed</span>
+              </div>
+              <div class="step-box-code" id="step2Output">Clear HLS Passthrough (or DRM token bound).</div>
+            </div>
+
+            <div class="step-box success" id="step3">
+              <div class="step-box-head">
+                <span class="step-box-title">Step 3: CDM Key System</span>
+                <span class="step-box-status ok" id="step3Status">Configured</span>
+              </div>
+              <div class="step-box-code" id="step3Output">Widevine / FairPlay license endpoints verified.</div>
+            </div>
+
+            <div class="step-box success" id="step4">
+              <div class="step-box-head">
+                <span class="step-box-title">Step 4: Request/Response License Filters</span>
+                <span class="step-box-status ok" id="step4Status">Registered</span>
+              </div>
+              <div class="step-box-code" id="step4Output">Base64 JSON to Uint8Array CDM converter attached.</div>
+            </div>
+
+            <div class="step-box success" id="step5">
+              <div class="step-box-head">
+                <span class="step-box-title">Step 5: Media Decryption & Playback</span>
+                <span class="step-box-status ok" id="step5Status">Playing</span>
+              </div>
+              <div class="step-box-code" id="step5Output">Media pipeline running without buffer underruns.</div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Live Pipeline Logs -->
-      <div class="log-panel">
-        <div class="log-header">
-          <span>PIPELINE EXECUTION LOGS</span>
-          <span id="logCount" style="color: var(--text-muted); font-size: 10px;">0 events</span>
-        </div>
-        <div id="logBody" class="log-body"></div>
-      </div>
-    </div>
-
-    <!-- Right Column: Step-by-Step DRM & Player Pipeline -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">Player & DRM Pipeline</span>
-        <button id="clearLogsBtn" class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;">Reset View</button>
-      </div>
-
-      <div class="steps-container">
-        <!-- Step 1 -->
-        <div id="step1" class="step-item">
-          <div class="step-head">
-            <span class="step-number"><span class="step-badge">1</span> Content Metadata API</span>
-            <span id="step1Status" class="step-status">Pending</span>
+          <!-- Live Log Console -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pipeline Event Logs</span>
+              <button onclick="clearLogs()" style="background: none; border: none; color: var(--text-muted); font-size: 10px; cursor: pointer;">Clear Logs</button>
+            </div>
+            <div class="log-viewport" id="logViewport"></div>
           </div>
-          <div class="step-title">Fetch Video Stream & DRM Flag</div>
-          <div id="step1Output" class="code-snippet">Endpoint: GET https://be.aryplus.tv/api/series/:id
-Header: x-api-key: ak_37515186786306625012043079404171</div>
-        </div>
-
-        <!-- Step 2 -->
-        <div id="step2" class="step-item">
-          <div class="step-head">
-            <span class="step-number"><span class="step-badge">2</span> DRM Token Exchange</span>
-            <span id="step2Status" class="step-status">Pending</span>
-          </div>
-          <div class="step-title">Generate Tencent VOD Multi-DRM Token</div>
-          <div id="step2Output" class="code-snippet">Endpoint: GET https://be.aryplus.tv/api/v3/drm/token/:streamUrl</div>
-        </div>
-
-        <!-- Step 3 -->
-        <div id="step3" class="step-item">
-          <div class="step-head">
-            <span class="step-number"><span class="step-badge">3</span> Shaka DRM Configuration</span>
-            <span id="step3Status" class="step-status">Pending</span>
-          </div>
-          <div class="step-title">Configure Widevine & FairPlay License Servers</div>
-          <div id="step3Output" class="code-snippet">com.widevine.alpha:
-https://be.aryplus.tv/api/v3/drm/getWVLicense?drmToken={token}</div>
-        </div>
-
-        <!-- Step 4 -->
-        <div id="step4" class="step-item">
-          <div class="step-head">
-            <span class="step-number"><span class="step-badge">4</span> Request & Response Filters</span>
-            <span id="step4Status" class="step-status">Pending</span>
-          </div>
-          <div class="step-title">Register EME License Filters in Shaka</div>
-          <div id="step4Output" class="code-snippet">NetworkingEngine.registerResponseFilter:
-Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
-        </div>
-
-        <!-- Step 5 -->
-        <div id="step5" class="step-item">
-          <div class="step-head">
-            <span class="step-number"><span class="step-badge">5</span> EME Key Exchange & Playback</span>
-            <span id="step5Status" class="step-status">Pending</span>
-          </div>
-          <div class="step-title">Manifest Load & Content Decryption</div>
-          <div id="step5Output" class="code-snippet">Awaiting player.load() and CDM session grant...</div>
         </div>
       </div>
     </div>
-  </main>
+  </section>
 
+  <!-- =========================================================
+       VIEW 4: DRM PROTECTED TAB
+       ========================================================= -->
+  <section id="view-drm" class="view-section">
+    <div class="drm-container">
+      <h1 class="section-headline">DRM Protected Content</h1>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 28px;">
+        Premium content secured with Tencent Cloud VOD Multi-DRM (Google Widevine Modular CENC & Apple FairPlay SAMPLE-AES).
+      </p>
+
+      <div class="drm-grid">
+        <!-- Love Guru Feature Card -->
+        <div class="drm-feature-card" onclick="playDrmFeature('69bad0ba34f97c2d4ae5da34')">
+          <div class="drm-thumb-wrap">
+            <img src="https://images.aryplus.tv/poster/Poster_1773850806160.webp" alt="Love Guru">
+            <span class="drama-badge featured" style="background: rgba(195, 22, 28, 0.9);">Widevine CENC</span>
+          </div>
+          <div class="drm-feature-body">
+            <div class="drm-feature-title">Love Guru</div>
+            <div class="drm-feature-desc">
+              Starring Humayun Saeed, Mahira Khan. Encrypted with Tencent Multi-DRM and played with EME license challenge exchange.
+            </div>
+            <button class="btn-play-drm" onclick="event.stopPropagation(); playDrmFeature('69bad0ba34f97c2d4ae5da34')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Play DRM Stream
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Content ID Inspector -->
+      <div class="inspector-box">
+        <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px;">Inspect Any ARY Plus Content ID</h3>
+        <p style="font-size: 12px; color: var(--text-muted);">
+          Enter any Series or Video MongoDB ObjectID from ARY Plus to test its DRM authorization and launch the pipeline:
+        </p>
+        <div class="inspector-input-row">
+          <input type="text" id="customIdInput" class="inspector-input" value="69bad0ba34f97c2d4ae5da34" placeholder="Enter ID e.g. 69bad0ba34f97c2d4ae5da34">
+          <button class="btn-watch-now" style="border-radius: 8px; padding: 0 20px;" onclick="inspectCustomId()">
+            Inspect & Play
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification element -->
+  <div class="toast-msg" id="toastMsg">Notification message</div>
+
+  <!-- =========================================================
+       JAVASCRIPT LOGIC
+       ========================================================= -->
   <script>
-    const API_CONFIG = {
+    const CONFIG = {
       API_BASE: 'https://be.aryplus.tv',
       API_KEY: 'ak_37515186786306625012043079404171',
       DRM_TOKEN_ENDPOINT: 'https://be.aryplus.tv/api/v3/drm/token',
@@ -994,58 +1409,139 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
 
     let shakaPlayer = null;
     let episodesCatalog = [];
+    let currentEpisodeIndex = 0;
+    let currentSortOrder = 'desc'; // Default to Newest to Oldest as in screenshot 2
+    let inList = false;
 
-    function switchSection(sectionId, btn) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      const target = document.getElementById(sectionId);
-      if (target) target.classList.add('active');
-      if (btn) btn.classList.add('active');
+    // Toast alert helper
+    function showToast(text) {
+      const toast = document.getElementById('toastMsg');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
+    // Diagnostics toggle
+    function toggleDiagnostics() {
+      const body = document.getElementById('diagBody');
+      const text = document.getElementById('diagToggleText');
+      if (body.style.display === 'none') {
+        body.style.display = 'grid';
+        text.textContent = 'Hide ▲';
+      } else {
+        body.style.display = 'none';
+        text.textContent = 'Show ▼';
+      }
+    }
+
+    // Logger
     function log(message, type = 'info') {
-      const logBody = document.getElementById('logBody');
+      const viewport = document.getElementById('logViewport');
+      if (!viewport) return;
       const time = new Date().toLocaleTimeString();
       const div = document.createElement('div');
-      div.className = `log-entry ${type}`;
+      div.className = `log-row ${type}`;
       div.textContent = `[${time}] ${message}`;
-      logBody.appendChild(div);
-      logBody.scrollTop = logBody.scrollHeight;
-      document.getElementById('logCount').textContent = `${logBody.children.length} events`;
+      viewport.appendChild(div);
+      viewport.scrollTop = viewport.scrollHeight;
     }
 
-    function setStep(stepNum, status, outputText = null) {
-      const stepEl = document.getElementById(`step${stepNum}`);
-      const statusEl = document.getElementById(`step${stepNum}Status`);
-      const outputEl = document.getElementById(`step${stepNum}Output`);
+    function clearLogs() {
+      const viewport = document.getElementById('logViewport');
+      if (viewport) viewport.innerHTML = '';
+    }
 
-      stepEl.classList.remove('active', 'success');
-      statusEl.classList.remove('ok', 'loading');
+    function setStep(num, status, text = null) {
+      const el = document.getElementById(`step${num}`);
+      const st = document.getElementById(`step${num}Status`);
+      const out = document.getElementById(`step${num}Output`);
+      if (!el || !st || !out) return;
 
-      if (status === 'loading') {
-        stepEl.classList.add('active');
-        statusEl.classList.add('loading');
-        statusEl.textContent = 'Executing...';
-      } else if (status === 'success') {
-        stepEl.classList.add('success');
-        statusEl.classList.add('ok');
-        statusEl.textContent = 'Completed';
+      st.className = 'step-box-status';
+      if (status === 'success') {
+        st.classList.add('ok');
+        st.textContent = 'Completed';
+      } else if (status === 'loading') {
+        st.textContent = 'Executing...';
       } else if (status === 'error') {
-        statusEl.textContent = 'Failed';
-        statusEl.style.color = '#ef4444';
+        st.textContent = 'Failed';
+        st.style.color = '#ef4444';
+      }
+      if (text) out.textContent = text;
+    }
+
+    // Routing & View Navigation
+    function navigateTo(viewName) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      if (outputText) {
-        outputEl.textContent = outputText;
+      if (viewName === 'dramas' || viewName === 'series-detail') {
+        document.getElementById('nav-dramas').classList.add('active');
+        window.location.hash = viewName === 'series-detail' ? '#/series/dar-e-nijaat' : '#/dramas';
+      } else if (viewName === 'drm') {
+        document.getElementById('nav-drm').classList.add('active');
+        window.location.hash = '#/drm';
+      }
+
+      // If leaving player view, pause video
+      if (viewName !== 'player') {
+        const video = document.getElementById('videoElement');
+        if (video && !video.paused) {
+          video.pause();
+        }
       }
     }
 
+    // Hero action toggles
+    function toggleAddList() {
+      inList = !inList;
+      const btnText = document.getElementById('addListText');
+      btnText.textContent = inList ? 'Added to List' : 'Add to List';
+      showToast(inList ? 'Added Dar-E-Nijaat to your Watchlist' : 'Removed from Watchlist');
+    }
+
+    function shareSeries() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href);
+        showToast('Link copied to clipboard!');
+      } else {
+        showToast('Share link: ' + window.location.href);
+      }
+    }
+
+    let audioMuted = true;
+    function toggleHeroAudio() {
+      audioMuted = !audioMuted;
+      showToast(audioMuted ? 'Preview audio muted' : 'Preview audio unmuted');
+    }
+
+    // Sub-tab toggles in Series Detail View
+    function showSubTab(tabName) {
+      document.querySelectorAll('.subnav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById(`subtab-${tabName}`).classList.add('active');
+
+      document.getElementById('episodesSubSection').style.display = tabName === 'episodes' ? 'block' : 'none';
+      document.getElementById('infoSubSection').style.display = tabName === 'info' ? 'block' : 'none';
+      document.getElementById('relatedSubSection').style.display = tabName === 'related' ? 'block' : 'none';
+    }
+
+    // Sort order handling
+    function changeEpisodeSort(order) {
+      currentSortOrder = order;
+      renderEpisodesGrid();
+    }
+
+    // Initialize Shaka Player
     async function initShaka() {
       shaka.polyfill.installAll();
-
       if (!shaka.Player.isBrowserSupported()) {
-        log('Browser does not support Shaka Player EME APIs', 'error');
-        alert('Your browser does not support Encrypted Media Extensions (EME).');
+        log('Browser does not support EME/Shaka Player APIs', 'error');
         return;
       }
 
@@ -1053,30 +1549,26 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
       shakaPlayer = new shaka.Player(video);
 
       shakaPlayer.addEventListener('error', (event) => {
-        log(`Shaka Player Error [${event.detail.code}]: ${event.detail.message || 'DRM or Media error'}`, 'error');
-        console.error('Shaka Player Error:', event.detail);
+        log(`Shaka Player Error [${event.detail.code}]: ${event.detail.message || 'Media/DRM error'}`, 'error');
       });
 
+      // Filter for Bearer token & license decoding
       shakaPlayer.getNetworkingEngine().registerRequestFilter(async (type, request) => {
         if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
-          log('🔑 License challenge dispatched to license server', 'info');
-          const cachedToken = sessionStorage.getItem('idTokenOverride');
-          if (cachedToken) {
-            request.headers['Authorization'] = `Bearer ${cachedToken}`;
-          }
+          log('License challenge emitted to CDM server', 'info');
         }
       });
 
       shakaPlayer.getNetworkingEngine().registerResponseFilter((type, response) => {
         if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
-          log('📥 License response received from server', 'success');
+          log('License response received from server', 'success');
           try {
             const text = new TextDecoder().decode(response.data);
             if (text.trim().startsWith('{')) {
               const parsed = JSON.parse(text);
               const keyData = parsed.ckc || parsed.msg || parsed.data || parsed.license;
               if (keyData) {
-                log('🔄 Decoded JSON license payload into raw binary for CDM', 'info');
+                log('Decoded Base64 license challenge into Uint8Array for CDM', 'info');
                 response.data = shaka.util.Uint8ArrayUtils.fromBase64(keyData.replace(/\s/g, ''));
               }
             }
@@ -1086,281 +1578,230 @@ Transforms Base64 { ckc, license, msg } to raw Uint8Array for CDM</div>
         }
       });
 
-      log('Shaka Player initialized and EME polyfills installed.', 'info');
+      log('Shaka Player engine initialized with DRM filters.', 'info');
     }
 
-    // Load DRM Content (e.g. Love Guru)
-    async function loadDrmContent(contentId) {
-      document.getElementById('seriesIdInput').value = contentId;
-      await runDrmPipeline(contentId);
-    }
+    // Render Episode Cards Grid
+    function renderEpisodesGrid() {
+      const grid = document.getElementById('detailEpisodesGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
 
-    // Play Direct Episode from Dar-E-Nijaat
-    async function playEpisode(epIndex) {
-      const ep = episodesCatalog[epIndex];
-      if (!ep) return;
-
-      document.querySelectorAll('.ep-card').forEach((c, i) => {
-        c.classList.toggle('active', i === epIndex);
-      });
-
-      const overlay = document.getElementById('playerOverlay');
-      const overlayText = document.getElementById('overlayStatus');
-      const playerBadge = document.getElementById('playerStateText');
-
-      overlay.classList.remove('hidden');
-      overlayText.textContent = `Loading ${ep.title}...`;
-      playerBadge.textContent = 'Loading';
-
-      try {
-        log(`[Step 1] Loading Dar-E-Nijaat - ${ep.title}`, 'info');
-        setStep(1, 'success', `Title: Dar-E-Nijaat - ${ep.title}\nDuration: ${ep.durationFormatted}\nStream URL: ${ep.hlsStreamUrl}\nDRM Enabled: ${ep.drmEnabled}`);
-
-        document.getElementById('metaBox').style.display = 'grid';
-        document.getElementById('metaTitle').textContent = `Dar-E-Nijaat - ${ep.title}`;
-        document.getElementById('metaDesc').textContent = `Some stories begin with love. Some are tested by loss. And some are remembered for the courage it takes to forgive. Written By: Umera Ahmed. Directed By: Saqib Khan.`;
-        document.getElementById('metaCast').textContent = 'Sheheryar Munawar, Dur-E-Fishan, Nameer Khan, Sania Saeed';
-        document.getElementById('metaTypeBadge').textContent = 'Episode';
-        document.getElementById('metaDrmBadge').textContent = ep.drmEnabled ? 'Widevine DRM' : 'Clear HLS';
-        document.getElementById('metaDrmBadge').className = ep.drmEnabled ? 'meta-tag drm' : 'meta-tag';
-        if (ep.thumbnailUrl && ep.thumbnailUrl !== 'N/A') {
-          document.getElementById('metaPoster').src = ep.thumbnailUrl;
-        }
-
-        if (ep.drmEnabled) {
-          setStep(2, 'loading');
-          log('[Step 2] Requesting DRM Token...', 'info');
-          const tokenRes = await fetch(`${API_CONFIG.DRM_TOKEN_ENDPOINT}/${ep.hlsStreamUrl}`, {
-            headers: { 'x-api-key': API_CONFIG.API_KEY }
-          });
-          const { token } = await tokenRes.json();
-          setStep(2, 'success', `Token: ${token.slice(0, 40)}...`);
-
-          const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-          const wvUrl = `${API_CONFIG.WV_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
-          const fpUrl = `${API_CONFIG.FP_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
-          shakaPlayer.configure({
-            drm: { servers: { 'com.widevine.alpha': wvUrl, 'com.apple.fps': fpUrl } }
-          });
-          setStep(3, 'success', `Configured DRM Server:\n${wvUrl}`);
-        } else {
-          setStep(2, 'success', 'Content is clear stream (No DRM token required)');
-          shakaPlayer.configure({ drm: { servers: {} } });
-          setStep(3, 'success', 'Standard HLS Playback Mode (Clear AES-128 / Passthrough)');
-        }
-
-        setStep(4, 'success', 'Request/Response filters active on Shaka NetworkingEngine');
-
-        setStep(5, 'loading');
-        log(`[Step 5] Calling player.load("${ep.hlsStreamUrl}")...`, 'info');
-        await shakaPlayer.load(ep.hlsStreamUrl);
-        log(`[Step 5] ${ep.title} stream loaded successfully!`, 'success');
-        setStep(5, 'success', `Playing: Dar-E-Nijaat - ${ep.title}\nManifest loaded and decoded successfully.`);
-
-        overlay.classList.add('hidden');
-        playerBadge.textContent = 'Playing';
-        document.getElementById('playerStateBadge').className = 'pill pill-green';
-
-        document.getElementById('videoElement').play().catch(e => {
-          log(`Autoplay notice: ${e.message}`, 'warn');
-        });
-
-      } catch (err) {
-        log(`Error loading episode: ${err.message}`, 'error');
-        overlayText.textContent = `Error: ${err.message}`;
-        playerBadge.textContent = 'Error';
+      // Copy and sort
+      let sorted = [...episodesCatalog];
+      if (currentSortOrder === 'desc') {
+        // Episode 25 down to Episode 1
+        sorted.sort((a, b) => b.episodeNumber - a.episodeNumber);
+      } else {
+        // Episode 1 up to Episode 25
+        sorted.sort((a, b) => a.episodeNumber - b.episodeNumber);
       }
+
+      sorted.forEach((ep) => {
+        const card = document.createElement('div');
+        card.className = 'detail-ep-card';
+        card.onclick = () => watchEpisode(ep.episodeNumber);
+
+        card.innerHTML = `
+          <div class="detail-ep-thumb-wrap">
+            <img class="detail-ep-thumb" src="${ep.thumbnailUrl}" alt="${ep.title}" loading="lazy">
+            <div class="detail-ep-play-circle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="detail-ep-info">
+            <span class="detail-ep-title">${ep.title}</span>
+            <span class="detail-ep-dur">${ep.durationFormatted}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
     }
 
-    // Load Episodes Catalog
+    // Load Episodes Catalog JSON
     async function loadEpisodesCatalog() {
-      const grid = document.getElementById('episodesGrid');
       try {
         const res = await fetch('./episodes.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         episodesCatalog = await res.json();
-
-        grid.innerHTML = '';
-        episodesCatalog.forEach((ep, idx) => {
-          const card = document.createElement('div');
-          card.className = `ep-card ${idx === 0 ? 'active' : ''}`;
-          card.onclick = () => playEpisode(idx);
-
-          card.innerHTML = `
-            <div class="ep-thumb-wrapper">
-              <img class="ep-thumb" src="${ep.thumbnailUrl}" alt="${ep.title}" loading="lazy">
-              <span class="ep-badge-num">Ep ${ep.episodeNumber}</span>
-              <span class="ep-badge-dur">${ep.durationFormatted}</span>
-            </div>
-            <div class="ep-info">
-              <div class="ep-title">${ep.title}</div>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
-
-        document.getElementById('episodesCountBadge').textContent = `${episodesCatalog.length} Episodes`;
-        log(`Loaded ${episodesCatalog.length} episodes for Dar-E-Nijaat.`, 'info');
-
-        // Automatically start playing Episode 1 on Home Tab load
-        if (episodesCatalog.length > 0) {
-          await playEpisode(0);
-        }
-      } catch (e) {
-        grid.innerHTML = `<div style="color: #ef4444; font-size: 12px; padding: 12px;">Failed to load episodes.json: ${e.message}</div>`;
+        document.getElementById('seriesTotalEpsBadge').textContent = `${episodesCatalog.length} Episodes`;
+        document.getElementById('subtab-episodes').textContent = `Episodes (${episodesCatalog.length})`;
+        renderEpisodesGrid();
+        log(`Loaded ${episodesCatalog.length} episodes for Dar-E-Nijaat catalog.`, 'info');
+      } catch (err) {
+        log(`Failed to load episodes.json: ${err.message}`, 'error');
       }
     }
 
-    // Pipeline for custom ID lookup
-    async function runDrmPipeline(contentId) {
+    // Watch a specific episode in dedicated Player View
+    async function watchEpisode(epNumber) {
+      const epIndex = episodesCatalog.findIndex(e => e.episodeNumber === epNumber);
+      if (epIndex === -1) return;
+      currentEpisodeIndex = epIndex;
+      const ep = episodesCatalog[epIndex];
+
+      // Navigate to dedicated Player Page
+      navigateTo('player');
+      window.location.hash = `#/watch/${ep.episodeNumber}`;
+
+      // Update player titles
+      document.getElementById('playerCurrentTitle').innerHTML = `
+        Dar-E-Nijaat - ${ep.title}
+        <span class="badge-stream-type">Clear HLS</span>
+      `;
+      document.getElementById('playerCurrentMeta').textContent = `Duration: ${ep.durationFormatted} • ARY Digital Network`;
+
       const overlay = document.getElementById('playerOverlay');
       const overlayText = document.getElementById('overlayStatus');
-      const playerBadge = document.getElementById('playerStateText');
-
       overlay.classList.remove('hidden');
-      overlayText.textContent = 'Querying Content Metadata...';
-      playerBadge.textContent = 'Connecting';
+      overlayText.textContent = `Loading ${ep.title}...`;
 
       try {
-        setStep(1, 'loading');
-        log(`[Step 1] Fetching metadata for ID: ${contentId}`, 'info');
+        log(`Starting playback of Dar-E-Nijaat - ${ep.title}`, 'info');
+        setStep(1, 'success', `Stream URL: ${ep.hlsStreamUrl}\nDuration: ${ep.durationFormatted}`);
 
-        const seriesRes = await fetch(`${API_CONFIG.API_BASE}/api/series/${contentId}`, {
-          headers: { 'x-api-key': API_CONFIG.API_KEY }
-        });
+        setStep(2, 'success', 'No DRM token required (Clear HLS)');
+        shakaPlayer.configure({ drm: { servers: {} } });
 
-        if (!seriesRes.ok) throw new Error(`Failed to fetch series data: HTTP ${seriesRes.status}`);
+        setStep(3, 'success', 'Standard HLS AES-128 Passthrough Mode');
+        setStep(4, 'success', 'Networking engine active');
+        setStep(5, 'loading', `Calling player.load("${ep.hlsStreamUrl}")...`);
 
-        const seriesData = await seriesRes.json();
-        log(`[Step 1] Retrieved content: "${seriesData.title}" (DRM Enabled: ${seriesData.drmEnabled})`, 'success');
-
-        document.getElementById('metaBox').style.display = 'grid';
-        document.getElementById('metaTitle').textContent = seriesData.title || 'Untitled';
-        document.getElementById('metaDesc').textContent = seriesData.description || 'No description available';
-        document.getElementById('metaCast').textContent = (seriesData.cast && seriesData.cast.join(', ')) || 'N/A';
-        document.getElementById('metaTypeBadge').textContent = seriesData.seriesType || 'singleVideo';
-        document.getElementById('metaDrmBadge').textContent = seriesData.drmEnabled ? 'Widevine DRM' : 'Clear HLS';
-        document.getElementById('metaDrmBadge').className = seriesData.drmEnabled ? 'meta-tag drm' : 'meta-tag';
-        if (seriesData.imagePoster) {
-          document.getElementById('metaPoster').src = `${API_CONFIG.IMAGE_BASE}${seriesData.imagePoster}`;
-        }
-
-        const streamUrl = seriesData.seiresCDNWebLink || seriesData.seiresCDN;
-        setStep(1, 'success', `Title: ${seriesData.title}\nStream URL: ${streamUrl}\nDRM Enabled: ${seriesData.drmEnabled}`);
-
-        setStep(2, 'loading');
-        overlayText.textContent = 'Generating DRM Token...';
-        log(`[Step 2] Requesting DRM Token for stream...`, 'info');
-
-        let drmToken = null;
-        if (seriesData.drmEnabled) {
-          const tokenRes = await fetch(`${API_CONFIG.DRM_TOKEN_ENDPOINT}/${streamUrl}`, {
-            headers: { 'x-api-key': API_CONFIG.API_KEY }
-          });
-
-          if (!tokenRes.ok) throw new Error(`DRM Token API failed: HTTP ${tokenRes.status}`);
-
-          const tokenData = await tokenRes.json();
-          drmToken = tokenData.token;
-          log(`[Step 2] DRM Token successfully generated!`, 'success');
-
-          let tokenInfo = drmToken;
-          try {
-            const parts = drmToken.split('~');
-            if (parts.length > 1) {
-              const claims = JSON.parse(atob(parts[1]));
-              tokenInfo = `AppId: ${claims.appId}\nFileId: ${claims.fileId}\nExpire: ${new Date(claims.expireTimeStamp * 1000).toLocaleString()}\nToken: ${drmToken.slice(0, 40)}...`;
-            }
-          } catch(e) {}
-
-          setStep(2, 'success', tokenInfo);
-        } else {
-          setStep(2, 'success', 'Content is clear stream (No DRM token required)');
-        }
-
-        setStep(3, 'loading');
-        overlayText.textContent = 'Configuring DRM Engine...';
-        log(`[Step 3] Configuring Shaka DRM servers...`, 'info');
-
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        const wvLicenseUrl = `${API_CONFIG.WV_LICENSE_SERVER}?drmToken=${encodeURIComponent(drmToken)}`;
-        const fpLicenseUrl = `${API_CONFIG.FP_LICENSE_SERVER}?drmToken=${encodeURIComponent(drmToken)}`;
-
-        const shakaDrmConfig = seriesData.drmEnabled ? {
-          servers: {
-            'com.widevine.alpha': wvLicenseUrl,
-            'com.apple.fps': fpLicenseUrl,
-            'com.apple.fps.1_0': fpLicenseUrl
-          },
-          streaming: {
-            useNativeHlsOnSafari: false,
-            bufferingGoal: 20,
-            rebufferingGoal: 5,
-            bufferBehind: 10
-          }
-        } : {
-          streaming: {
-            useNativeHlsOnSafari: false,
-            bufferingGoal: 20,
-            rebufferingGoal: 5
-          }
-        };
-
-        if (isSafari && seriesData.drmEnabled) {
-          try {
-            const certRes = await fetch(API_CONFIG.FP_CERT_URL);
-            const certData = new Uint8Array(await certRes.arrayBuffer());
-            shakaDrmConfig.advanced = {
-              'com.apple.fps': { serverCertificate: certData },
-              'com.apple.fps.1_0': { serverCertificate: certData }
-            };
-          } catch (certErr) {
-            log(`FairPlay Certificate warning: ${certErr.message}`, 'warn');
-          }
-        }
-
-        shakaPlayer.configure({ drm: shakaDrmConfig });
-        setStep(3, 'success', seriesData.drmEnabled ? `Widevine License Server:\n${wvLicenseUrl}` : 'Clear HLS Stream');
-
-        setStep(4, 'success', 'Request/Response filters active on Shaka NetworkingEngine');
-
-        setStep(5, 'loading');
-        overlayText.textContent = 'Loading Media Manifest...';
-        log(`[Step 5] Calling player.load("${streamUrl}")...`, 'info');
-
-        await shakaPlayer.load(streamUrl);
-        log(`[Step 5] Stream loaded successfully! Media ready for playback.`, 'success');
-        setStep(5, 'success', `Manifest parsed and active in CDM.\nPlaying: ${seriesData.title}`);
+        await shakaPlayer.load(ep.hlsStreamUrl);
+        log(`Manifest parsed and decoded for ${ep.title}!`, 'success');
+        setStep(5, 'success', `Now Playing: ${ep.title}`);
 
         overlay.classList.add('hidden');
-        playerBadge.textContent = 'Playing';
-        document.getElementById('playerStateBadge').className = 'pill pill-green';
-
         document.getElementById('videoElement').play().catch(e => {
-          log(`Autoplay notice: ${e.message}`, 'warn');
+          log(`Autoplay notification: ${e.message}`, 'warn');
         });
 
       } catch (err) {
-        log(`Pipeline Failure: ${err.message}`, 'error');
+        log(`Playback error: ${err.message}`, 'error');
         overlayText.textContent = `Error: ${err.message}`;
-        playerBadge.textContent = 'Error';
       }
     }
 
-    document.getElementById('loadBtn').addEventListener('click', () => {
-      const id = document.getElementById('seriesIdInput').value.trim();
-      if (id) runDrmPipeline(id);
-    });
+    function playNextEpisode() {
+      const nextIndex = currentEpisodeIndex + 1;
+      if (nextIndex < episodesCatalog.length) {
+        watchEpisode(episodesCatalog[nextIndex].episodeNumber);
+      } else {
+        showToast('You have reached the final episode!');
+      }
+    }
 
-    document.getElementById('clearLogsBtn').addEventListener('click', () => {
-      document.getElementById('logBody').innerHTML = '';
-      document.getElementById('logCount').textContent = '0 events';
-      for (let i = 1; i <= 5; i++) setStep(i, 'pending');
-    });
+    // Play DRM Feature (e.g. Love Guru)
+    async function playDrmFeature(contentId) {
+      navigateTo('player');
+      window.location.hash = `#/watch/drm/${contentId}`;
+
+      document.getElementById('playerCurrentTitle').innerHTML = `
+        Love Guru (2026)
+        <span class="badge-stream-type drm">Widevine CENC</span>
+      `;
+      document.getElementById('playerCurrentMeta').textContent = 'Starring Humayun Saeed, Mahira Khan • Tencent Multi-DRM';
+
+      const overlay = document.getElementById('playerOverlay');
+      const overlayText = document.getElementById('overlayStatus');
+      overlay.classList.remove('hidden');
+      overlayText.textContent = 'Authorizing DRM Session...';
+
+      try {
+        setStep(1, 'loading', `Querying series metadata for ID: ${contentId}`);
+        log(`[Step 1] Fetching metadata for ID: ${contentId}`, 'info');
+
+        const seriesRes = await fetch(`${CONFIG.API_BASE}/api/series/${contentId}`, {
+          headers: { 'x-api-key': CONFIG.API_KEY }
+        });
+        if (!seriesRes.ok) throw new Error(`HTTP ${seriesRes.status}`);
+        const data = await seriesRes.json();
+        const streamUrl = data.seiresCDNWebLink || data.seiresCDN;
+        setStep(1, 'success', `Title: ${data.title}\nStream: ${streamUrl}`);
+
+        setStep(2, 'loading', 'Generating Tencent VOD DRM Token...');
+        const tokenRes = await fetch(`${CONFIG.DRM_TOKEN_ENDPOINT}/${streamUrl}`, {
+          headers: { 'x-api-key': CONFIG.API_KEY }
+        });
+        if (!tokenRes.ok) throw new Error(`Token failed: HTTP ${tokenRes.status}`);
+        const { token } = await tokenRes.json();
+        setStep(2, 'success', `DRM Token Generated: ${token.slice(0, 42)}...`);
+
+        setStep(3, 'loading', 'Configuring Shaka DRM License Servers...');
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const wvUrl = `${CONFIG.WV_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
+        const fpUrl = `${CONFIG.FP_LICENSE_SERVER}?drmToken=${encodeURIComponent(token)}`;
+
+        const drmConfig = {
+          servers: {
+            'com.widevine.alpha': wvUrl,
+            'com.apple.fps': fpUrl
+          }
+        };
+
+        if (isSafari) {
+          try {
+            const certRes = await fetch(CONFIG.FP_CERT_URL);
+            const certData = new Uint8Array(await certRes.arrayBuffer());
+            drmConfig.advanced = {
+              'com.apple.fps': { serverCertificate: certData },
+              'com.apple.fps.1_0': { serverCertificate: certData }
+            };
+          } catch(e) {}
+        }
+
+        shakaPlayer.configure({ drm: drmConfig });
+        setStep(3, 'success', `License Server:\n${wvUrl}`);
+
+        setStep(4, 'success', 'Request/Response license filters active on NetworkingEngine');
+        setStep(5, 'loading', 'Decentralized license challenge & load...');
+
+        await shakaPlayer.load(streamUrl);
+        log(`DRM Stream successfully authorized & loaded!`, 'success');
+        setStep(5, 'success', `Decryption granted by CDM. Playing ${data.title}`);
+
+        overlay.classList.add('hidden');
+        document.getElementById('videoElement').play().catch(e => {
+          log(`Autoplay notification: ${e.message}`, 'warn');
+        });
+
+      } catch (err) {
+        log(`DRM pipeline failure: ${err.message}`, 'error');
+        overlayText.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    function inspectCustomId() {
+      const id = document.getElementById('customIdInput').value.trim();
+      if (id) {
+        playDrmFeature(id);
+      }
+    }
+
+    // Hash Route Listener
+    function handleRoute() {
+      const hash = window.location.hash || '#/dramas';
+      if (hash.startsWith('#/watch/drm/')) {
+        const id = hash.replace('#/watch/drm/', '');
+        playDrmFeature(id);
+      } else if (hash.startsWith('#/watch/')) {
+        const epNum = parseInt(hash.replace('#/watch/', ''), 10);
+        if (!isNaN(epNum)) watchEpisode(epNum);
+      } else if (hash === '#/series/dar-e-nijaat') {
+        navigateTo('series-detail');
+      } else if (hash === '#/drm') {
+        navigateTo('drm');
+      } else {
+        navigateTo('dramas');
+      }
+    }
+
+    window.addEventListener('hashchange', handleRoute);
 
     window.addEventListener('DOMContentLoaded', async () => {
       await initShaka();
-      await loadEpisodesCatalog(); // Loads Dar-E-Nijaat and begins Episode 1 by default
+      await loadEpisodesCatalog();
+      handleRoute();
     });
   </script>
 </body>
