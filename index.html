@@ -286,19 +286,31 @@
       position: relative;
       width: 100%;
       min-height: 520px;
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
+      overflow: hidden;
       display: flex;
       align-items: flex-end;
       padding: 60px 48px;
+      background: #0b0c10;
+    }
+
+    .series-hero-backdrop-img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right top;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .series-hero-backdrop-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 75% 30%, rgba(11, 12, 16, 0.2) 0%, rgba(11, 12, 16, 0.85) 65%, #0b0c10 100%),
-                  linear-gradient(to top, #0b0c10 0%, rgba(11, 12, 16, 0.6) 40%, rgba(11, 12, 16, 0.3) 100%);
+      background: radial-gradient(circle at 75% 35%, rgba(11, 12, 16, 0.15) 0%, rgba(11, 12, 16, 0.8) 65%, #0b0c10 100%),
+                  linear-gradient(to right, #0b0c10 0%, rgba(11, 12, 16, 0.85) 45%, rgba(11, 12, 16, 0.2) 75%, transparent 100%),
+                  linear-gradient(to top, #0b0c10 0%, rgba(11, 12, 16, 0.4) 40%, transparent 100%);
       z-index: 1;
     }
 
@@ -1128,7 +1140,8 @@
        ========================================================= -->
   <section id="view-series-detail" class="view-section">
     <!-- Hero Banner with Desktop Backdrop -->
-    <div class="series-hero-wrap" style="background-image: url('https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp');">
+    <div class="series-hero-wrap">
+      <img class="series-hero-backdrop-img" src="https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp" alt="Dar-E-Nijaat Backdrop" referrerpolicy="no-referrer">
       <div class="series-hero-backdrop-overlay"></div>
       
       <div class="series-hero-content">
