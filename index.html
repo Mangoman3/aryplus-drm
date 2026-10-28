@@ -1095,7 +1095,7 @@
         <!-- 1. Rutba Card -->
         <div class="drama-poster-card" onclick="showToast('Rutba selected - Open Dar-E-Nijaat for full 25 episodes player')">
           <span class="drama-badge">Drama</span>
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1790783312410.webp" alt="Rutba" loading="lazy">
+          <img class="drama-poster-img" src="./images/rutba.webp" alt="Rutba" loading="lazy" referrerpolicy="no-referrer">
           <div class="drama-poster-gradient">
             <div class="drama-card-title">Rutba</div>
             <div class="drama-card-sub">ARY Digital Drama Series</div>
@@ -1105,7 +1105,7 @@
         <!-- 2. Dar-E-Nijaat Card (Main Featured Series) -->
         <div class="drama-poster-card" onclick="navigateTo('series-detail')">
           <span class="drama-badge featured">Featured • 25 Eps</span>
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280X400_1784120968010.webp" alt="Dar-E-Nijaat">
+          <img class="drama-poster-img" src="./images/dar-e-nijaat.webp" alt="Dar-E-Nijaat" referrerpolicy="no-referrer">
           <div class="drama-poster-gradient" style="opacity: 1; background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.4) 40%, transparent 80%);">
             <div class="drama-card-title" style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 16px;">Dar-E-Nijaat</div>
             <div class="drama-card-sub">Romance, Drama • 25 Episodes</div>
@@ -1115,7 +1115,7 @@
         <!-- 3. Hey Fam Card -->
         <div class="drama-poster-card" onclick="showToast('Hey Fam selected')">
           <span class="drama-badge">Family</span>
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280x400-1_1788282433040.webp" alt="Hey Fam" loading="lazy">
+          <img class="drama-poster-img" src="./images/hey-fam.webp" alt="Hey Fam" loading="lazy" referrerpolicy="no-referrer">
           <div class="drama-poster-gradient">
             <div class="drama-card-title">Hey Fam</div>
             <div class="drama-card-sub">Comedy, Family Drama</div>
@@ -1125,7 +1125,7 @@
         <!-- 4. LAGAN LAGI Card -->
         <div class="drama-poster-card" onclick="showToast('Lagan Lagi selected')">
           <span class="drama-badge">Romance</span>
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1791124391063.webp" alt="Lagan Lagi" loading="lazy">
+          <img class="drama-poster-img" src="./images/lagan-lagi.webp" alt="Lagan Lagi" loading="lazy" referrerpolicy="no-referrer">
           <div class="drama-poster-gradient">
             <div class="drama-card-title">LAGAN LAGI</div>
             <div class="drama-card-sub">Romance, Drama Series</div>
@@ -1141,7 +1141,7 @@
   <section id="view-series-detail" class="view-section">
     <!-- Hero Banner with Desktop Backdrop -->
     <div class="series-hero-wrap">
-      <img class="series-hero-backdrop-img" src="https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp" alt="Dar-E-Nijaat Backdrop" referrerpolicy="no-referrer">
+      <img class="series-hero-backdrop-img" src="./images/dar-e-nijaat-backdrop.webp" alt="Dar-E-Nijaat Backdrop" referrerpolicy="no-referrer" onerror="this.src='https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp'">
       <div class="series-hero-backdrop-overlay"></div>
       
       <div class="series-hero-content">
@@ -1237,13 +1237,13 @@
       <h3 style="font-size: 18px; margin-bottom: 16px; color: #fff;">More Like This</h3>
       <div class="drama-cards-grid">
         <div class="drama-poster-card" onclick="showToast('Rutba')">
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1790783312410.webp" alt="Rutba">
+          <img class="drama-poster-img" src="./images/rutba.webp" alt="Rutba" referrerpolicy="no-referrer">
         </div>
         <div class="drama-poster-card" onclick="showToast('Hey Fam')">
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280x400-1_1788282433040.webp" alt="Hey Fam">
+          <img class="drama-poster-img" src="./images/hey-fam.webp" alt="Hey Fam" referrerpolicy="no-referrer">
         </div>
         <div class="drama-poster-card" onclick="showToast('Lagan Lagi')">
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/Poster-Image-280x400-With-Logo_1791124391063.webp" alt="Lagan Lagi">
+          <img class="drama-poster-img" src="./images/lagan-lagi.webp" alt="Lagan Lagi" referrerpolicy="no-referrer">
         </div>
       </div>
     </div>
@@ -1378,7 +1378,7 @@
         <!-- Love Guru Feature Card -->
         <div class="drm-feature-card" onclick="playDrmFeature('69bad0ba34f97c2d4ae5da34')">
           <div class="drm-thumb-wrap">
-            <img src="https://images.aryplus.tv/poster/Poster_1773850806160.webp" alt="Love Guru">
+            <img src="./images/love-guru.webp" alt="Love Guru" referrerpolicy="no-referrer" onerror="this.src='https://images.aryplus.tv/poster/Poster_1773850806160.webp'">
             <span class="drama-badge featured" style="background: rgba(195, 22, 28, 0.9);">Widevine CENC</span>
           </div>
           <div class="drm-feature-body">
@@ -1621,10 +1621,11 @@
         const card = document.createElement('div');
         card.className = 'detail-ep-card';
         card.onclick = () => watchEpisode(ep.episodeNumber);
+        const thumbUrl = ep.thumbnailLocal || ep.thumbnailUrl;
 
         card.innerHTML = `
           <div class="detail-ep-thumb-wrap">
-            <img class="detail-ep-thumb" src="${ep.thumbnailUrl}" alt="${ep.title}" loading="lazy">
+            <img class="detail-ep-thumb" src="${thumbUrl}" alt="${ep.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='${ep.thumbnailUrl}'">
             <div class="detail-ep-gradient">
               <div class="detail-ep-title">${ep.title}</div>
               <div class="detail-ep-meta-row">

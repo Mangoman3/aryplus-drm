@@ -12,7 +12,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/4d7f21815001834813456382537/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-08-01_195633_1785596701455.webp",
     "introTimeStamp": 113,
-    "nextEpisodeId": "6a75fcc346c9625e3fb8296d"
+    "nextEpisodeId": "6a75fcc346c9625e3fb8296d",
+    "thumbnailLocal": "./images/episodes/ep_1.webp"
   },
   {
     "episodeNumber": 2,
@@ -27,7 +28,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/c9b8f8d2vodtransth1313565080/416f93585001834814741326280/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/EP-2_1786117314765.webp",
     "introTimeStamp": 50,
-    "nextEpisodeId": "6a774b1046c9625e3fbcaf6d"
+    "nextEpisodeId": "6a774b1046c9625e3fbcaf6d",
+    "thumbnailLocal": "./images/episodes/ep_2.webp"
   },
   {
     "episodeNumber": 3,
@@ -42,7 +44,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/cd6a659fvodtransjkt1313565080/58e21a7a5001834813456845031/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar_e_nijaat_3_1786202895950.webp",
     "introTimeStamp": 9,
-    "nextEpisodeId": "6a7f216446c9625e3f392dbe"
+    "nextEpisodeId": "6a7f216446c9625e3f392dbe",
+    "thumbnailLocal": "./images/episodes/ep_3.webp"
   },
   {
     "episodeNumber": 4,
@@ -57,7 +60,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/be84028a5001834815875854247/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar_e_nijaat_4_1786716515521.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a807db546c9625e3f46dca5"
+    "nextEpisodeId": "6a807db546c9625e3f46dca5",
+    "thumbnailLocal": "./images/episodes/ep_4.webp"
   },
   {
     "episodeNumber": 5,
@@ -72,7 +76,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/182e3ab65001834815910148052/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/sampleSnapshot_10_1_1786805682685.webp",
     "introTimeStamp": 8,
-    "nextEpisodeId": "6a886a83c0a7971117868526"
+    "nextEpisodeId": "6a886a83c0a7971117868526",
+    "thumbnailLocal": "./images/episodes/ep_5.webp"
   },
   {
     "episodeNumber": 6,
@@ -87,7 +92,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/6b776de45001834816629641285/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_6_1787325058187.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a89bcc6c0a797111795ce0a"
+    "nextEpisodeId": "6a89bcc6c0a797111795ce0a",
+    "thumbnailLocal": "./images/episodes/ep_6.webp"
   },
   {
     "episodeNumber": 7,
@@ -102,7 +108,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/cd6a659fvodtransjkt1313565080/f5df067d5001834816621075078/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/sampleSnapshot_10_6_1787411651715.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a91aa81c0a79711171fc1b8"
+    "nextEpisodeId": "6a91aa81c0a79711171fc1b8",
+    "thumbnailLocal": "./images/episodes/ep_7.webp"
   },
   {
     "episodeNumber": 8,
@@ -117,7 +124,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/a443474a5001834817980774328/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar-E-Nijaat_Ep___08_1787931263714.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a92ff05c0a797111731b5b2"
+    "nextEpisodeId": "6a92ff05c0a797111731b5b2",
+    "thumbnailLocal": "./images/episodes/ep_8.webp"
   },
   {
     "episodeNumber": 9,
@@ -132,7 +140,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/24886d765001834818041427090/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar-e-nijaat-9_1788019736700.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a9ac8b715407ce7c63606bb"
+    "nextEpisodeId": "6a9ac8b715407ce7c63606bb",
+    "thumbnailLocal": "./images/episodes/ep_9.webp"
   },
   {
     "episodeNumber": 10,
@@ -147,7 +156,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/c07a3e225001834818851944710/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/sampleSnapshot_10_4_1788528821829.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6a9c2b213bb6f06f6a22685b"
+    "nextEpisodeId": "6a9c2b213bb6f06f6a22685b",
+    "thumbnailLocal": "./images/episodes/ep_10.webp"
   },
   {
     "episodeNumber": 11,
@@ -162,7 +172,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/e0c824005001834818848303443/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_11_1788619551984.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6aa3fe61db2e05fc15c3f98a"
+    "nextEpisodeId": "6aa3fe61db2e05fc15c3f98a",
+    "thumbnailLocal": "./images/episodes/ep_11.webp"
   },
   {
     "episodeNumber": 12,
@@ -177,7 +188,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/ea5a74475001834819855330379/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_12_1789132385006.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6aa569699ce8620de08e66f1"
+    "nextEpisodeId": "6aa569699ce8620de08e66f1",
+    "thumbnailLocal": "./images/episodes/ep_12.webp"
   },
   {
     "episodeNumber": 13,
@@ -192,7 +204,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/a016e8fd5001834820048274880/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-09-12_200312_1789225538689.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6aad5c681f5a2d4920d6297a"
+    "nextEpisodeId": "6aad5c681f5a2d4920d6297a",
+    "thumbnailLocal": "./images/episodes/ep_13.webp"
   },
   {
     "episodeNumber": 14,
@@ -207,7 +220,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/86c7409b5001834820509423484/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-09-18_204054_1789746279073.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6aaeb19765a92de0f19da7e4"
+    "nextEpisodeId": "6aaeb19765a92de0f19da7e4",
+    "thumbnailLocal": "./images/episodes/ep_14.webp"
   },
   {
     "episodeNumber": 15,
@@ -222,7 +236,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/c9b8f8d2vodtransth1313565080/3d03f3d85001834820515358135/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-09-19_201544_1789833621764.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6ab6818de2d45a788e51d21a"
+    "nextEpisodeId": "6ab6818de2d45a788e51d21a",
+    "thumbnailLocal": "./images/episodes/ep_15.webp"
   },
   {
     "episodeNumber": 16,
@@ -237,7 +252,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/c9b8f8d2vodtransth1313565080/534a79c55001834820546539845/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar_E_Nijaat_Ep_16_1790345611749.webp",
     "introTimeStamp": 11,
-    "nextEpisodeId": "6ab7e0e876025242013a106e"
+    "nextEpisodeId": "6ab7e0e876025242013a106e",
+    "thumbnailLocal": "./images/episodes/ep_16.webp"
   },
   {
     "episodeNumber": 17,
@@ -252,7 +268,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/c48706b65001834820582006229/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-09-26_224444_1790444825652.webp",
     "introTimeStamp": 12,
-    "nextEpisodeId": "6abfb83d292394265381f466"
+    "nextEpisodeId": "6abfb83d292394265381f466",
+    "thumbnailLocal": "./images/episodes/ep_17.webp"
   },
   {
     "episodeNumber": 18,
@@ -267,7 +284,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/cd6a659fvodtransjkt1313565080/c941cf755001834820582213318/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar_E_Nijaat_18_1790949435951.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6ac110a0b5da0c5ef220353a"
+    "nextEpisodeId": "6ac110a0b5da0c5ef220353a",
+    "thumbnailLocal": "./images/episodes/ep_18.webp"
   },
   {
     "episodeNumber": 19,
@@ -282,7 +300,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/905583255001834820509859742/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Screenshot_2026-10-03_180722_1791037598772.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6ac8f29206ed0d6db5611bff"
+    "nextEpisodeId": "6ac8f29206ed0d6db5611bff",
+    "thumbnailLocal": "./images/episodes/ep_19.webp"
   },
   {
     "episodeNumber": 20,
@@ -297,7 +316,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/b71c00a85001834820510108320/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_20_1791554192964.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6aca4d5da82787739292f8dd"
+    "nextEpisodeId": "6aca4d5da82787739292f8dd",
+    "thumbnailLocal": "./images/episodes/ep_20.webp"
   },
   {
     "episodeNumber": 21,
@@ -312,7 +332,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/d1b1669b5001834822266329018/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_21_1791642971705.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6ad224a465a69a7357b9b869"
+    "nextEpisodeId": "6ad224a465a69a7357b9b869",
+    "thumbnailLocal": "./images/episodes/ep_21.webp"
   },
   {
     "episodeNumber": 22,
@@ -327,7 +348,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/0cb138c65001834822925764159/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/DN_1792156835411.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6ad37aead2475259d017867b"
+    "nextEpisodeId": "6ad37aead2475259d017867b",
+    "thumbnailLocal": "./images/episodes/ep_22.webp"
   },
   {
     "episodeNumber": 23,
@@ -342,7 +364,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/be8170a0vodtranssgp1313565080/5bc9c82f5001834823023624034/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_nijaat_23_1792244456717.webp",
     "introTimeStamp": 9,
-    "nextEpisodeId": "6adb64bd9de5e9678e24cd4a"
+    "nextEpisodeId": "6adb64bd9de5e9678e24cd4a",
+    "thumbnailLocal": "./images/episodes/ep_23.webp"
   },
   {
     "episodeNumber": 24,
@@ -357,7 +380,8 @@
     "spriteVttUrl": "https://vod.aryzap.com/0e66b809vodtranshk1313565080/75c412295001834825054646878/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/Dar_E_Nijaat_24_1792763068176.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": "6adcad4b41356cee6d8ac16e"
+    "nextEpisodeId": "6adcad4b41356cee6d8ac16e",
+    "thumbnailLocal": "./images/episodes/ep_24.webp"
   },
   {
     "episodeNumber": 25,
@@ -372,6 +396,7 @@
     "spriteVttUrl": "https://vod.aryzap.com/cd6a659fvodtransjkt1313565080/e0c8aa315001834825113171622/imageSprite/imageSprite_10.vtt",
     "thumbnailUrl": "https://images.aryplus.tv/cdnv1/dar_e_1792847178286.webp",
     "introTimeStamp": 10,
-    "nextEpisodeId": null
+    "nextEpisodeId": null,
+    "thumbnailLocal": "./images/episodes/ep_25.webp"
   }
 ]
