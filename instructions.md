@@ -207,3 +207,20 @@ The user requested two key upgrades to FOOLFLIX:
 - [x] 14.6: Push to Remotes & Vercel Verification:
   - Commit and push to `origin` and `vercel-repo` on `master` and `main`.
   - Verify live deployment on `https://aryplus-drm.vercel.app/` and capture screenshots.
+
+---
+
+# FOOLFLIX Portal - Implementation Plan (v5.1: Scale Rocket Plus Animation 20% Smaller)
+
+## Problem Statement
+The user requested reducing the width of the flying rocket plus sign animation by 20% to achieve more balanced proportions with the hero text and catalog rows.
+
+---
+
+## Versioned Task List
+
+### Task 15: Scale Rocket Plus Animation 20% Smaller (v5.1)
+- [x] 15.1: Reduce `.home-hero-rocket-stage` max-width from 720px down to 576px (20% reduction) and adjust flex-basis.
+- [x] 15.2: Adjust `.home-rocket-craft-wrap` max-width and scale flame jet dimensions proportionally.
+- [x] 15.3: Update responsive mobile breakpoint to scale the stage from 460px to 368px.
+- [x] 15.4: Test with automated Chrome CDP script, capture screenshot, commit and push to remotes, and verify on live Vercel.
