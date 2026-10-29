@@ -250,6 +250,327 @@
     }
 
     /* =========================================================
+       VIEW 1: FOOLFLIX HOMEPAGE & DRAMAS BROWSE VIEW
+       ========================================================= */
+    .home-view-container {
+      width: 100%;
+      min-height: 100vh;
+      background: #141414;
+    }
+
+    /* Cinematic Hero Banner */
+    .home-hero-banner {
+      width: 100%;
+      min-height: 380px;
+      position: relative;
+      background: 
+        radial-gradient(circle at 18% 40%, rgba(229, 9, 20, 0.35) 0%, rgba(229, 9, 20, 0.1) 36%, transparent 62%),
+        linear-gradient(to right, #0a0a0a 0%, #0a0a0a 45%, rgba(10, 10, 10, 0.8) 55%, transparent 70%),
+        linear-gradient(to bottom, transparent 75%, #141414 100%),
+        url('./images/foolflix-hero-clean.jpg?v=3') right center / cover no-repeat;
+      padding: 56px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-sizing: border-box;
+    }
+
+    .home-hero-headline-1 {
+      font-size: 46px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.08;
+      letter-spacing: -0.8px;
+      margin: 0;
+    }
+
+    .home-hero-headline-2 {
+      font-size: 46px;
+      font-weight: 900;
+      color: var(--netflix-red);
+      line-height: 1.08;
+      letter-spacing: -0.8px;
+      margin: 2px 0 12px 0;
+      text-shadow: 0 0 24px rgba(229, 9, 20, 0.45);
+    }
+
+    .home-hero-subtext {
+      font-size: 15px;
+      color: #b5b5b5;
+      font-weight: 500;
+      max-width: 660px;
+      margin: 0 0 32px 0;
+      line-height: 1.4;
+    }
+
+    /* 4 Hero Features Horizontal Row */
+    .home-features-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .home-feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .home-feature-pill:hover {
+      transform: translateY(-2px);
+    }
+
+    .home-feature-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--netflix-red);
+      flex-shrink: 0;
+    }
+
+    .home-feature-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .home-feature-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.1px;
+    }
+
+    .home-feature-sub {
+      font-size: 11px;
+      color: #8c8c8c;
+      font-weight: 500;
+    }
+
+    /* Sections Rows Container */
+    .home-rows-container {
+      padding: 24px 48px 50px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .home-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .home-section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+
+    .home-see-all-link {
+      font-size: 12.5px;
+      color: #888888;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .home-see-all-link:hover {
+      color: #ffffff;
+    }
+
+    /* Landscape Cards Grid & Row */
+    .home-cards-carousel-wrap {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .home-landscape-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .home-single-card-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .home-landscape-card {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .home-single-card-row .home-landscape-card {
+      width: calc((100% - 70px) / 6);
+      min-width: 200px;
+      max-width: 260px;
+    }
+
+    .home-landscape-card:hover {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85);
+      z-index: 10;
+    }
+
+    .home-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .home-card-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--netflix-red);
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4);
+      z-index: 2;
+    }
+
+    .home-card-info {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.35) 45%, transparent 70%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 10px 12px;
+      z-index: 1;
+    }
+
+    .home-card-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .home-card-meta {
+      font-size: 11px;
+      color: #a0a0a0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Carousel Arrow Button */
+    .home-carousel-arrow {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(20, 20, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 5;
+      backdrop-filter: blur(4px);
+    }
+
+    .home-carousel-arrow:hover {
+      background: rgba(229, 9, 20, 0.85);
+      border-color: var(--netflix-red);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Footer */
+    .foolflix-footer {
+      background: #0d0d0d;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--netflix-red);
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 12.5px;
+      color: #777777;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-social-icon {
+      color: #777777;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .footer-social-icon:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
        VIEW 2: SERIES DETAIL (Netflix Clone)
        ========================================================= */
     .series-hero-wrap {
@@ -1731,7 +2052,35 @@
       .player-page-wrap,
       .drm-container,
       .billing-container,
-      .checkout-wrap {
+      .checkout-wrap,
+      .home-rows-container {
+        padding: 20px;
+      }
+
+      .home-hero-banner {
+        padding: 40px 20px 32px;
+        min-height: 320px;
+      }
+
+      .home-hero-headline-1,
+      .home-hero-headline-2 {
+        font-size: 32px;
+      }
+
+      .home-features-row {
+        gap: 18px;
+      }
+
+      .home-landscape-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .home-single-card-row .home-landscape-card {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .foolflix-footer {
         padding: 20px;
       }
 
@@ -1792,24 +2141,201 @@
   </header>
 
   <!-- =========================================================
-       VIEW 1: DRAMAS BROWSE VIEW (Only Dar-E-Nijaat)
+       VIEW 1: FOOLFLIX HOMEPAGE & DRAMAS BROWSE VIEW
        ========================================================= -->
   <section id="view-dramas" class="view-section active">
-    <div class="catalog-container">
-      <h1 class="section-headline">Dramas</h1>
+    <div class="home-view-container">
+      
+      <!-- Cinematic Hero Banner -->
+      <div class="home-hero-banner">
+        <h1 class="home-hero-headline-1">Powered by Politics.</h1>
+        <h1 class="home-hero-headline-2">Secured by Hope.</h1>
+        <p class="home-hero-subtext">Enterprise-grade mismanagement. Production-grade vulnerabilities.</p>
 
-      <div class="drama-cards-grid">
-        <!-- Dar-E-Nijaat Card (Featured) -->
-        <div class="drama-poster-card" onclick="navigateTo('series-detail')">
-          <span class="drama-badge featured">FOOLFLIX Series • 25 Eps</span>
-          <img class="drama-poster-img" src="https://images.aryplus.tv/poster/280X400_1784120968010.webp" alt="Dar-E-Nijaat"
-            referrerpolicy="no-referrer" onerror="this.src='./images/dar-e-nijaat.webp'">
-          <div class="drama-poster-gradient">
-            <div class="drama-card-title">Dar-E-Nijaat</div>
-            <div class="drama-card-sub">Romance, Drama • 25 Episodes</div>
+        <!-- 4 Badges Horizontal Row -->
+        <div class="home-features-row">
+          <div class="home-feature-pill" onclick="showToast('Streaming in 4K UHD')">
+            <div class="home-feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+              </svg>
+            </div>
+            <div class="home-feature-text">
+              <span class="home-feature-title">Premium Incompetence</span>
+              <span class="home-feature-sub">Now Streaming in 4K</span>
+            </div>
+          </div>
+
+          <div class="home-feature-pill" onclick="showToast('Security: Just Hope')">
+            <div class="home-feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v6h-2V7zm0 8h2v2h-2v-2z"/>
+              </svg>
+            </div>
+            <div class="home-feature-text">
+              <span class="home-feature-title">No Security</span>
+              <span class="home-feature-sub">Just Hope</span>
+            </div>
+          </div>
+
+          <div class="home-feature-pill" onclick="showToast('Zero Ownership: Unlimited Excuses')">
+            <div class="home-feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+            </div>
+            <div class="home-feature-text">
+              <span class="home-feature-title">Zero Ownership</span>
+              <span class="home-feature-sub">Unlimited Excuses</span>
+            </div>
+          </div>
+
+          <div class="home-feature-pill" onclick="showToast('Corporate Resources: Personal Profits')">
+            <div class="home-feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+              </svg>
+            </div>
+            <div class="home-feature-text">
+              <span class="home-feature-title">Corporate Resources</span>
+              <span class="home-feature-sub">Personal Profits</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Rows Container -->
+      <div class="home-rows-container">
+        
+        <!-- ROW 1: Dramas (Only Dar-E-Nijaat) -->
+        <div class="home-section-header">
+          <h2 class="home-section-title">Dramas</h2>
+          <a class="home-see-all-link" onclick="showToast('Showing all Dramas')">See All &rarr;</a>
+        </div>
+
+        <div class="home-cards-carousel-wrap">
+          <div class="home-single-card-row">
+            <!-- Dar-E-Nijaat Landscape Card -->
+            <div class="home-landscape-card" onclick="navigateTo('series-detail')">
+              <span class="home-card-badge">FOOLFLIX Series • 25 Eps</span>
+              <img src="./images/dar-e-nijaat-backdrop.webp" alt="Dar-E-Nijaat" class="home-card-img" style="object-position: center 25%;" onerror="this.src='https://images.aryplus.tv/desktop/1920X1080_1784120969405.webp'">
+              <div class="home-card-info">
+                <div class="home-card-name">Dar-E-Nijaat</div>
+                <div class="home-card-meta">Romance, Drama • 25 Episodes</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="home-carousel-arrow" onclick="navigateTo('series-detail')" title="View Dar-E-Nijaat">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- ROW 2: Trending on FoolFlix -->
+        <div class="home-section-header" style="margin-top: 36px;">
+          <h2 class="home-section-title">Trending on FoolFlix</h2>
+          <a class="home-see-all-link" onclick="showToast('Trending titles')">See All &rarr;</a>
+        </div>
+
+        <div class="home-cards-carousel-wrap">
+          <div class="home-landscape-grid">
+            <!-- Card 1: Meeting Baaz -->
+            <div class="home-landscape-card" onclick="showToast('Meeting Baaz • Office Comedy (12 Episodes)')">
+              <img src="./images/trending/meeting-baaz.jpg?v=3" alt="Meeting Baaz" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Meeting Baaz</div>
+                <div class="home-card-meta">Office Comedy • 12 Episodes</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Deadline? Kya Deadline? -->
+            <div class="home-landscape-card" onclick="showToast('Deadline? Kya Deadline? • Workplace Comedy (10 Episodes)')">
+              <img src="./images/trending/deadline.jpg?v=3" alt="Deadline? Kya Deadline?" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Deadline? Kya Deadline?</div>
+                <div class="home-card-meta">Workplace Comedy • 10 Episodes</div>
+              </div>
+            </div>
+
+            <!-- Card 3: Idea Chori -->
+            <div class="home-landscape-card" onclick="showToast('Idea Chori • Drama, Thriller (14 Episodes)')">
+              <img src="./images/trending/idea-chori.jpg?v=3" alt="Idea Chori" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Idea Chori</div>
+                <div class="home-card-meta">Drama, Thriller • 14 Episodes</div>
+              </div>
+            </div>
+
+            <!-- Card 4: Email Forwarded -->
+            <div class="home-landscape-card" onclick="showToast('Email Forwarded • Satire (8 Episodes)')">
+              <img src="./images/trending/email-forwarded.jpg?v=3" alt="Email Forwarded" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Email Forwarded</div>
+                <div class="home-card-meta">Satire • 8 Episodes</div>
+              </div>
+            </div>
+
+            <!-- Card 5: Budget Khatam -->
+            <div class="home-landscape-card" onclick="showToast('Budget Khatam • Comedy (10 Episodes)')">
+              <img src="./images/trending/budget-khatam.jpg?v=3" alt="Budget Khatam" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Budget Khatam</div>
+                <div class="home-card-meta">Comedy • 10 Episodes</div>
+              </div>
+            </div>
+
+            <!-- Card 6: Server Down -->
+            <div class="home-landscape-card" onclick="showToast('Server Down • Tech Drama (6 Episodes)')">
+              <img src="./images/trending/server-down.jpg?v=3" alt="Server Down" class="home-card-img">
+              <div class="home-card-info">
+                <div class="home-card-name">Server Down</div>
+                <div class="home-card-meta">Tech Drama • 6 Episodes</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="home-carousel-arrow" onclick="showToast('More satirical originals in development')" title="Scroll Trending">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Footer (Matching Reference Screenshot) -->
+      <footer class="foolflix-footer">
+        <div class="footer-left">
+          <span class="footer-logo">FOOLFLIX</span>
+          <nav class="footer-links">
+            <a href="javascript:void(0)" onclick="showToast('FOOLFLIX: Streaming Mismanagement')">About</a>
+            <a href="javascript:void(0)" onclick="showToast('Help Center: Just Hope')">Help</a>
+            <a href="javascript:void(0)" onclick="showToast('Terms of Satire')">Terms</a>
+            <a href="javascript:void(0)" onclick="showToast('Privacy Policy: Zero Ownership')">Privacy</a>
+          </nav>
+        </div>
+
+        <div class="footer-socials">
+          <a class="footer-social-icon" title="YouTube" onclick="showToast('YouTube: FOOLFLIX Official')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a class="footer-social-icon" title="X" onclick="showToast('X: @FoolFlix')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a class="footer-social-icon" title="Instagram" onclick="showToast('Instagram: @foolflix.official')">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </footer>
+
     </div>
   </section>
 

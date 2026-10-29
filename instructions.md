@@ -133,3 +133,43 @@ The user requested consolidating the billing and payment experience into **one s
   - Run the payment authorization simulation modal directly on the same page.
   - Once paid, instantly update the account card to "VIP Active • 90% OFF", show invoice receipt row, and update header badge to "⭐ VIP Member".
 - [x] 12.6: Test locally with automated Chrome CDP script, push to GitHub remotes (`master` and `main`), and verify live on `https://aryplus-drm.vercel.app/#/billing`.
+
+---
+
+# FOOLFLIX Portal - Implementation Plan (v4.0: Main Homepage Redesign)
+
+## Problem Statement
+The user requested updating the main FOOLFLIX homepage (`#view-dramas` / `#/dramas`) to match their reference screenshot:
+1. **Hero Banner:**
+   - Cinematic background with viewer on couch facing red-lit drama poster collage.
+   - Large bold typography:
+     - `Powered by Politics.` (white)
+     - `Secured by Hope.` (Netflix red `#E50914`)
+     - Subtitle: `Enterprise-grade mismanagement. Production-grade vulnerabilities.`
+   - 4 Feature Badges in horizontal row:
+     - 👑 **Premium Incompetence** (Now Streaming in 4K)
+     - 🛡️ **No Security** (Just Hope)
+     - 👥 **Zero Ownership** (Unlimited Excuses)
+     - 💼 **Corporate Resources** (Personal Profits)
+2. **Dramas Row:**
+   - Section header "Dramas" with "See All →".
+   - Only show *Dar-E-Nijaat* card (per user instruction: *"in daram just show dare nijat for now"*).
+   - 16:9 landscape card with red `FOOLFLIX Series • 25 Eps` badge, Dar-E-Nijaat title, and subtitle, navigating to Series Detail on click.
+3. **Trending on FoolFlix Row:**
+   - Section header "Trending on FoolFlix" with "See All →".
+   - 6 horizontal parody drama cards: *Meeting Baaz*, *Deadline? Kya Deadline?*, *Idea Chori*, *Email Forwarded*, *Budget Khatam*, *Server Down*.
+   - Carousel navigation chevron.
+4. **Footer:**
+   - FOOLFLIX brand, About, Help, Terms, Privacy links, and social icons (YouTube, X, Instagram).
+
+---
+
+## Versioned Task List
+
+### Task 13: Main Homepage Redesign (v4.0)
+- [x] 13.1: Build cinematic Hero Banner in `#view-dramas` with dual-color headline, subtitle, and 4 feature badge cards.
+- [x] 13.2: Reconfigure "Dramas" catalog row to display only *Dar-E-Nijaat* in 16:9 landscape format with red badge and smooth navigation to series detail.
+- [x] 13.3: Build "Trending on FoolFlix" row featuring all 6 parody titles (*Meeting Baaz*, *Deadline? Kya Deadline?*, *Idea Chori*, *Email Forwarded*, *Budget Khatam*, *Server Down*) with carousel navigation.
+- [x] 13.4: Add matching dark FOOLFLIX footer with navigation links and social icons.
+- [x] 13.5: Add responsive styling for mobile, tablet, and desktop viewports.
+- [x] 13.6: Test with automated Chrome CDP script, push to GitHub remotes (`origin` and `vercel-repo`), and verify live on `https://aryplus-drm.vercel.app/`.
