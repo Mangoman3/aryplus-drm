@@ -874,6 +874,809 @@
       transform: translateY(0);
     }
 
+    /* =========================================================
+       HEADER ENHANCEMENTS: PROMO CTA & USER BADGE
+       ========================================================= */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge-discount-nav {
+      background: linear-gradient(135deg, #E50914, #ff4d4d);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: 6px;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.45);
+      animation: pulseBadge 2.2s infinite;
+    }
+
+    @keyframes pulseBadge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); box-shadow: 0 0 14px rgba(229, 9, 20, 0.7); }
+    }
+
+    .btn-sub-promo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--netflix-red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 10px rgba(229, 9, 20, 0.35);
+    }
+
+    .btn-sub-promo:hover {
+      background: var(--netflix-red-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(229, 9, 20, 0.55);
+    }
+
+    .sub-promo-tag {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .user-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      color: #e5e5e5;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .user-badge:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: #2c2c2c;
+    }
+
+    .user-badge.vip {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(229, 9, 20, 0.18));
+      border: 1px solid #ffd700;
+      color: #ffd700;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+    }
+
+    /* =========================================================
+       VIEW 4: BILLING & PLANS SEGMENT
+       ========================================================= */
+    .billing-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 48px 80px;
+    }
+
+    .billing-title-wrap {
+      margin-bottom: 28px;
+    }
+
+    .billing-main-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .billing-sub-title {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Account Overview Status Card */
+    .account-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .account-card-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .account-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #333, #1f1f1f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .account-avatar.vip {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #000;
+    }
+
+    .account-name-row {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .plan-status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-status-pill.guest {
+      background: rgba(255, 255, 255, 0.1);
+      color: #bbb;
+    }
+
+    .plan-status-pill.active {
+      background: rgba(46, 213, 115, 0.18);
+      color: #2ed573;
+      border: 1px solid rgba(46, 213, 115, 0.4);
+    }
+
+    .account-meta-row {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 16px;
+    }
+
+    .account-card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-secondary-action {
+      background: var(--surface-elevated);
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary-action:hover {
+      background: #333;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 90% Off Flash Promo Banner */
+    .billing-promo-banner {
+      background: radial-gradient(circle at 80% 30%, rgba(229, 9, 20, 0.25) 0%, transparent 60%),
+                  linear-gradient(135deg, #1c0a0c 0%, #240c10 50%, #171717 100%);
+      border: 1px solid rgba(229, 9, 20, 0.45);
+      border-radius: 12px;
+      padding: 30px 34px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 10px 30px rgba(229, 9, 20, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--netflix-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .promo-banner-heading {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .promo-banner-desc {
+      font-size: 14px;
+      color: #ccc;
+      max-width: 620px;
+      line-height: 1.5;
+    }
+
+    .btn-claim-banner {
+      background: var(--netflix-red);
+      color: #fff;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 4px 18px rgba(229, 9, 20, 0.4);
+    }
+
+    .btn-claim-banner:hover {
+      background: var(--netflix-red-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(229, 9, 20, 0.6);
+    }
+
+    /* Plan Comparison Grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .plan-card.featured {
+      background: linear-gradient(180deg, rgba(229, 9, 20, 0.08) 0%, var(--surface) 35%);
+      border: 2px solid var(--netflix-red);
+      box-shadow: 0 12px 36px rgba(229, 9, 20, 0.22);
+    }
+
+    .plan-featured-ribbon {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #E50914, #ff3b30);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 20px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
+      white-space: nowrap;
+    }
+
+    .plan-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .plan-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .plan-price-block {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plan-price-orig {
+      font-size: 16px;
+      color: #888;
+      text-decoration: line-through;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .plan-price-current-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .plan-price-val {
+      font-size: 42px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+
+    .plan-price-period {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .plan-discount-pill {
+      display: inline-block;
+      background: rgba(229, 9, 20, 0.2);
+      border: 1px solid var(--netflix-red);
+      color: #ff5252;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    .plan-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+
+    .plan-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #e5e5e5;
+      line-height: 1.4;
+    }
+
+    .plan-feature-icon {
+      color: #2ed573;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .plan-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .plan-btn.primary {
+      background: var(--netflix-red);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(229, 9, 20, 0.35);
+    }
+
+    .plan-btn.primary:hover {
+      background: var(--netflix-red-hover);
+      box-shadow: 0 6px 20px rgba(229, 9, 20, 0.55);
+    }
+
+    .plan-btn.secondary {
+      background: var(--surface-elevated);
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .plan-btn.secondary:hover {
+      background: #333;
+    }
+
+    /* Invoices History Table */
+    .invoices-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+    }
+
+    .invoices-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .invoices-table th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .invoices-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #e5e5e5;
+    }
+
+    /* =========================================================
+       VIEW 5: DEDICATED PAYMENT CHECKOUT PAGE
+       ========================================================= */
+    .checkout-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 48px 80px;
+    }
+
+    .checkout-breadcrumbs {
+      margin-bottom: 24px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .checkout-section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Payment Methods Tabs */
+    .pay-methods-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .pay-tab-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: #ccc;
+      padding: 10px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .pay-tab-btn.active {
+      background: rgba(229, 9, 20, 0.15);
+      border-color: var(--netflix-red);
+      color: #fff;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #bbb;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input-wrap {
+      position: relative;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #101010;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--netflix-red);
+      box-shadow: 0 0 0 1px var(--netflix-red);
+    }
+
+    .card-icons-inline {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 6px;
+      pointer-events: none;
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-quick-fill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      color: #aaa;
+      padding: 7px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .btn-quick-fill:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .checkout-btn-submit {
+      width: 100%;
+      background: var(--netflix-red);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 18px rgba(229, 9, 20, 0.45);
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .checkout-btn-submit:hover {
+      background: var(--netflix-red-hover);
+      box-shadow: 0 6px 24px rgba(229, 9, 20, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .security-badges-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+      font-size: 11px;
+      color: #777;
+    }
+
+    /* Summary Card (Right Column) */
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px;
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-plan-badge {
+      display: inline-block;
+      background: rgba(229, 9, 20, 0.15);
+      border: 1px solid var(--netflix-red);
+      color: #ff4d4d;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .summary-plan-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .summary-plan-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-line-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      color: #bbb;
+      margin-bottom: 10px;
+    }
+
+    .summary-line-item.discount {
+      color: #2ed573;
+      font-weight: 600;
+    }
+
+    .summary-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .summary-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .summary-total-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .summary-total-val {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .summary-savings-pill {
+      background: rgba(46, 213, 115, 0.15);
+      border: 1px solid rgba(46, 213, 115, 0.35);
+      color: #2ed573;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* Payment Simulation Modal */
+    .pay-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .pay-modal-backdrop.show {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .pay-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .pay-spinner-wrap {
+      margin-bottom: 20px;
+    }
+
+    .pay-spinner {
+      width: 52px;
+      height: 52px;
+      border: 4px solid rgba(229, 9, 20, 0.2);
+      border-top-color: var(--netflix-red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto;
+    }
+
+    .pay-modal-step-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .pay-modal-step-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Success State inside Modal */
+    .pay-success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(46, 213, 115, 0.15);
+      border: 2px solid #2ed573;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      color: #2ed573;
+      font-size: 32px;
+      box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+    }
+
     @media (max-width: 900px) {
       header {
         padding: 0 20px;
@@ -894,8 +1697,20 @@
 
       .catalog-container,
       .player-page-wrap,
-      .drm-container {
+      .drm-container,
+      .billing-container,
+      .checkout-wrap {
         padding: 20px;
+      }
+
+      .plans-grid,
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .billing-promo-banner {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -913,7 +1728,7 @@
         <span class="brand-logo-text">FOOLFLIX</span>
       </a>
 
-      <!-- Only 2 Tabs: Dramas & DRM Protected -->
+      <!-- Tabs: Dramas, DRM Protected, Billing -->
       <ul class="nav-links">
         <li class="nav-item">
           <a class="nav-link active" id="nav-dramas" onclick="navigateTo('dramas')">Dramas</a>
@@ -921,7 +1736,25 @@
         <li class="nav-item">
           <a class="nav-link" id="nav-drm" onclick="navigateTo('drm')">DRM Protected</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-billing" onclick="navigateTo('billing')">
+            Billing
+            <span class="badge-discount-nav">90% OFF</span>
+          </a>
+        </li>
       </ul>
+    </div>
+
+    <!-- Right Header Actions: Promo CTA & User Status -->
+    <div class="nav-right">
+      <button class="btn-sub-promo" id="headerPromoBtn" onclick="navigateTo('checkout')">
+        <span class="sub-promo-tag">90% OFF</span>
+        <span>Claim Annual VIP</span>
+      </button>
+      <div id="userProfileBadge" class="user-badge" onclick="navigateTo('billing')" title="Click to view subscription details">
+        <span id="userBadgeIcon">👤</span>
+        <span id="userBadgeLabel">Guest Tier</span>
+      </div>
     </div>
   </header>
 
@@ -1190,6 +2023,369 @@
     </div>
   </section>
 
+  <!-- =========================================================
+       VIEW 4: BILLING & SUBSCRIPTION PLANS
+       ========================================================= -->
+  <section id="view-billing" class="view-section">
+    <div class="billing-container">
+      <div class="billing-title-wrap">
+        <h1 class="billing-main-title">Account & Billing</h1>
+        <p class="billing-sub-title">Manage your membership, payment methods, and invoices.</p>
+      </div>
+
+      <!-- Current Membership Status Card -->
+      <div class="account-card" id="accountStatusCard">
+        <div class="account-card-left">
+          <div class="account-avatar" id="billingAvatar">👤</div>
+          <div>
+            <div class="account-name-row">
+              <span id="billingPlanName">Free / Guest Tier</span>
+              <span class="plan-status-pill guest" id="billingStatusPill">Inactive</span>
+            </div>
+            <div class="account-meta-row">
+              <span>Member ID: <strong style="color: #fff;" id="billingMemberId">FF-849201</strong></span>
+              <span>Next Renewal: <strong style="color: #fff;" id="billingNextDate">—</strong></span>
+              <span>Payment: <strong style="color: #fff;" id="billingCardSummary">None</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="account-card-actions">
+          <button class="btn-claim-banner" style="padding: 9px 18px; font-size: 13px;" onclick="navigateTo('checkout')">
+            Upgrade Plan
+          </button>
+          <button class="btn-secondary-action" id="btnResetSub" onclick="resetSubscription()" title="Reset subscription for demo testing">
+            Reset Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- 90% Off Annual Flash Sale Spotlight Banner -->
+      <div class="billing-promo-banner" id="billingPromoBanner">
+        <div>
+          <div class="promo-banner-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            FLASH PROMOTION • 90% OFF
+          </div>
+          <h2 class="promo-banner-heading">Get Annual VIP Pass for Just $11.99/year</h2>
+          <p class="promo-banner-desc">
+            Unlock all 25 episodes of <em>Dar-E-Nijaat</em> in 4K UHD, exclusive DRM movies like <em>Love Guru</em>, 100% ad-free experience, and multi-device streaming for only <strong>$0.99/month</strong>.
+          </p>
+        </div>
+        <button class="btn-claim-banner" onclick="navigateTo('checkout')">
+          Claim 90% Off Now
+        </button>
+      </div>
+
+      <!-- Plan Selector Comparison Grid -->
+      <h3 style="font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 20px;">Choose the Plan That's Right For You</h3>
+      <div class="plans-grid">
+        
+        <!-- Standard Monthly Plan -->
+        <div class="plan-card">
+          <div class="plan-title">Monthly Standard</div>
+          <div class="plan-sub">Flexible streaming with monthly renewal.</div>
+          
+          <div class="plan-price-block">
+            <div class="plan-price-current-row">
+              <span class="plan-price-val">$9.99</span>
+              <span class="plan-price-period">/ month</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Billed $9.99 every month ($119.88/yr)</div>
+          </div>
+
+          <ul class="plan-features-list">
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span>Full HD 1080p streaming</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span>Access to all standard dramas</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span>Stream on 1 device at a time</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span>Cancel online anytime</span>
+            </li>
+          </ul>
+
+          <button class="plan-btn secondary" onclick="navigateTo('checkout')">
+            Select Monthly
+          </button>
+        </div>
+
+        <!-- Annual VIP Plan (Featured with 90% Discount) -->
+        <div class="plan-card featured">
+          <div class="plan-featured-ribbon">🔥 BEST VALUE • 90% DISCOUNT</div>
+          <div class="plan-title" style="color: #fff; display: flex; align-items: center; gap: 8px;">
+            Annual VIP Pass
+            <span style="font-size: 16px;">⭐</span>
+          </div>
+          <div class="plan-sub">Unlimited VIP entertainment for a full year.</div>
+
+          <div class="plan-price-block">
+            <span class="plan-price-orig">Regular $119.99 / year</span>
+            <div class="plan-price-current-row">
+              <span class="plan-price-val">$11.99</span>
+              <span class="plan-price-period">/ year</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-top: 6px;">
+              <span class="plan-discount-pill">SAVE 90% (You save $108)</span>
+              <span style="font-size: 12px; color: #2ed573; font-weight: 700;">Just $0.99/mo</span>
+            </div>
+          </div>
+
+          <ul class="plan-features-list">
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span><strong>4K Ultra HD + HDR & Dolby Atmos</strong> audio</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span><strong>All 25 Episodes</strong> of Dar-E-Nijaat + Future Originals</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span><strong>Full Access to DRM Blockbusters</strong> (e.g. <em>Love Guru</em>)</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span><strong>100% Ad-Free</strong> uninterrupted viewing</span>
+            </li>
+            <li class="plan-feature-item">
+              <span class="plan-feature-icon">✓</span>
+              <span><strong>4 Screens simultaneously</strong> + Offline Downloads</span>
+            </li>
+          </ul>
+
+          <button class="plan-btn primary" onclick="navigateTo('checkout')">
+            Claim 90% Off & Subscribe ($11.99/yr)
+          </button>
+        </div>
+      </div>
+
+      <!-- Billing History Table -->
+      <div class="invoices-box">
+        <h3 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px;">Billing & Invoice History</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Recent payments and membership receipts.</p>
+        
+        <table class="invoices-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Payment Method</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Receipt</th>
+            </tr>
+          </thead>
+          <tbody id="invoicesTableBody">
+            <tr>
+              <td>—</td>
+              <td>No past invoices</td>
+              <td>—</td>
+              <td>$0.00</td>
+              <td><span style="color: #888;">N/A</span></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 5: SECURE PAYMENT CHECKOUT PAGE (90% OFF)
+       ========================================================= -->
+  <section id="view-checkout" class="view-section">
+    <div class="checkout-wrap">
+      <!-- Breadcrumb Nav -->
+      <div class="checkout-breadcrumbs">
+        <button class="btn-back-nav" onclick="navigateTo('billing')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Back to Plans & Billing</span>
+        </button>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Left: Payment Entry Form -->
+        <div class="checkout-card">
+          <h2 class="checkout-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+            <span>Payment Method</span>
+          </h2>
+
+          <!-- Payment Options Tabs -->
+          <div class="pay-methods-tabs">
+            <button class="pay-tab-btn active" id="tabPayCard" onclick="selectPaymentMethod('card')">
+              <span>💳 Card</span>
+              <span style="font-size: 10px; color: #888;">Credit / Debit</span>
+            </button>
+            <button class="pay-tab-btn" id="tabPayWallet" onclick="selectPaymentMethod('wallet')">
+              <span>Pay / GPay</span>
+              <span style="font-size: 10px; color: #888;">Digital Wallet</span>
+            </button>
+            <button class="pay-tab-btn" id="tabPayPaypal" onclick="selectPaymentMethod('paypal')">
+              <span>🅿️ PayPal</span>
+              <span style="font-size: 10px; color: #888;">PayPal Wallet</span>
+            </button>
+          </div>
+
+          <!-- Quick Fill Button for testing -->
+          <div>
+            <button type="button" class="btn-quick-fill" onclick="autoFillTestCard()">
+              ⚡ <span>Fill Demo Card (Stripe 4242)</span>
+            </button>
+          </div>
+
+          <!-- Card Form -->
+          <form id="checkoutForm" onsubmit="event.preventDefault(); processPayment();">
+            <div class="form-group">
+              <label class="form-label">Name on Card</label>
+              <input type="text" id="cardName" class="form-input" placeholder="e.g. John Doe" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <div class="form-input-wrap">
+                <input type="text" id="cardNumber" class="form-input" placeholder="4242 •••• •••• 4242" maxlength="19" required oninput="formatCardNumber(this)">
+                <div class="card-icons-inline" id="cardBrandIcon">VISA / MC</div>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label">Expiry (MM/YY)</label>
+                <input type="text" id="cardExpiry" class="form-input" placeholder="12/28" maxlength="5" required oninput="formatCardExpiry(this)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVC / CVV</label>
+                <input type="password" id="cardCvc" class="form-input" placeholder="123" maxlength="4" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Billing Postal Code</label>
+              <input type="text" id="cardZip" class="form-input" placeholder="e.g. 90210" required>
+            </div>
+
+            <button type="submit" class="checkout-btn-submit" id="btnSubmitPayment">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>Pay $11.99 & Start VIP Membership</span>
+            </button>
+          </form>
+
+          <div class="security-badges-row">
+            <span>🔒 256-Bit SSL Encrypted</span>
+            <span>•</span>
+            <span>PCI-DSS Level 1</span>
+            <span>•</span>
+            <span>30-Day Guarantee</span>
+          </div>
+        </div>
+
+        <!-- Right: Order Summary (90% Discount Breakdown) -->
+        <div class="summary-card">
+          <span class="summary-plan-badge">90% PROMO APPLIED</span>
+          <div class="summary-plan-name">FOOLFLIX Annual VIP</div>
+          <div class="summary-plan-sub">12 Months Full Access • Ultra HD 4K</div>
+
+          <div class="summary-line-item">
+            <span>Regular Price (1 Year)</span>
+            <span style="text-decoration: line-through;">$119.99</span>
+          </div>
+
+          <div class="summary-line-item discount">
+            <span>Promo Discount (ANNUAL90)</span>
+            <span>-$108.00</span>
+          </div>
+
+          <div class="summary-line-item">
+            <span>Estimated Taxes & Fees</span>
+            <span>$0.00</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total-row">
+            <span class="summary-total-label">Total Due Today:</span>
+            <span class="summary-total-val" style="color: #2ed573;">$11.99</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); text-align: right;">Billed Annually ($0.99/mo)</div>
+
+          <div class="summary-savings-pill">
+            🎉 You save $108.00 (90%) today!
+          </div>
+
+          <div style="margin-top: 20px; font-size: 11.5px; color: #888; line-height: 1.5;">
+            By confirming your subscription, you authorize FOOLFLIX to charge $11.99 today for 1 year of access. You can easily cancel anytime in your billing settings with zero cancellation fees.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PAYMENT PROCESSING & SUCCESS MODAL
+       ========================================================= -->
+  <div class="pay-modal-backdrop" id="payModalBackdrop">
+    <div class="pay-modal">
+      <!-- Loading State -->
+      <div id="payModalLoadingState">
+        <div class="pay-spinner-wrap">
+          <div class="pay-spinner"></div>
+        </div>
+        <div class="pay-modal-step-title" id="payModalStepTitle">Connecting to Gateway...</div>
+        <div class="pay-modal-step-sub" id="payModalStepSub">Securing 256-bit SSL encrypted connection</div>
+      </div>
+
+      <!-- Success State -->
+      <div id="payModalSuccessState" style="display: none;">
+        <div class="pay-success-icon">✓</div>
+        <h3 class="pay-modal-step-title" style="color: #2ed573;">Subscription Activated!</h3>
+        <p class="pay-modal-step-sub" style="margin-bottom: 20px;">
+          Welcome to <strong>FOOLFLIX Annual VIP</strong>! Your 90% discount has been successfully applied.
+        </p>
+
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: left; font-size: 12.5px; margin-bottom: 22px; color: #ccc;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span>Transaction ID:</span>
+            <strong style="color: #fff;" id="receiptTxnId">TXN-FF90-184920</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span>Amount Paid:</span>
+            <strong style="color: #2ed573;">$11.99 USD</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span>Plan:</span>
+            <strong style="color: #fff;">Annual VIP (365 Days)</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Valid Until:</span>
+            <strong style="color: #fff;" id="receiptValidUntil">Oct 30, 2027</strong>
+          </div>
+        </div>
+
+        <button class="checkout-btn-submit" onclick="finishCheckoutAndStream()">
+          <span>Start Streaming Now</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification element -->
   <div class="toast-msg" id="toastMsg">Notification message</div>
 
@@ -1239,6 +2435,10 @@
       } else if (viewName === 'drm') {
         document.getElementById('nav-drm').classList.add('active');
         window.location.hash = '#/drm';
+      } else if (viewName === 'billing' || viewName === 'checkout') {
+        const billingNav = document.getElementById('nav-billing');
+        if (billingNav) billingNav.classList.add('active');
+        window.location.hash = viewName === 'checkout' ? '#/billing/checkout' : '#/billing';
       }
 
       // If leaving player view, pause video
@@ -1577,6 +2777,259 @@
       }
     }
 
+    // =========================================================
+    // SUBSCRIPTION & BILLING STATE MANAGEMENT
+    // =========================================================
+    function getSubscription() {
+      try {
+        const raw = localStorage.getItem('foolflix_subscription');
+        if (raw) return JSON.parse(raw);
+      } catch (e) { }
+      return null;
+    }
+
+    function initSubscription() {
+      const sub = getSubscription();
+      const badgeIcon = document.getElementById('userBadgeIcon');
+      const badgeLabel = document.getElementById('userBadgeLabel');
+      const profileBadge = document.getElementById('userProfileBadge');
+      const promoBtn = document.getElementById('headerPromoBtn');
+      const avatar = document.getElementById('billingAvatar');
+      const planName = document.getElementById('billingPlanName');
+      const statusPill = document.getElementById('billingStatusPill');
+      const nextDate = document.getElementById('billingNextDate');
+      const cardSummary = document.getElementById('billingCardSummary');
+      const invoicesTbody = document.getElementById('invoicesTableBody');
+
+      if (sub && sub.status === 'active') {
+        // VIP Active state
+        if (badgeIcon) badgeIcon.textContent = '⭐';
+        if (badgeLabel) badgeLabel.textContent = 'VIP Member';
+        if (profileBadge) profileBadge.classList.add('vip');
+        if (promoBtn) {
+          promoBtn.innerHTML = '<span class="sub-promo-tag" style="background:#2ed573; color:#000;">ACTIVE</span> <span>VIP Pass</span>';
+          promoBtn.onclick = () => navigateTo('billing');
+        }
+
+        if (avatar) {
+          avatar.textContent = '👑';
+          avatar.classList.add('vip');
+        }
+        if (planName) planName.textContent = 'FOOLFLIX Annual VIP (90% Promo)';
+        if (statusPill) {
+          statusPill.textContent = 'Active • 90% OFF';
+          statusPill.className = 'plan-status-pill active';
+        }
+        if (nextDate) nextDate.textContent = sub.validUntil || 'Oct 30, 2027';
+        if (cardSummary) cardSummary.textContent = `Visa ending in ${sub.last4 || '4242'}`;
+
+        if (invoicesTbody) {
+          invoicesTbody.innerHTML = `
+            <tr>
+              <td>${sub.purchasedAt || 'Oct 30, 2026'}</td>
+              <td><strong>FOOLFLIX Annual VIP Pass (90% Flash Discount)</strong></td>
+              <td>Visa •••• ${sub.last4 || '4242'}</td>
+              <td style="color: #2ed573; font-weight: 700;">$11.99 USD</td>
+              <td><span style="color: #2ed573; font-weight: 700;">Paid</span></td>
+              <td><a href="javascript:void(0)" onclick="showToast('Receipt ${sub.txnId} ready for download')" style="color: var(--netflix-red); text-decoration: underline;">View PDF</a></td>
+            </tr>
+          `;
+        }
+      } else {
+        // Free / Guest state
+        if (badgeIcon) badgeIcon.textContent = '👤';
+        if (badgeLabel) badgeLabel.textContent = 'Guest Tier';
+        if (profileBadge) profileBadge.classList.remove('vip');
+        if (promoBtn) {
+          promoBtn.innerHTML = '<span class="sub-promo-tag">90% OFF</span> <span>Claim Annual VIP</span>';
+          promoBtn.onclick = () => navigateTo('checkout');
+        }
+
+        if (avatar) {
+          avatar.textContent = '👤';
+          avatar.classList.remove('vip');
+        }
+        if (planName) planName.textContent = 'Free / Guest Tier';
+        if (statusPill) {
+          statusPill.textContent = 'Inactive';
+          statusPill.className = 'plan-status-pill guest';
+        }
+        if (nextDate) nextDate.textContent = '—';
+        if (cardSummary) cardSummary.textContent = 'None';
+
+        if (invoicesTbody) {
+          invoicesTbody.innerHTML = `
+            <tr>
+              <td>—</td>
+              <td>No past invoices</td>
+              <td>—</td>
+              <td>$0.00</td>
+              <td><span style="color: #888;">N/A</span></td>
+              <td>—</td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    function resetSubscription() {
+      localStorage.removeItem('foolflix_subscription');
+      initSubscription();
+      showToast('Subscription reset to Guest tier for testing.');
+    }
+
+    // =========================================================
+    // PAYMENT CHECKOUT FORM & PROCESSING SIMULATION
+    // =========================================================
+    let selectedPaymentMethod = 'card';
+
+    function selectPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      document.querySelectorAll('.pay-tab-btn').forEach(b => b.classList.remove('active'));
+      const submitBtn = document.getElementById('btnSubmitPayment');
+      if (method === 'card') {
+        const tab = document.getElementById('tabPayCard');
+        if (tab) tab.classList.add('active');
+        if (submitBtn) {
+          submitBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Pay $11.99 & Start VIP Membership</span>
+          `;
+        }
+      } else if (method === 'wallet') {
+        const tab = document.getElementById('tabPayWallet');
+        if (tab) tab.classList.add('active');
+        if (submitBtn) {
+          submitBtn.innerHTML = `<span>Pay $11.99 with Digital Wallet</span>`;
+        }
+      } else {
+        const tab = document.getElementById('tabPayPaypal');
+        if (tab) tab.classList.add('active');
+        if (submitBtn) {
+          submitBtn.innerHTML = `<span>Pay $11.99 with PayPal</span>`;
+        }
+      }
+      showToast(`Selected ${method.toUpperCase()} payment`);
+    }
+
+    function formatCardNumber(input) {
+      let v = input.value.replace(/\D/g, '').slice(0, 16);
+      let parts = [];
+      for (let i = 0; i < v.length; i += 4) {
+        parts.push(v.slice(i, i + 4));
+      }
+      input.value = parts.join(' ');
+
+      const brandIcon = document.getElementById('cardBrandIcon');
+      if (brandIcon) {
+        if (v.startsWith('4')) {
+          brandIcon.textContent = '💳 VISA';
+        } else if (v.startsWith('5')) {
+          brandIcon.textContent = '💳 MASTERCARD';
+        } else if (v.startsWith('3')) {
+          brandIcon.textContent = '💳 AMEX';
+        } else {
+          brandIcon.textContent = 'VISA / MC';
+        }
+      }
+    }
+
+    function formatCardExpiry(input) {
+      let v = input.value.replace(/\D/g, '').slice(0, 4);
+      if (v.length > 2) {
+        input.value = v.slice(0, 2) + '/' + v.slice(2);
+      } else {
+        input.value = v;
+      }
+    }
+
+    function autoFillTestCard() {
+      const nameInput = document.getElementById('cardName');
+      const numInput = document.getElementById('cardNumber');
+      const expInput = document.getElementById('cardExpiry');
+      const cvcInput = document.getElementById('cardCvc');
+      const zipInput = document.getElementById('cardZip');
+      const brandIcon = document.getElementById('cardBrandIcon');
+
+      if (nameInput) nameInput.value = 'Jane Foster';
+      if (numInput) numInput.value = '4242 4242 4242 4242';
+      if (expInput) expInput.value = '12/28';
+      if (cvcInput) cvcInput.value = '888';
+      if (zipInput) zipInput.value = '90210';
+      if (brandIcon) brandIcon.textContent = '💳 VISA';
+      showToast('⚡ Demo credentials auto-filled (Stripe 4242)');
+    }
+
+    function processPayment() {
+      const modal = document.getElementById('payModalBackdrop');
+      const loadingState = document.getElementById('payModalLoadingState');
+      const successState = document.getElementById('payModalSuccessState');
+      const stepTitle = document.getElementById('payModalStepTitle');
+      const stepSub = document.getElementById('payModalStepSub');
+
+      if (!modal) return;
+      modal.classList.add('show');
+      if (loadingState) loadingState.style.display = 'block';
+      if (successState) successState.style.display = 'none';
+
+      if (stepTitle) stepTitle.textContent = 'Contacting Payment Gateway...';
+      if (stepSub) stepSub.textContent = 'Establishing secure 256-bit encrypted handshake';
+
+      setTimeout(() => {
+        if (stepTitle) stepTitle.textContent = 'Authorizing 3D Secure Verification...';
+        if (stepSub) stepSub.textContent = 'Verifying card issuer protocol and credentials';
+      }, 700);
+
+      setTimeout(() => {
+        if (stepTitle) stepTitle.textContent = 'Applying 90% Discount & Activating VIP...';
+        if (stepSub) stepSub.textContent = 'Enrolling account in FOOLFLIX Annual VIP Membership';
+      }, 1400);
+
+      setTimeout(() => {
+        const numInput = document.getElementById('cardNumber');
+        const cardNumber = numInput ? numInput.value.replace(/\s/g, '') : '';
+        const last4 = cardNumber.slice(-4) || '4242';
+        const txnId = 'TXN-FF90-' + Math.floor(100000 + Math.random() * 900000);
+        const now = new Date();
+        const nextYear = new Date();
+        nextYear.setFullYear(now.getFullYear() + 1);
+
+        const sub = {
+          plan: 'Annual VIP',
+          status: 'active',
+          isVip: true,
+          discount: '90%',
+          amount: 11.99,
+          last4: last4,
+          txnId: txnId,
+          purchasedAt: now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          validUntil: nextYear.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        };
+
+        localStorage.setItem('foolflix_subscription', JSON.stringify(sub));
+
+        const txnEl = document.getElementById('receiptTxnId');
+        const validEl = document.getElementById('receiptValidUntil');
+        if (txnEl) txnEl.textContent = txnId;
+        if (validEl) validEl.textContent = sub.validUntil;
+
+        if (loadingState) loadingState.style.display = 'none';
+        if (successState) successState.style.display = 'block';
+
+        initSubscription();
+      }, 2100);
+    }
+
+    function finishCheckoutAndStream() {
+      const modal = document.getElementById('payModalBackdrop');
+      if (modal) modal.classList.remove('show');
+      navigateTo('series-detail');
+      showToast('🎉 VIP Active! Enjoy all 25 episodes in 4K UHD');
+    }
+
     // Hash Route Listener
     function handleRoute() {
       const hash = window.location.hash || '#/dramas';
@@ -1590,6 +3043,10 @@
         navigateTo('series-detail');
       } else if (hash === '#/drm') {
         navigateTo('drm');
+      } else if (hash === '#/billing/checkout' || hash === '#/checkout') {
+        navigateTo('checkout');
+      } else if (hash === '#/billing') {
+        navigateTo('billing');
       } else {
         navigateTo('dramas');
       }
@@ -1598,6 +3055,7 @@
     window.addEventListener('hashchange', handleRoute);
 
     window.addEventListener('DOMContentLoaded', async () => {
+      initSubscription();
       await initShaka();
       await loadEpisodesCatalog();
       handleRoute();
