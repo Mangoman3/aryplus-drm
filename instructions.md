@@ -104,3 +104,32 @@ The feature must maintain the FOOLFLIX Netflix-style dark theme, integrate seaml
 - [x] 11.1: Test complete checkout flow, input validation, payment simulation, and plan cancellation/reset locally.
 - [x] 11.2: Commit and push changes to GitHub remotes (`origin` and `vercel-repo`).
 - [x] 11.3: Verify on live Vercel endpoint `https://aryplus-drm.vercel.app/` using Chrome CDP and capture screenshots.
+
+---
+
+# FOOLFLIX Portal - Implementation Plan (v3.0: Unified Single-Page Billing & Payment Checkout)
+
+## Problem Statement
+The user requested consolidating the billing and payment experience into **one single page** (`#/billing`) so users can be redirected directly to this single page without needing a separate checkout step:
+- Show the **90% discount offer** ($11.99/year instead of regular $119.99/year) and **collect payment/card details on the exact same page**.
+- Remove the separate second page (`#view-checkout`) and eliminate multi-step page redirects.
+- Seamlessly display the order discount breakdown, payment form (Card, Wallets, PayPal, demo fill), and one-click purchase button side-by-side with plan benefits.
+- Display account status and invoice history on the same page, updating immediately upon payment completion.
+
+---
+
+## Versioned Task List
+
+### Task 12: Unified Single-Page Billing & Payment Architecture (v3.0)
+- [x] 12.1: Consolidate `#view-checkout` and `#view-billing` into a single, cohesive view (`#view-billing` at route `#/billing`).
+- [x] 12.2: Build a unified 2-column layout:
+  - **Left Column (Offer & Plan Spotlight):** 90% Off Annual VIP banner, pricing breakdown (~~$119.99~~ -> $11.99/yr, $0.99/mo), full feature list (4K UHD, Dar-E-Nijaat all 25 eps, DRM blockbusters, no ads, 4 screens), and money-back guarantee.
+  - **Right Column (Instant Payment & Checkout):** Order summary box with 90% discount calculation, payment method selector, credit card inputs with live formatting/brand detection, "⚡ Fill Demo Card (Stripe 4242)" button, and "Pay $11.99 & Start VIP Membership" button.
+- [x] 12.3: Integrate Account Status and Invoice History section at the bottom of the page (with active plan badge, next renewal date, and test reset toggle).
+- [x] 12.4: Update routing and header triggers:
+  - Top navigation `Billing 90% OFF` tab and `Claim Annual VIP` button both open `#/billing` directly.
+  - Remove `#view-checkout` and redirect any `#/checkout` or `#/billing/checkout` hash URLs to `#/billing`.
+- [x] 12.5: In-place payment processing & instant state update:
+  - Run the payment authorization simulation modal directly on the same page.
+  - Once paid, instantly update the account card to "VIP Active • 90% OFF", show invoice receipt row, and update header badge to "⭐ VIP Member".
+- [x] 12.6: Test locally with automated Chrome CDP script, push to GitHub remotes (`master` and `main`), and verify live on `https://aryplus-drm.vercel.app/#/billing`.

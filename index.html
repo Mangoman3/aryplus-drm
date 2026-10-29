@@ -1606,6 +1606,38 @@
       margin-top: 14px;
     }
 
+    /* Unified Single-Page Billing & Payment Stage */
+    .unified-billing-stage {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr;
+      gap: 32px;
+      align-items: stretch;
+      margin-bottom: 36px;
+    }
+
+    .unified-offer-card {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .offer-guarantee-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+
+    .order-summary-box {
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
     /* Payment Simulation Modal */
     .pay-modal-backdrop {
       position: fixed;
@@ -1704,7 +1736,8 @@
       }
 
       .plans-grid,
-      .checkout-grid {
+      .checkout-grid,
+      .unified-billing-stage {
         grid-template-columns: 1fr;
       }
 
@@ -1747,7 +1780,7 @@
 
     <!-- Right Header Actions: Promo CTA & User Status -->
     <div class="nav-right">
-      <button class="btn-sub-promo" id="headerPromoBtn" onclick="navigateTo('checkout')">
+      <button class="btn-sub-promo" id="headerPromoBtn" onclick="navigateTo('billing')">
         <span class="sub-promo-tag">90% OFF</span>
         <span>Claim Annual VIP</span>
       </button>
@@ -2024,217 +2057,101 @@
   </section>
 
   <!-- =========================================================
-       VIEW 4: BILLING & SUBSCRIPTION PLANS
+       VIEW 4: UNIFIED SINGLE-PAGE BILLING & PAYMENT (90% OFF)
        ========================================================= -->
   <section id="view-billing" class="view-section">
     <div class="billing-container">
       <div class="billing-title-wrap">
-        <h1 class="billing-main-title">Account & Billing</h1>
-        <p class="billing-sub-title">Manage your membership, payment methods, and invoices.</p>
+        <h1 class="billing-main-title">FOOLFLIX VIP Subscription & Billing</h1>
+        <p class="billing-sub-title">Claim your 90% discount on Annual VIP Membership and activate your pass instantly below.</p>
       </div>
 
-      <!-- Current Membership Status Card -->
-      <div class="account-card" id="accountStatusCard">
-        <div class="account-card-left">
-          <div class="account-avatar" id="billingAvatar">👤</div>
-          <div>
-            <div class="account-name-row">
-              <span id="billingPlanName">Free / Guest Tier</span>
-              <span class="plan-status-pill guest" id="billingStatusPill">Inactive</span>
-            </div>
-            <div class="account-meta-row">
-              <span>Member ID: <strong style="color: #fff;" id="billingMemberId">FF-849201</strong></span>
-              <span>Next Renewal: <strong style="color: #fff;" id="billingNextDate">—</strong></span>
-              <span>Payment: <strong style="color: #fff;" id="billingCardSummary">None</strong></span>
-            </div>
-          </div>
-        </div>
-        <div class="account-card-actions">
-          <button class="btn-claim-banner" style="padding: 9px 18px; font-size: 13px;" onclick="navigateTo('checkout')">
-            Upgrade Plan
-          </button>
-          <button class="btn-secondary-action" id="btnResetSub" onclick="resetSubscription()" title="Reset subscription for demo testing">
-            Reset Demo
-          </button>
-        </div>
-      </div>
-
-      <!-- 90% Off Annual Flash Sale Spotlight Banner -->
-      <div class="billing-promo-banner" id="billingPromoBanner">
-        <div>
-          <div class="promo-banner-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            FLASH PROMOTION • 90% OFF
-          </div>
-          <h2 class="promo-banner-heading">Get Annual VIP Pass for Just $11.99/year</h2>
-          <p class="promo-banner-desc">
-            Unlock all 25 episodes of <em>Dar-E-Nijaat</em> in 4K UHD, exclusive DRM movies like <em>Love Guru</em>, 100% ad-free experience, and multi-device streaming for only <strong>$0.99/month</strong>.
-          </p>
-        </div>
-        <button class="btn-claim-banner" onclick="navigateTo('checkout')">
-          Claim 90% Off Now
-        </button>
-      </div>
-
-      <!-- Plan Selector Comparison Grid -->
-      <h3 style="font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 20px;">Choose the Plan That's Right For You</h3>
-      <div class="plans-grid">
+      <!-- Unified 2-Column Billing & Checkout Stage -->
+      <div class="unified-billing-stage">
         
-        <!-- Standard Monthly Plan -->
-        <div class="plan-card">
-          <div class="plan-title">Monthly Standard</div>
-          <div class="plan-sub">Flexible streaming with monthly renewal.</div>
+        <!-- Left Column: 90% OFF Annual VIP Offer Spotlight -->
+        <div class="plan-card featured unified-offer-card">
+          <div class="plan-featured-ribbon">🔥 BEST VALUE • 90% DISCOUNT FLASH SALE</div>
           
-          <div class="plan-price-block">
-            <div class="plan-price-current-row">
-              <span class="plan-price-val">$9.99</span>
-              <span class="plan-price-period">/ month</span>
+          <div>
+            <div class="plan-title" style="color: #fff; display: flex; align-items: center; gap: 8px; font-size: 24px; margin-top: 6px;">
+              Annual VIP Pass
+              <span style="font-size: 20px;">⭐</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Billed $9.99 every month ($119.88/yr)</div>
+            <div class="plan-sub">Unlock unlimited VIP entertainment for a full 365 days.</div>
+
+            <div class="plan-price-block">
+              <span class="plan-price-orig">Regular $119.99 / year</span>
+              <div class="plan-price-current-row">
+                <span class="plan-price-val">$11.99</span>
+                <span class="plan-price-period">/ year</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap;">
+                <span class="plan-discount-pill">SAVE 90% (You save $108)</span>
+                <span style="font-size: 13px; color: #2ed573; font-weight: 700;">Just $0.99/mo</span>
+              </div>
+            </div>
+
+            <div style="font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+              Included With Your VIP Pass:
+            </div>
+
+            <ul class="plan-features-list">
+              <li class="plan-feature-item">
+                <span class="plan-feature-icon">✓</span>
+                <span><strong>4K Ultra HD + HDR & Dolby Atmos</strong> audio fidelity</span>
+              </li>
+              <li class="plan-feature-item">
+                <span class="plan-feature-icon">✓</span>
+                <span><strong>All 25 Episodes</strong> of <em>Dar-E-Nijaat</em> + upcoming FOOLFLIX originals</span>
+              </li>
+              <li class="plan-feature-item">
+                <span class="plan-feature-icon">✓</span>
+                <span><strong>Full Access to DRM Blockbusters</strong> (including <em>Love Guru</em>)</span>
+              </li>
+              <li class="plan-feature-item">
+                <span class="plan-feature-icon">✓</span>
+                <span><strong>100% Ad-Free</strong> uninterrupted viewing experience</span>
+              </li>
+              <li class="plan-feature-item">
+                <span class="plan-feature-icon">✓</span>
+                <span><strong>4 Screens simultaneously</strong> with offline download capability</span>
+              </li>
+            </ul>
           </div>
 
-          <ul class="plan-features-list">
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span>Full HD 1080p streaming</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span>Access to all standard dramas</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span>Stream on 1 device at a time</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span>Cancel online anytime</span>
-            </li>
-          </ul>
-
-          <button class="plan-btn secondary" onclick="navigateTo('checkout')">
-            Select Monthly
-          </button>
+          <div class="offer-guarantee-box">
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; margin-bottom: 4px; font-size: 13px;">
+              <span>🛡️</span>
+              <span>30-Day Money-Back Guarantee</span>
+            </div>
+            <div style="font-size: 11.5px; color: #aaa; line-height: 1.4;">
+              Cancel anytime online in your billing settings with zero cancellation fees. If you're not completely satisfied, get a full refund within 30 days.
+            </div>
+          </div>
         </div>
 
-        <!-- Annual VIP Plan (Featured with 90% Discount) -->
-        <div class="plan-card featured">
-          <div class="plan-featured-ribbon">🔥 BEST VALUE • 90% DISCOUNT</div>
-          <div class="plan-title" style="color: #fff; display: flex; align-items: center; gap: 8px;">
-            Annual VIP Pass
-            <span style="font-size: 16px;">⭐</span>
-          </div>
-          <div class="plan-sub">Unlimited VIP entertainment for a full year.</div>
-
-          <div class="plan-price-block">
-            <span class="plan-price-orig">Regular $119.99 / year</span>
-            <div class="plan-price-current-row">
-              <span class="plan-price-val">$11.99</span>
-              <span class="plan-price-period">/ year</span>
-            </div>
-            <div style="display: flex; gap: 8px; align-items: center; margin-top: 6px;">
-              <span class="plan-discount-pill">SAVE 90% (You save $108)</span>
-              <span style="font-size: 12px; color: #2ed573; font-weight: 700;">Just $0.99/mo</span>
-            </div>
-          </div>
-
-          <ul class="plan-features-list">
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span><strong>4K Ultra HD + HDR & Dolby Atmos</strong> audio</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span><strong>All 25 Episodes</strong> of Dar-E-Nijaat + Future Originals</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span><strong>Full Access to DRM Blockbusters</strong> (e.g. <em>Love Guru</em>)</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span><strong>100% Ad-Free</strong> uninterrupted viewing</span>
-            </li>
-            <li class="plan-feature-item">
-              <span class="plan-feature-icon">✓</span>
-              <span><strong>4 Screens simultaneously</strong> + Offline Downloads</span>
-            </li>
-          </ul>
-
-          <button class="plan-btn primary" onclick="navigateTo('checkout')">
-            Claim 90% Off & Subscribe ($11.99/yr)
-          </button>
-        </div>
-      </div>
-
-      <!-- Billing History Table -->
-      <div class="invoices-box">
-        <h3 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px;">Billing & Invoice History</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Recent payments and membership receipts.</p>
-        
-        <table class="invoices-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Payment Method</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Receipt</th>
-            </tr>
-          </thead>
-          <tbody id="invoicesTableBody">
-            <tr>
-              <td>—</td>
-              <td>No past invoices</td>
-              <td>—</td>
-              <td>$0.00</td>
-              <td><span style="color: #888;">N/A</span></td>
-              <td>—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       VIEW 5: SECURE PAYMENT CHECKOUT PAGE (90% OFF)
-       ========================================================= -->
-  <section id="view-checkout" class="view-section">
-    <div class="checkout-wrap">
-      <!-- Breadcrumb Nav -->
-      <div class="checkout-breadcrumbs">
-        <button class="btn-back-nav" onclick="navigateTo('billing')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-          <span>Back to Plans & Billing</span>
-        </button>
-      </div>
-
-      <div class="checkout-grid">
-        <!-- Left: Payment Entry Form -->
-        <div class="checkout-card">
+        <!-- Right Column: Direct Payment Checkout Form -->
+        <div class="checkout-card unified-checkout-card">
           <h2 class="checkout-section-title">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
               <line x1="1" y1="10" x2="23" y2="10"></line>
             </svg>
-            <span>Payment Method</span>
+            <span>Payment Details</span>
           </h2>
 
           <!-- Payment Options Tabs -->
           <div class="pay-methods-tabs">
-            <button class="pay-tab-btn active" id="tabPayCard" onclick="selectPaymentMethod('card')">
+            <button type="button" class="pay-tab-btn active" id="tabPayCard" onclick="selectPaymentMethod('card')">
               <span>💳 Card</span>
               <span style="font-size: 10px; color: #888;">Credit / Debit</span>
             </button>
-            <button class="pay-tab-btn" id="tabPayWallet" onclick="selectPaymentMethod('wallet')">
+            <button type="button" class="pay-tab-btn" id="tabPayWallet" onclick="selectPaymentMethod('wallet')">
               <span>Pay / GPay</span>
               <span style="font-size: 10px; color: #888;">Digital Wallet</span>
             </button>
-            <button class="pay-tab-btn" id="tabPayPaypal" onclick="selectPaymentMethod('paypal')">
+            <button type="button" class="pay-tab-btn" id="tabPayPaypal" onclick="selectPaymentMethod('paypal')">
               <span>🅿️ PayPal</span>
               <span style="font-size: 10px; color: #888;">PayPal Wallet</span>
             </button>
@@ -2245,6 +2162,38 @@
             <button type="button" class="btn-quick-fill" onclick="autoFillTestCard()">
               ⚡ <span>Fill Demo Card (Stripe 4242)</span>
             </button>
+          </div>
+
+          <!-- Order Summary Embedded Box -->
+          <div class="order-summary-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="summary-plan-badge" style="margin-bottom: 0;">90% PROMO APPLIED</span>
+              <span style="font-size: 11px; color: #2ed573; font-weight: 700;">Code: ANNUAL90</span>
+            </div>
+            
+            <div style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px;">
+              FOOLFLIX Annual VIP (1 Year Full Access)
+            </div>
+
+            <div class="summary-line-item" style="font-size: 12.5px; margin-bottom: 4px;">
+              <span>Regular Price</span>
+              <span style="text-decoration: line-through;">$119.99</span>
+            </div>
+
+            <div class="summary-line-item discount" style="font-size: 12.5px; margin-bottom: 4px;">
+              <span>Promo Discount (90% OFF)</span>
+              <span>-$108.00</span>
+            </div>
+
+            <div class="summary-divider" style="margin: 8px 0;"></div>
+
+            <div class="summary-total-row">
+              <span style="font-size: 14px; font-weight: 700; color: #fff;">Total Due Today:</span>
+              <span class="summary-total-val" style="color: #2ed573; font-size: 24px;">$11.99</span>
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 2px;">
+              Billed Annually ($0.99/mo)
+            </div>
           </div>
 
           <!-- Card Form -->
@@ -2295,44 +2244,58 @@
             <span>30-Day Guarantee</span>
           </div>
         </div>
+      </div>
 
-        <!-- Right: Order Summary (90% Discount Breakdown) -->
-        <div class="summary-card">
-          <span class="summary-plan-badge">90% PROMO APPLIED</span>
-          <div class="summary-plan-name">FOOLFLIX Annual VIP</div>
-          <div class="summary-plan-sub">12 Months Full Access • Ultra HD 4K</div>
-
-          <div class="summary-line-item">
-            <span>Regular Price (1 Year)</span>
-            <span style="text-decoration: line-through;">$119.99</span>
-          </div>
-
-          <div class="summary-line-item discount">
-            <span>Promo Discount (ANNUAL90)</span>
-            <span>-$108.00</span>
-          </div>
-
-          <div class="summary-line-item">
-            <span>Estimated Taxes & Fees</span>
-            <span>$0.00</span>
-          </div>
-
-          <div class="summary-divider"></div>
-
-          <div class="summary-total-row">
-            <span class="summary-total-label">Total Due Today:</span>
-            <span class="summary-total-val" style="color: #2ed573;">$11.99</span>
-          </div>
-          <div style="font-size: 12px; color: var(--text-muted); text-align: right;">Billed Annually ($0.99/mo)</div>
-
-          <div class="summary-savings-pill">
-            🎉 You save $108.00 (90%) today!
-          </div>
-
-          <div style="margin-top: 20px; font-size: 11.5px; color: #888; line-height: 1.5;">
-            By confirming your subscription, you authorize FOOLFLIX to charge $11.99 today for 1 year of access. You can easily cancel anytime in your billing settings with zero cancellation fees.
+      <!-- Current Membership Status Card -->
+      <div class="account-card" id="accountStatusCard">
+        <div class="account-card-left">
+          <div class="account-avatar" id="billingAvatar">👤</div>
+          <div>
+            <div class="account-name-row">
+              <span id="billingPlanName">Free / Guest Tier</span>
+              <span class="plan-status-pill guest" id="billingStatusPill">Inactive</span>
+            </div>
+            <div class="account-meta-row">
+              <span>Member ID: <strong style="color: #fff;" id="billingMemberId">FF-849201</strong></span>
+              <span>Next Renewal: <strong style="color: #fff;" id="billingNextDate">—</strong></span>
+              <span>Payment: <strong style="color: #fff;" id="billingCardSummary">None</strong></span>
+            </div>
           </div>
         </div>
+        <div class="account-card-actions">
+          <button class="btn-secondary-action" id="btnResetSub" onclick="resetSubscription()" title="Reset subscription for demo testing">
+            Reset Demo Tier
+          </button>
+        </div>
+      </div>
+
+      <!-- Billing History Table -->
+      <div class="invoices-box">
+        <h3 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px;">Billing & Invoice History</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Recent payments and membership receipts.</p>
+        
+        <table class="invoices-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Payment Method</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Receipt</th>
+            </tr>
+          </thead>
+          <tbody id="invoicesTableBody">
+            <tr>
+              <td>—</td>
+              <td>No past invoices</td>
+              <td>—</td>
+              <td>$0.00</td>
+              <td><span style="color: #888;">N/A</span></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -2378,10 +2341,15 @@
           </div>
         </div>
 
-        <button class="checkout-btn-submit" onclick="finishCheckoutAndStream()">
-          <span>Start Streaming Now</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </button>
+        <div style="display: flex; gap: 10px;">
+          <button class="checkout-btn-submit" style="flex: 1;" onclick="finishCheckoutAndStream()">
+            <span>Start Streaming</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="btn-secondary-action" style="padding: 12px 18px; border-radius: 6px; font-weight: 700;" onclick="closePayModal()">
+            View Account
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -2420,6 +2388,10 @@
 
     // Routing & View Navigation
     function navigateTo(viewName) {
+      if (viewName === 'checkout') {
+        viewName = 'billing';
+      }
+
       document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
 
@@ -2435,10 +2407,10 @@
       } else if (viewName === 'drm') {
         document.getElementById('nav-drm').classList.add('active');
         window.location.hash = '#/drm';
-      } else if (viewName === 'billing' || viewName === 'checkout') {
+      } else if (viewName === 'billing') {
         const billingNav = document.getElementById('nav-billing');
         if (billingNav) billingNav.classList.add('active');
-        window.location.hash = viewName === 'checkout' ? '#/billing/checkout' : '#/billing';
+        window.location.hash = '#/billing';
       }
 
       // If leaving player view, pause video
@@ -2842,7 +2814,7 @@
         if (profileBadge) profileBadge.classList.remove('vip');
         if (promoBtn) {
           promoBtn.innerHTML = '<span class="sub-promo-tag">90% OFF</span> <span>Claim Annual VIP</span>';
-          promoBtn.onclick = () => navigateTo('checkout');
+          promoBtn.onclick = () => navigateTo('billing');
         }
 
         if (avatar) {
@@ -3030,6 +3002,12 @@
       showToast('🎉 VIP Active! Enjoy all 25 episodes in 4K UHD');
     }
 
+    function closePayModal() {
+      const modal = document.getElementById('payModalBackdrop');
+      if (modal) modal.classList.remove('show');
+      showToast('⭐ Welcome to FOOLFLIX VIP!');
+    }
+
     // Hash Route Listener
     function handleRoute() {
       const hash = window.location.hash || '#/dramas';
@@ -3043,9 +3021,7 @@
         navigateTo('series-detail');
       } else if (hash === '#/drm') {
         navigateTo('drm');
-      } else if (hash === '#/billing/checkout' || hash === '#/checkout') {
-        navigateTo('checkout');
-      } else if (hash === '#/billing') {
+      } else if (hash === '#/billing/checkout' || hash === '#/checkout' || hash === '#/billing') {
         navigateTo('billing');
       } else {
         navigateTo('dramas');
