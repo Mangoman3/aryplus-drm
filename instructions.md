@@ -61,46 +61,46 @@ The feature must maintain the FOOLFLIX Netflix-style dark theme, integrate seaml
 ## Versioned Task List
 
 ### Task 7: Top Navigation & Routing Expansion (v2.0)
-- [ ] 7.1: Add `Billing` navigation tab with glowing `90% OFF` discount pill to top header.
-- [ ] 7.2: Add top-right promotional CTA button (`Claim 90% Off`) and user membership status badge (`Guest` / `VIP ⭐`).
-- [ ] 7.3: Extend `navigateTo(viewName)` router to handle `billing` (`#/billing`) and `checkout` (`#/billing/checkout`) with scroll-to-top and hash history.
+- [x] 7.1: Add `Billing` navigation tab with glowing `90% OFF` discount pill to top header.
+- [x] 7.2: Add top-right promotional CTA button (`Claim 90% Off`) and user membership status badge (`Guest` / `VIP ⭐`).
+- [x] 7.3: Extend `navigateTo(viewName)` router to handle `billing` (`#/billing`) and `checkout` (`#/billing/checkout`) with scroll-to-top and hash history.
 
 ### Task 8: Billing Segment View (`#view-billing`) (v2.0)
-- [ ] 8.1: Design Member Account Status card displaying current plan tier, status (Active/Guest), renewal date, and member ID.
-- [ ] 8.2: Build Promotional Spotlight banner highlighting the 90% Off Annual Flash Sale.
-- [ ] 8.3: Build Plan Comparison Grid:
+- [x] 8.1: Design Member Account Status card displaying current plan tier, status (Active/Guest), renewal date, and member ID.
+- [x] 8.2: Build Promotional Spotlight banner highlighting the 90% Off Annual Flash Sale.
+- [x] 8.3: Build Plan Comparison Grid:
   - **Annual VIP Plan (Featured):** Regular ~~$119.99/yr~~ -> **$11.99/yr (90% OFF)**, $0.99/mo breakdown, 4K UHD, Dolby Atmos, all originals & DRM blockbusters, zero ads, 4 devices.
   - **Monthly Plan:** $9.99/mo ($119.88/yr), 1080p HD, 1 device.
-- [ ] 8.4: Add Billing History & Invoice table with status badges and simulated receipt viewing.
-- [ ] 8.5: Provide Subscription Management controls (Upgrade, Manage Payment, Cancel/Reset subscription for testing).
+- [x] 8.4: Add Billing History & Invoice table with status badges and simulated receipt viewing.
+- [x] 8.5: Provide Subscription Management controls (Upgrade, Manage Payment, Cancel/Reset subscription for testing).
 
 ### Task 9: Dedicated Payment Checkout Page (`#view-checkout`) (v2.0)
-- [ ] 9.1: Build 2-column Netflix-style checkout layout with breadcrumb navigation back to Billing.
-- [ ] 9.2: Left Column - Payment details form:
+- [x] 9.1: Build 2-column Netflix-style checkout layout with breadcrumb navigation back to Billing.
+- [x] 9.2: Left Column - Payment details form:
   - Payment method selector: Credit/Debit Card, Apple/Google Pay, PayPal.
   - Interactive credit card inputs: Cardholder Name, Card Number (with live formatting & brand detection), Expiry (`MM/YY`), CVC (`CVV`), and Postal Code.
   - Quick "Fill Demo Card" helper button for instant testing (uses Stripe test card 4242...).
   - Security badges: 256-Bit SSL Encryption, PCI-DSS Verified, 30-Day Money-Back Guarantee.
-- [ ] 9.3: Right Column - Transparent Order Summary:
+- [x] 9.3: Right Column - Transparent Order Summary:
   - Itemized receipt: Annual VIP Plan ($119.99), Promo Discount `ANNUAL90` (-$108.00 / 90% OFF), Total Today: **$11.99**.
   - Terms of service acknowledgment and auto-renewal disclaimer.
-- [ ] 9.4: Primary checkout button: "Pay $11.99 & Start VIP Membership".
+- [x] 9.4: Primary checkout button: "Pay $11.99 & Start VIP Membership".
 
 ### Task 10: Payment Processing Simulation & Subscription State Persistence (v2.0)
-- [ ] 10.1: Multi-stage realistic processing modal:
+- [x] 10.1: Multi-stage realistic processing modal:
   - Step 1: "Contacting payment gateway..."
   - Step 2: "Verifying 3D Secure & card authorization..."
   - Step 3: "Activating Annual VIP subscription..."
-- [ ] 10.2: Success Confirmation Screen:
+- [x] 10.2: Success Confirmation Screen:
   - Animated green success badge.
   - Generated Transaction ID (`TXN-FF90-XXXXXXXX`), date, amount ($11.99), and payment method summary.
   - "Start Streaming Now" button routing directly to VIP catalog.
-- [ ] 10.3: State persistence in `localStorage` (`foolflix_subscription`):
+- [x] 10.3: State persistence in `localStorage` (`foolflix_subscription`):
   - Automatically updates navigation badge to `VIP ANNUAL (Active)`.
   - Unlocks VIP badge on video player and DRM catalog.
   - Preserves subscription state across page refreshes.
 
 ### Task 11: Testing, Build & Live Vercel Deployment (v2.0)
-- [ ] 11.1: Test complete checkout flow, input validation, payment simulation, and plan cancellation/reset locally.
-- [ ] 11.2: Commit and push changes to GitHub remotes (`origin` and `vercel-repo`).
-- [ ] 11.3: Verify on live Vercel endpoint `https://aryplus-drm.vercel.app/` using Chrome CDP and capture screenshots.
+- [x] 11.1: Test complete checkout flow, input validation, payment simulation, and plan cancellation/reset locally.
+- [x] 11.2: Commit and push changes to GitHub remotes (`origin` and `vercel-repo`).
+- [x] 11.3: Verify on live Vercel endpoint `https://aryplus-drm.vercel.app/` using Chrome CDP and capture screenshots.
