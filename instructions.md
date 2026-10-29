@@ -173,3 +173,37 @@ The user requested updating the main FOOLFLIX homepage (`#view-dramas` / `#/dram
 - [x] 13.4: Add matching dark FOOLFLIX footer with navigation links and social icons.
 - [x] 13.5: Add responsive styling for mobile, tablet, and desktop viewports.
 - [x] 13.6: Test with automated Chrome CDP script, push to GitHub remotes (`origin` and `vercel-repo`), and verify live on `https://aryplus-drm.vercel.app/`.
+
+---
+
+# FOOLFLIX Portal - Implementation Plan (v5.0: Exclusive Tab & Animated Flying Rocket Plus Hero)
+
+## Problem Statement
+The user requested two key upgrades to FOOLFLIX:
+1. **Exclusive Tab ("Coming Soon"):** Add an `Exclusive` navigation tab placed immediately before `Billing [90% OFF]`. When clicked, it displays an exclusive series catalog view marked "Coming Soon" with teaser cards, early access notices, and VIP triggers.
+2. **Animated Flying Rocket Plus Hero:** Replace the couch viewer background image in the main hero banner with the newly provided 3D flying red plus sign craft with rocket engine thrusters (`media_1793312832100_8d483406.jpg`). Remove the couch viewer image, and add animated rocket flame effects with the craft hovering and moving up and down dynamically.
+
+---
+
+## Versioned Task List
+
+### Task 14: Exclusive Tab & Animated Flying Rocket Plus Hero (v5.0)
+- [x] 14.1: Top Navigation Update:
+  - Insert `Exclusive` nav button between `DRM Protected` and `Billing 90% OFF`.
+  - Update route handling in `navigateTo()` and `hashchange` to support `#/exclusive`.
+- [x] 14.2: Exclusive Catalog View (`#view-exclusive`):
+  - Build modern "Coming Soon" showcase for upcoming exclusive FOOLFLIX series (*Filey: The Leak Files*, *Kursi Ki Jung*, *Sifarish Uncensored*).
+  - Add "VIP Early Access" promo banner linking to `#/billing` and "Notify Me" interactive alerts.
+- [x] 14.3: Animated Flying Rocket Plus Hero:
+  - Remove the couch viewer background image (`images/foolflix-hero-clean.jpg`) from the hero banner.
+  - Implement `.home-hero-rocket-stage` containing the flying red plus rocket craft (`images/foolflix-flying-plus.jpg`).
+  - Add continuous floating hover animation (`@keyframes rocketHover`) moving smoothly up and down with realistic inertia.
+  - Add dynamic rocket flame thruster animations (`@keyframes flamePulse`, `@keyframes flameFlicker`) with pulsating cyan/orange exhaust flames, thruster light flares, and ambient red reflections.
+  - Apply smooth gradient blending on the left and edges so it seamlessly merges with the dark `#0a0a0a` background and text.
+- [x] 14.4: Responsive Layout & Mobile Tuning:
+  - Ensure headlines, badges, and the animated rocket craft adjust smoothly across mobile, tablet, and widescreen.
+- [x] 14.5: Local Testing & Verification:
+  - Run automated Chrome CDP script to verify navigation to `#/exclusive`, the "Coming Soon" content, and the animated rocket hover and flame effects.
+- [x] 14.6: Push to Remotes & Vercel Verification:
+  - Commit and push to `origin` and `vercel-repo` on `master` and `main`.
+  - Verify live deployment on `https://aryplus-drm.vercel.app/` and capture screenshots.

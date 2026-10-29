@@ -261,18 +261,27 @@
     /* Cinematic Hero Banner */
     .home-hero-banner {
       width: 100%;
-      min-height: 380px;
+      min-height: 420px;
       position: relative;
       background: 
-        radial-gradient(circle at 18% 40%, rgba(229, 9, 20, 0.35) 0%, rgba(229, 9, 20, 0.1) 36%, transparent 62%),
-        linear-gradient(to right, #0a0a0a 0%, #0a0a0a 45%, rgba(10, 10, 10, 0.8) 55%, transparent 70%),
-        linear-gradient(to bottom, transparent 75%, #141414 100%),
-        url('./images/foolflix-hero-clean.jpg?v=3') right center / cover no-repeat;
-      padding: 56px 48px 48px;
+        radial-gradient(circle at 12% 45%, rgba(229, 9, 20, 0.28) 0%, rgba(229, 9, 20, 0.08) 40%, transparent 68%),
+        linear-gradient(to right, #0a0a0a 0%, #0a0a0a 45%, rgba(10, 10, 10, 0.9) 60%, rgba(10, 10, 10, 0.6) 80%, transparent 100%),
+        #0a0a0a;
+      padding: 44px 48px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
       box-sizing: border-box;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .home-hero-content {
+      position: relative;
+      z-index: 3;
+      flex: 1.1;
+      max-width: 650px;
     }
 
     .home-hero-headline-1 {
@@ -298,7 +307,7 @@
       font-size: 15px;
       color: #b5b5b5;
       font-weight: 500;
-      max-width: 660px;
+      max-width: 620px;
       margin: 0 0 32px 0;
       line-height: 1.4;
     }
@@ -307,8 +316,180 @@
     .home-features-row {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
       flex-wrap: wrap;
+    }
+
+    /* Animated Flying Rocket Plus Stage */
+    .home-hero-rocket-stage {
+      position: relative;
+      flex: 1.25;
+      max-width: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 12%, black 28%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 12%, black 28%);
+    }
+
+    .home-rocket-craft-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      animation: rocketHover 3.6s ease-in-out infinite;
+      transform-origin: center center;
+      filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 40px rgba(229, 9, 20, 0.35));
+    }
+
+    .home-rocket-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    /* Floating Hover Animation (Up and Down Motion) */
+    @keyframes rocketHover {
+      0% {
+        transform: translateY(8px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-22px) rotate(0.7deg);
+      }
+      100% {
+        transform: translateY(8px) rotate(0deg);
+      }
+    }
+
+    /* Dynamic Rocket Flame Thrusters */
+    .rocket-flame-jet {
+      position: absolute;
+      pointer-events: none;
+      transform-origin: top center;
+      z-index: 4;
+      mix-blend-mode: screen;
+      animation: flamePulse 3.6s ease-in-out infinite;
+    }
+
+    .rocket-flame-jet.jet-left-outer {
+      left: 13.5%;
+      top: 66%;
+      width: 26px;
+      height: 55px;
+    }
+
+    .rocket-flame-jet.jet-front-left {
+      left: 30.2%;
+      top: 73%;
+      width: 42px;
+      height: 85px;
+    }
+
+    .rocket-flame-jet.jet-front-right {
+      left: 79.2%;
+      top: 74%;
+      width: 42px;
+      height: 85px;
+    }
+
+    .rocket-flame-jet.jet-right-outer {
+      left: 91.2%;
+      top: 67%;
+      width: 26px;
+      height: 55px;
+    }
+
+    /* Flame Plume, Core & Flicker */
+    .flame-plume {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top center, rgba(255,255,255,1) 0%, rgba(0,240,255,0.95) 25%, rgba(255,140,0,0.85) 60%, rgba(229,9,20,0.55) 85%, transparent 100%);
+      border-radius: 50% 50% 60% 60% / 30% 30% 70% 70%;
+      filter: blur(2px);
+      animation: flameFlicker 0.12s infinite alternate ease-in-out;
+    }
+
+    .flame-core {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42%;
+      height: 68%;
+      background: linear-gradient(to bottom, #ffffff 15%, #66ffff 50%, #ff8800 85%, transparent 100%);
+      border-radius: 50% 50% 50% 50%;
+      filter: blur(1px);
+    }
+
+    .flame-spark {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: radial-gradient(circle, #ffffff 0%, rgba(255, 170, 0, 0.9) 60%, transparent 100%);
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: flameFlicker 0.08s infinite alternate-reverse;
+    }
+
+    @keyframes flamePulse {
+      0% {
+        transform: scaleY(0.9) scaleX(0.95);
+        opacity: 0.85;
+        filter: drop-shadow(0 10px 18px rgba(0, 240, 255, 0.7));
+      }
+      35%, 60% {
+        transform: scaleY(1.4) scaleX(1.1);
+        opacity: 1;
+        filter: drop-shadow(0 16px 28px rgba(0, 240, 255, 0.95)) drop-shadow(0 26px 45px rgba(255, 80, 0, 0.85));
+      }
+      100% {
+        transform: scaleY(0.9) scaleX(0.95);
+        opacity: 0.85;
+        filter: drop-shadow(0 10px 18px rgba(0, 240, 255, 0.7));
+      }
+    }
+
+    @keyframes flameFlicker {
+      0% {
+        transform: translateX(-50%) translateY(0px) scaleX(0.96) scaleY(0.97);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateX(-50%) translateY(3px) scaleX(1.05) scaleY(1.06);
+        opacity: 1;
+      }
+    }
+
+    /* Floor Smoke & Light Blast */
+    .rocket-floor-blast {
+      position: absolute;
+      bottom: -6px;
+      left: 12%;
+      right: 12%;
+      height: 38px;
+      background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.45) 0%, rgba(229, 9, 20, 0.35) 45%, transparent 75%);
+      filter: blur(12px);
+      pointer-events: none;
+      animation: floorGlowPulse 3.6s ease-in-out infinite;
+    }
+
+    @keyframes floorGlowPulse {
+      0%, 100% {
+        opacity: 0.45;
+        transform: scale(0.92);
+      }
+      50% {
+        opacity: 0.95;
+        transform: scale(1.15);
+      }
     }
 
     .home-feature-pill {
@@ -567,6 +748,323 @@
 
     .footer-social-icon:hover {
       color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       EXCLUSIVE TAB VIEW (COMING SOON)
+       ========================================================= */
+    .exclusive-view-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 48px 80px;
+      box-sizing: border-box;
+    }
+
+    .exclusive-header-wrap {
+      background: radial-gradient(circle at 15% 30%, rgba(229, 9, 20, 0.22) 0%, transparent 60%), #141414;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 48px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exclusive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 9, 20, 0.15);
+      border: 1px solid rgba(229, 9, 20, 0.4);
+      color: var(--netflix-red);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .exclusive-headline {
+      font-size: 38px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin: 0 0 12px 0;
+    }
+
+    .exclusive-subtext {
+      font-size: 15px;
+      color: #b5b5b5;
+      max-width: 740px;
+      line-height: 1.5;
+      margin: 0 0 28px 0;
+    }
+
+    .exclusive-vip-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: rgba(229, 9, 20, 0.1);
+      border: 1px solid rgba(229, 9, 20, 0.35);
+      border-radius: 8px;
+      padding: 16px 20px;
+      flex-wrap: wrap;
+    }
+
+    .vip-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .vip-banner-icon {
+      font-size: 26px;
+    }
+
+    .vip-banner-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .vip-banner-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .vip-banner-desc {
+      font-size: 12.5px;
+      color: #b0b0b0;
+    }
+
+    .btn-claim-vip-early {
+      background: var(--netflix-red);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-claim-vip-early:hover {
+      background: #b80710;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(229, 9, 20, 0.45);
+    }
+
+    .exclusive-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 14px;
+    }
+
+    .exclusive-section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 4px 0;
+    }
+
+    .exclusive-section-sub {
+      font-size: 13px;
+      color: #888888;
+      margin: 0;
+    }
+
+    .exclusive-tag-live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #46d369;
+      background: rgba(70, 211, 105, 0.1);
+      border: 1px solid rgba(70, 211, 105, 0.25);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    .live-dot.pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #46d369;
+      box-shadow: 0 0 8px #46d369;
+      animation: pulseGreen 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .exclusive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .exclusive-card {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .exclusive-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .exclusive-card-thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .exclusive-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85);
+      transition: transform 0.4s ease;
+    }
+
+    .exclusive-card:hover .exclusive-card-img {
+      transform: scale(1.04);
+      filter: brightness(0.95);
+    }
+
+    .exclusive-status-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--netflix-red);
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .exclusive-countdown-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+      padding: 24px 14px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .countdown-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: #999999;
+      letter-spacing: 0.5px;
+    }
+
+    .countdown-val {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .exclusive-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .exclusive-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--netflix-red);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .exclusive-ep-count {
+      color: #888888;
+      font-weight: 500;
+    }
+
+    .exclusive-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 8px 0;
+    }
+
+    .exclusive-card-synopsis {
+      font-size: 13px;
+      color: #a0a0a0;
+      line-height: 1.45;
+      margin: 0 0 18px 0;
+      flex: 1;
+    }
+
+    .exclusive-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 12px;
+    }
+
+    .exclusive-creator {
+      font-size: 11px;
+      color: #777777;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-notify-me {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-notify-me:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
       transform: translateY(-1px);
     }
 
@@ -2058,8 +2556,23 @@
       }
 
       .home-hero-banner {
-        padding: 40px 20px 32px;
-        min-height: 320px;
+        flex-direction: column;
+        padding: 36px 20px 32px;
+        align-items: flex-start;
+        min-height: auto;
+      }
+
+      .home-hero-content {
+        max-width: 100%;
+      }
+
+      .home-hero-rocket-stage {
+        width: 100%;
+        max-width: 460px;
+        margin-top: 24px;
+        align-self: center;
+        mask-image: none;
+        -webkit-mask-image: none;
       }
 
       .home-hero-headline-1,
@@ -2069,6 +2582,27 @@
 
       .home-features-row {
         gap: 18px;
+      }
+
+      .exclusive-view-container {
+        padding: 24px 16px 50px;
+      }
+
+      .exclusive-header-wrap {
+        padding: 24px 18px;
+      }
+
+      .exclusive-headline {
+        font-size: 28px;
+      }
+
+      .exclusive-vip-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .exclusive-grid {
+        grid-template-columns: 1fr;
       }
 
       .home-landscape-grid {
@@ -2110,13 +2644,16 @@
         <span class="brand-logo-text">FOOLFLIX</span>
       </a>
 
-      <!-- Tabs: Dramas, DRM Protected, Billing -->
+      <!-- Tabs: Dramas, DRM Protected, Exclusive, Billing -->
       <ul class="nav-links">
         <li class="nav-item">
           <a class="nav-link active" id="nav-dramas" onclick="navigateTo('dramas')">Dramas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="nav-drm" onclick="navigateTo('drm')">DRM Protected</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-exclusive" onclick="navigateTo('exclusive')">Exclusive</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="nav-billing" onclick="navigateTo('billing')">
@@ -2146,60 +2683,102 @@
   <section id="view-dramas" class="view-section active">
     <div class="home-view-container">
       
-      <!-- Cinematic Hero Banner -->
+      <!-- Cinematic Hero Banner with Animated Flying Rocket Plus -->
       <div class="home-hero-banner">
-        <h1 class="home-hero-headline-1">Powered by Politics.</h1>
-        <h1 class="home-hero-headline-2">Secured by Hope.</h1>
-        <p class="home-hero-subtext">Enterprise-grade mismanagement. Production-grade vulnerabilities.</p>
+        <!-- Left: Text Content & 4 Badges -->
+        <div class="home-hero-content">
+          <h1 class="home-hero-headline-1">Powered by Politics.</h1>
+          <h1 class="home-hero-headline-2">Secured by Hope.</h1>
+          <p class="home-hero-subtext">Enterprise-grade mismanagement. Production-grade vulnerabilities.</p>
 
-        <!-- 4 Badges Horizontal Row -->
-        <div class="home-features-row">
-          <div class="home-feature-pill" onclick="showToast('Streaming in 4K UHD')">
-            <div class="home-feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
-              </svg>
+          <!-- 4 Badges Horizontal Row -->
+          <div class="home-features-row">
+            <div class="home-feature-pill" onclick="showToast('Streaming in 4K UHD')">
+              <div class="home-feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                </svg>
+              </div>
+              <div class="home-feature-text">
+                <span class="home-feature-title">Premium Incompetence</span>
+                <span class="home-feature-sub">Now Streaming in 4K</span>
+              </div>
             </div>
-            <div class="home-feature-text">
-              <span class="home-feature-title">Premium Incompetence</span>
-              <span class="home-feature-sub">Now Streaming in 4K</span>
+
+            <div class="home-feature-pill" onclick="showToast('Security: Just Hope')">
+              <div class="home-feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v6h-2V7zm0 8h2v2h-2v-2z"/>
+                </svg>
+              </div>
+              <div class="home-feature-text">
+                <span class="home-feature-title">No Security</span>
+                <span class="home-feature-sub">Just Hope</span>
+              </div>
+            </div>
+
+            <div class="home-feature-pill" onclick="showToast('Zero Ownership: Unlimited Excuses')">
+              <div class="home-feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
+              <div class="home-feature-text">
+                <span class="home-feature-title">Zero Ownership</span>
+                <span class="home-feature-sub">Unlimited Excuses</span>
+              </div>
+            </div>
+
+            <div class="home-feature-pill" onclick="showToast('Corporate Resources: Personal Profits')">
+              <div class="home-feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                </svg>
+              </div>
+              <div class="home-feature-text">
+                <span class="home-feature-title">Corporate Resources</span>
+                <span class="home-feature-sub">Personal Profits</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="home-feature-pill" onclick="showToast('Security: Just Hope')">
-            <div class="home-feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v6h-2V7zm0 8h2v2h-2v-2z"/>
-              </svg>
+        <!-- Right: Animated Flying Rocket Plus Stage -->
+        <div class="home-hero-rocket-stage">
+          <div class="home-rocket-craft-wrap">
+            <img src="./images/foolflix-flying-plus.jpg" alt="FOOLFLIX Flying Rocket Plus" class="home-rocket-img">
+            
+            <!-- Animated Rocket Thruster Flame Overlays -->
+            <!-- Flame 1: Left Outer Jet -->
+            <div class="rocket-flame-jet jet-left-outer">
+              <div class="flame-plume"></div>
+              <div class="flame-core"></div>
+              <div class="flame-spark"></div>
             </div>
-            <div class="home-feature-text">
-              <span class="home-feature-title">No Security</span>
-              <span class="home-feature-sub">Just Hope</span>
-            </div>
-          </div>
 
-          <div class="home-feature-pill" onclick="showToast('Zero Ownership: Unlimited Excuses')">
-            <div class="home-feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-              </svg>
+            <!-- Flame 2: Front Left Jet (Primary) -->
+            <div class="rocket-flame-jet jet-front-left">
+              <div class="flame-plume"></div>
+              <div class="flame-core"></div>
+              <div class="flame-spark"></div>
             </div>
-            <div class="home-feature-text">
-              <span class="home-feature-title">Zero Ownership</span>
-              <span class="home-feature-sub">Unlimited Excuses</span>
-            </div>
-          </div>
 
-          <div class="home-feature-pill" onclick="showToast('Corporate Resources: Personal Profits')">
-            <div class="home-feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
-              </svg>
+            <!-- Flame 3: Front Right Jet (Primary) -->
+            <div class="rocket-flame-jet jet-front-right">
+              <div class="flame-plume"></div>
+              <div class="flame-core"></div>
+              <div class="flame-spark"></div>
             </div>
-            <div class="home-feature-text">
-              <span class="home-feature-title">Corporate Resources</span>
-              <span class="home-feature-sub">Personal Profits</span>
+
+            <!-- Flame 4: Right Outer Jet -->
+            <div class="rocket-flame-jet jet-right-outer">
+              <div class="flame-plume"></div>
+              <div class="flame-core"></div>
+              <div class="flame-spark"></div>
             </div>
+
+            <!-- Glowing Floor Blast & Smoke Pulse -->
+            <div class="rocket-floor-blast"></div>
           </div>
         </div>
       </div>
@@ -2583,6 +3162,152 @@
   </section>
 
   <!-- =========================================================
+       VIEW 5: EXCLUSIVE TAB (COMING SOON)
+       ========================================================= -->
+  <section id="view-exclusive" class="view-section">
+    <div class="exclusive-view-container">
+      
+      <!-- Exclusive Hero Showcase -->
+      <div class="exclusive-header-wrap">
+        <div class="exclusive-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          FOOLFLIX EXCLUSIVES
+        </div>
+        <h1 class="exclusive-headline">Uncensored Satires &amp; Leaked Chronicles</h1>
+        <p class="exclusive-subtext">
+          High-stakes political thrillers, whistleblower exposés, and corporate comedy dramas produced exclusively for FOOLFLIX VIP members. We are finishing the final edits in post-production.
+        </p>
+
+        <!-- VIP Early Access Alert Banner -->
+        <div class="exclusive-vip-banner">
+          <div class="vip-banner-left">
+            <span class="vip-banner-icon">👑</span>
+            <div class="vip-banner-info">
+              <span class="vip-banner-title">VIP 48-Hour Early Access</span>
+              <span class="vip-banner-desc">Annual VIP Pass holders get exclusive early screening access 48 hours before official drop.</span>
+            </div>
+          </div>
+          <button class="btn-claim-vip-early" onclick="navigateTo('billing')">
+            Get Annual VIP • 90% OFF
+          </button>
+        </div>
+      </div>
+
+      <!-- Section Title & Status -->
+      <div class="exclusive-section-header">
+        <div>
+          <h2 class="exclusive-section-title">Coming Soon to FOOLFLIX</h2>
+          <p class="exclusive-section-sub">Original series in active production. Click "Remind Me" to be notified the moment episodes drop.</p>
+        </div>
+        <div class="exclusive-tag-live">
+          <span class="live-dot pulse"></span> Production Slate
+        </div>
+      </div>
+
+      <!-- Exclusives Coming Soon Cards Grid -->
+      <div class="exclusive-grid">
+        <!-- Card 1: Filey - The Leak Files -->
+        <div class="exclusive-card">
+          <div class="exclusive-card-thumb-wrap">
+            <img src="./images/trending/idea-chori.jpg?v=3" alt="Filey: The Leak Files" class="exclusive-card-img">
+            <span class="exclusive-status-badge">COMING Q1</span>
+            <div class="exclusive-countdown-overlay">
+              <span class="countdown-label">STATUS</span>
+              <span class="countdown-val">In Post-Production</span>
+            </div>
+          </div>
+          <div class="exclusive-card-body">
+            <div class="exclusive-card-meta">
+              <span class="exclusive-genre">Political Thriller</span>
+              <span class="exclusive-ep-count">• 10 Episodes</span>
+            </div>
+            <h3 class="exclusive-card-title">Filey: The Leak Files</h3>
+            <p class="exclusive-card-synopsis">
+              When 4,000 pages of classified committee memos are quietly left on a photocopier, an overlooked filing clerk becomes the most dangerous person in the capital.
+            </p>
+            <div class="exclusive-card-footer">
+              <div class="exclusive-creator">Starring Sheheryar Munawar &amp; Dur-e-Fishan</div>
+              <button class="btn-notify-me" onclick="showToast('🔔 Notification set! You will be alerted when Filey drops.')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Remind Me
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Kursi Ki Jung -->
+        <div class="exclusive-card">
+          <div class="exclusive-card-thumb-wrap">
+            <img src="./images/trending/deadline.jpg?v=3" alt="Kursi Ki Jung" class="exclusive-card-img">
+            <span class="exclusive-status-badge">COMING SOON</span>
+            <div class="exclusive-countdown-overlay">
+              <span class="countdown-label">STATUS</span>
+              <span class="countdown-val">Final Sound Mix</span>
+            </div>
+          </div>
+          <div class="exclusive-card-body">
+            <div class="exclusive-card-meta">
+              <span class="exclusive-genre">Drama, Satire</span>
+              <span class="exclusive-ep-count">• 8 Episodes</span>
+            </div>
+            <h3 class="exclusive-card-title">Kursi Ki Jung</h3>
+            <p class="exclusive-card-synopsis">
+              Musical chairs in the boardroom. A ruthless power struggle erupts when the founder announces his sudden retirement, leaving 5 ambitious deputies scheming for the chair.
+            </p>
+            <div class="exclusive-card-footer">
+              <div class="exclusive-creator">A FOOLFLIX Original Production</div>
+              <button class="btn-notify-me" onclick="showToast('🔔 Notification set! You will be alerted when Kursi Ki Jung drops.')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Remind Me
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Sifarish Uncensored -->
+        <div class="exclusive-card">
+          <div class="exclusive-card-thumb-wrap">
+            <img src="./images/trending/meeting-baaz.jpg?v=3" alt="Sifarish Uncensored" class="exclusive-card-img">
+            <span class="exclusive-status-badge">IN PRODUCTION</span>
+            <div class="exclusive-countdown-overlay">
+              <span class="countdown-label">STATUS</span>
+              <span class="countdown-val">Shooting Episode 4</span>
+            </div>
+          </div>
+          <div class="exclusive-card-body">
+            <div class="exclusive-card-meta">
+              <span class="exclusive-genre">Dark Comedy</span>
+              <span class="exclusive-ep-count">• 12 Episodes</span>
+            </div>
+            <h3 class="exclusive-card-title">Sifarish Uncensored</h3>
+            <p class="exclusive-card-synopsis">
+              Why work hard when your uncle knows someone who knows someone? A witty, unfiltered dive into the art of connections, mutual favours, and bureaucratic shortcuts.
+            </p>
+            <div class="exclusive-card-footer">
+              <div class="exclusive-creator">Directed by Saqib Khan</div>
+              <button class="btn-notify-me" onclick="showToast('🔔 Notification set! You will be alerted when Sifarish drops.')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Remind Me
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
        VIEW 4: UNIFIED SINGLE-PAGE BILLING & PAYMENT (90% OFF)
        ========================================================= -->
   <section id="view-billing" class="view-section">
@@ -2933,6 +3658,10 @@
       } else if (viewName === 'drm') {
         document.getElementById('nav-drm').classList.add('active');
         window.location.hash = '#/drm';
+      } else if (viewName === 'exclusive') {
+        const exclusiveNav = document.getElementById('nav-exclusive');
+        if (exclusiveNav) exclusiveNav.classList.add('active');
+        window.location.hash = '#/exclusive';
       } else if (viewName === 'billing') {
         const billingNav = document.getElementById('nav-billing');
         if (billingNav) billingNav.classList.add('active');
@@ -3547,6 +4276,8 @@
         navigateTo('series-detail');
       } else if (hash === '#/drm') {
         navigateTo('drm');
+      } else if (hash === '#/exclusive') {
+        navigateTo('exclusive');
       } else if (hash === '#/billing/checkout' || hash === '#/checkout' || hash === '#/billing') {
         navigateTo('billing');
       } else {
